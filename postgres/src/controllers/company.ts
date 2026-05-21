@@ -11,9 +11,7 @@ class CompanyController {
   private _io;
   private admin;
 
-  constructor(
-    io: Server
-  ) {
+  constructor(io: Server) {
     this._io = io;
     this.admin = new CompanyAdminSocket();
   }

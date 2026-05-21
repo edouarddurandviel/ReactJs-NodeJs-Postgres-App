@@ -5,7 +5,6 @@ import { handleErrors } from "@libs/server";
 import { sessionToken } from "@middleware/sessionToken";
 import UserController from "@controllers/user";
 import { Server } from "socket.io";
-import config from "../../_config/google";
 
 export default (io: Server) => {
   const router = express.Router({
@@ -17,7 +16,10 @@ export default (io: Server) => {
   const userServices = new UserController(io);
 
   /* users pages. */
-  router.post("/create", async (req: ExtendedRequest, res: Response) => {
+  router.post(
+    "/create", 
+    sessionToken, 
+    async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await userSchemas.user.validateAsync(req.body);
       const result = await userServices.createOneUser(data);
@@ -75,7 +77,7 @@ export default (io: Server) => {
 
   router.get(
     "/all",
-    //sessionToken,
+    sessionToken,
     async (req: ExtendedRequest, res: Response) => {
       try {
         const result = await userServices.getAllUsers();
@@ -89,7 +91,7 @@ export default (io: Server) => {
 
   router.get(
     "/:userId",
-    //sessionToken,
+    sessionToken,
     async (req: ExtendedRequest, res: Response) => {
       try {
         const userId = await userSchemas.userId.validateAsync(req.params.userId);

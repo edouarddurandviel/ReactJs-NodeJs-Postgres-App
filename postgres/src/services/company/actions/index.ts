@@ -9,9 +9,9 @@ export const getAllCompanies = async () => {
     const companies = await findAll<Company>("Company", {
       include: [
         {
-          association: "addresses",
-        },
-      ],
+          association: "addresses"
+        }
+      ]
     });
     return companies;
   } catch (err: any) {

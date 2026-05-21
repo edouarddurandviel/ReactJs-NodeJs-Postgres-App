@@ -23,7 +23,7 @@ export class Company extends Model<InferAttributes<Company>, InferCreationAttrib
     Company.hasMany(models.CompanyAddress, {
       as: "addresses",
       foreignKey: "Company_Id",
-      onDelete: 'CASCADE',
+      onDelete: "CASCADE",
       hooks: true
     });
   }

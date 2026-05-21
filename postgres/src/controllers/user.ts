@@ -72,10 +72,10 @@ class UserController {
 
     if (hash.toString("hex") === user.password) {
       // create jwt token
-      const payload = { userId: user.id };
-      const secret = password;
-      const token = jwt.sign(payload, secret, { expiresIn: "1w" });
-      await userActions.storeUserToken(token, user.id);
+      const payload = { User_Id: user.id };
+      const secret = process.env.ENV_SECRET;
+      const token = secret && jwt.sign(payload, secret, { expiresIn: "1w" });
+      token && (await userActions.storeUserToken(token, user.id));
 
       const userPermissions = {
         id: user.id,
@@ -89,8 +89,7 @@ class UserController {
   }
 
   public async logout(userId: number) {
-    const data = (await userActions.getUserTokenWithId(userId)) as unknown as UserToken;
-    const result = await userActions.deleteUserToken(data.User_Id);
+    const result = await userActions.deleteUserToken(userId);
     return result;
   }
 }

@@ -27,7 +27,7 @@
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "emitDecoratorMetadata": true,
-    "types": ["node", "sequelize-typescript"]
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "src/test"],

@@ -162,11 +162,11 @@ export const storeUserToken = async (token: string, userId: number) => {
 //   return userToken;
 // };
 
-export const getUserTokenWithId = async (User_Id: number) => {
+export const getUserTokenWithId = async (token: string) => {
   try {
     const user = await findOne<Token>("Token", {
       where: {
-        User_Id: User_Id
+        token: token
       }
     });
 
@@ -176,7 +176,7 @@ export const getUserTokenWithId = async (User_Id: number) => {
   }
 };
 
-export const deleteUserToken = async (User_Id: string) => {
+export const deleteUserToken = async (User_Id: number) => {
   try {
     const user = await destroy("Token", {
       where: {
