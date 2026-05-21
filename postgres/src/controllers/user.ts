@@ -1,5 +1,5 @@
 import { Unauthorized } from "http-json-errors";
-import { CreateUser, UserData } from "../_interfaces/user";
+import { CreateUser } from "../_interfaces/user";
 import * as userActions from "../services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
@@ -74,8 +74,9 @@ class UserController {
       // create jwt token
       const payload = { User_Id: user.id };
       const secret = process.env.ENV_SECRET;
+
       const token = secret && jwt.sign(payload, secret, { expiresIn: "1w" });
-      token && (await userActions.storeUserToken(token, user.id));
+      token && await userActions.storeUserToken(token, user.id);
 
       const userPermissions = {
         id: user.id,
