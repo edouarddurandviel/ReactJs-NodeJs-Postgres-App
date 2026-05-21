@@ -1,0 +1,8 @@
+cert
+dist
+node_modules
+
+.boto
+tsconfig.tsbuildinfo
+
+

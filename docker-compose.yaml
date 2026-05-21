@@ -1,0 +1,64 @@
+
+services:
+  react:
+    container_name: react
+    build:
+      context: ./react
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./react:/usr/src/app
+      - /usr/src/app/node_modules
+    restart: always
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend
+    ports:
+    - "3000:3000"
+    build:
+      context: ./postgres
+    environment:
+      NODE_ENV: docker
+    restart: always
+    depends_on:
+      - postgresdb
+    networks:
+      - postgres_net
+
+
+  postgresdb:
+    image: postgres:16
+    container_name: postgresdb
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpassword
+      POSTGRES_DB: companiesdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d companiesdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/data/database.202605201629.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres_net
+
+    
+
+volumes:
+  pgdata:
+
+networks:
+  postgres_net:
+    driver: bridge
+
+  # global dump with psql
+
+ 

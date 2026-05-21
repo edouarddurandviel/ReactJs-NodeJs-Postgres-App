@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["es2022"],
+    "baseUrl": ".",
+    "paths": {
+      "@libs/*": ["src/_lib/*"],
+      "@middleware/*": ["src/_middleware/*"],
+      "@services/*": ["src/services/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@schemas/*": ["src/_joiSchemas/*"]
+    },
+    "sourceMap": false,
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "strict": true,
+    "noEmit": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "noEmitOnError": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "exactOptionalPropertyTypes": true,
+    "noFallthroughCasesInSwitch": true,
+    "emitDecoratorMetadata": true,
+    "types": ["node", "sequelize-typescript"]
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "src/test"],
+  "watchOptions": {
+    "watchFile": "useFsEvents",
+    "watchDirectory": "useFsEvents",
+    "fallbackPolling": "dynamicPriority",
+    "synchronousWatchDirectory": true,
+    "excludeDirectories": ["**/node_modules", "dist"]
+  }
+}

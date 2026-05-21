@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "dbuser",
+    "password": "dbpassword",
+    "database": "mydatabase",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "dbuser",
+    "password": "dbpassword",
+    "database": "mydatabase",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "dbuser",
+    "password": "dbpassword",
+    "database": "mydatabase",
+    "host": "localhost",
+    "port": 5433,
+    "dialect": "postgres"
+  }
+}
