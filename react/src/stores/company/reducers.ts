@@ -56,7 +56,7 @@ export default (state: State = initialState, action: Action): State => {
         draft.addCompanyAddressSuccess = true;
         draft.addCompanyAddress = action.payload as unknown as Address;
         break;
-      case actionType.ADD_ONE_COMPANY_FAILURE:
+      case actionType.ADD_ONE_COMPANY_ADDRESS_FAILURE:
         draft.addCompanyErrors = true;
         break;
 
