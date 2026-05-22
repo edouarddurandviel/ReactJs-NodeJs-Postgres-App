@@ -11,7 +11,7 @@ let db: {
 } = {};
 
 export default {
-  initSequelize: async () => {
+  init: async () => {
     const configFile: any = {
       development: {
         username: "dbuser",
@@ -54,6 +54,8 @@ export default {
     Sequelize.useCLS(namespace);
 
     const sequelize = new Sequelize(config.database, config.username, config.password, config);
+    if(sequelize) sequelize.sync()
+      
     const files = fs.readdirSync(__dirname);
 
     const basename = path.basename(__filename);
@@ -64,7 +66,7 @@ export default {
     for (const modelFile of modelsFiles) {
       const modelModule = await import(path.join(__dirname, modelFile));
       const modelFactory = modelModule.default || modelModule;
-      const model: ModelStatic<Model> = modelFactory(sequelize);
+      const model: ModelStatic<Model> = await modelFactory(sequelize);
       db[model.name] = model;
     }
 
