@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
-import db from "../models";
+import sequelize from "../models";
 
 const app = express();
 app.disable("x-powered-by");
@@ -49,9 +49,6 @@ app.use(bodyParser.json());
 app.use(morgan("dev"));
 
 // check sequelize connection
-db.initSequelize();
-
-const appDb = db.instance();
-appDb.sequelize?.sync();
+sequelize.init();
 
 export default app;
