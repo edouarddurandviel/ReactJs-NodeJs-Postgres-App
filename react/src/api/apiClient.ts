@@ -2,6 +2,7 @@ import axios from "axios";
 import type { PathParamsObject, QueryObject } from "./interfaces";
 import { urlBuilder } from "./buildUrl";
 import { default as apiCache } from "./createApiCache";
+import config from "../config";
 
 export default async (props: {
   path: string;
@@ -13,7 +14,7 @@ export default async (props: {
   const cache = await apiCache.getInstance();
 
   const apiClient = await axios.create({
-    baseURL: "http://localhost:3000/api/v1",
+    baseURL: config.baseUrl,
     withCredentials: true,
     headers: {
       "Content-Type": "application/json",
@@ -24,10 +25,9 @@ export default async (props: {
     const key = config.url;
     const isCacheEnabled = await cache.manageRequest(key, config);
     if (isCacheEnabled) {
-      const data = cache.getCache(key);
       return Promise.reject({
         __fromCache: true,
-        data: data,
+        data: cache.getCache(key),
       });
     } else {
       return config;

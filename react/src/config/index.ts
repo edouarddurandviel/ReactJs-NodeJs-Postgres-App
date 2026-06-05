@@ -1,4 +1,4 @@
 export default {
-  baseUrl: "http://localhost:3000/api/v1",
-  socket: "http://localhost:3000",
+  baseUrl: import.meta.env.VITE_API_BASE_URL,
+  socket: import.meta.env.VITE_API_URL,
 };

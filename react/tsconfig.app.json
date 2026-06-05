@@ -9,6 +9,7 @@
     "paths": {
       "@theme/*": ["./src/theme/*"]
     },
+    "types": ["node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -27,5 +28,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
 }
