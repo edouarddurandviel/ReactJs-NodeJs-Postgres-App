@@ -45,7 +45,6 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   }, [dispatch]);
 
   useEffect(() => {
-   
     companies?.length &&
       setCompanyList(
         companies.map((e) => {
@@ -54,7 +53,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
             name: e.name,
             activity: e.activity,
             owner: e.owner,
-            ...e.addresses && {addresses: e.addresses},
+            ...(e.addresses && { addresses: e.addresses }),
             createdAt: e.createdAt,
             updatedAt: e.updatedAt,
           };
@@ -113,7 +112,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
         <LeftColumn>
           <h3>{user?.userPermissions.email}</h3>
           <p>
-            <strong>Cache definition</strong> for every viewed company detail pages. It prevents
+            <strong>Cache definitions</strong> for every viewed company detail pages. It prevents
             from making any <strong>unnecessary requests</strong> twice. Content is stored in a Map.
             It could be sessionStorage
           </p>

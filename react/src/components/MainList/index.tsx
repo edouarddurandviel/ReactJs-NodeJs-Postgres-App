@@ -13,12 +13,13 @@ const Index = ({ data, handleEditModal, handleDeleteItem }: MainListProps) => {
         <SpanTitle>{data.name}</SpanTitle>
         <SpanRef>
           {data.activity}{" "}
-          {data.addresses && data.addresses.map((e: any) => (
-            <React.Fragment key={e.id}>
-              <span>{e.street} </span>
-              <span>{e.city}</span>
-            </React.Fragment>
-          ))}
+          {data.addresses &&
+            data.addresses.map((e: any) => (
+              <React.Fragment key={e.id}>
+                <span>{e.street} </span>
+                <span>{e.city}</span>
+              </React.Fragment>
+            ))}
         </SpanRef>
         <SpanIso>
           {data.owner} - {date.toLocaleDateString()}

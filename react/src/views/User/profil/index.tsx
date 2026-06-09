@@ -58,7 +58,7 @@ const Index = ({ profil, dispatch }: UserProps) => {
 
         <H2>Add information about each users</H2>
         <Message>
-          Built with <strong>Formik</strong> forms library, prefilled initialValues
+          Built with <strong>Formik</strong> forms library, prefilled with initialValues
         </Message>
 
         <Formik
