@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router";
 import { fontSize, primary, radius, secondary } from "../../theme/variables";
 
-export const ButtonLink = styled.div`
+export const ButtonLink = styled(Link)`
   width: auto;
   height: 31px;
   padding: 0 20px;
+  margin: 0 5px;
   border-radius: ${radius};
   text-align: center;
   font-size: ${fontSize};

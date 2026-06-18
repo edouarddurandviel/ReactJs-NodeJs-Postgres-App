@@ -1,11 +1,8 @@
-import { Link } from "react-router";
-import { ButtonLink } from "./style";
+import { ButtonLink } from "./styles";
 
 const Index = ({ path, text }: ButtonLinkProps) => {
   return (
-    <ButtonLink>
-      <Link to={path}>{text}</Link>
-    </ButtonLink>
+    <ButtonLink to={path}>{text}</ButtonLink>
   );
 };
 
