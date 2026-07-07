@@ -5,9 +5,10 @@ export const FieldSet = styled.div<{ hidden?: boolean }>`
   float: left;
   display: ${({ hidden }) => (hidden ? "none" : "flex")};
   flex-direction: column;
+
   align-content: flex-start;
   align-items: flex-start;
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 `;
 
 export const InputField = styled.input`

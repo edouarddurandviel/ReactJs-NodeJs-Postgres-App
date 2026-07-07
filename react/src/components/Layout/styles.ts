@@ -77,6 +77,7 @@ export const LeftColumn = styled.div`
   flex-direction: column;
   background-color: rgba(188, 209, 238, 1);
   width: 45%;
+  padding: 0 20px 0 20px;
   justify-content: flex-start;
   align-items: flex-start;
 `;
@@ -95,7 +96,7 @@ export const FormActions = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin: 20px 0 20px 30px;
+  padding: 20px 0 10px 0;
 `;
 
 export const FormActionsLabel = styled.div`
@@ -147,4 +148,8 @@ export const Message = styled.div`
 export const InlineWrapper = styled.div`
   display: flex;
   margin: 13px 20px;
+`;
+
+export const ContainerCentered = styled.div`
+  display: flex;
 `;

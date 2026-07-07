@@ -76,7 +76,7 @@ class UserController {
       const secret = process.env.ENV_SECRET;
 
       const token = secret && jwt.sign(payload, secret, { expiresIn: "1w" });
-      token && await userActions.storeUserToken(token, user.id);
+      token && (await userActions.storeUserToken(token, user.id));
 
       const userPermissions = {
         id: user.id,

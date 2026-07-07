@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ItemList = styled.div`
   display: flex;
-  height: 50px;
+  height: 150px;
   padding: 10px;
   border: 1px solid #cbcbcb;
   border-radius: ${radius};

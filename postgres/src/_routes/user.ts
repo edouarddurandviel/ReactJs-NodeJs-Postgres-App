@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { ExtendedRequest } from "../../_interfaces/requests";
-import * as userSchemas from "../../_joiSchemas/users";
+import { ExtendedRequest } from "../_interfaces/requests";
+import * as userSchemas from "../_joiSchemas/users";
 import { handleErrors } from "@libs/server";
 import { sessionToken } from "@middleware/sessionToken";
 import UserController from "@controllers/user";
@@ -16,10 +16,7 @@ export default (io: Server) => {
   const userServices = new UserController(io);
 
   /* users pages. */
-  router.post(
-    "/create", 
-    sessionToken, 
-    async (req: ExtendedRequest, res: Response) => {
+  router.post("/create", sessionToken, async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await userSchemas.user.validateAsync(req.body);
       const result = await userServices.createOneUser(data);
@@ -75,34 +72,26 @@ export default (io: Server) => {
   //   }
   // });
 
-  router.get(
-    "/all",
-    sessionToken,
-    async (req: ExtendedRequest, res: Response) => {
-      try {
-        const result = await userServices.getAllUsers();
+  router.get("/all", sessionToken, async (req: ExtendedRequest, res: Response) => {
+    try {
+      const result = await userServices.getAllUsers();
 
-        res.status(200).json({ err: false, data: result });
-      } catch (error: any) {
-        handleErrors(error);
-      }
+      res.status(200).json({ err: false, data: result });
+    } catch (error: any) {
+      handleErrors(error);
     }
-  );
+  });
 
-  router.get(
-    "/:userId",
-    sessionToken,
-    async (req: ExtendedRequest, res: Response) => {
-      try {
-        const userId = await userSchemas.userId.validateAsync(req.params.userId);
-        const result = await userServices.getUserData(userId);
+  router.get("/:userId", sessionToken, async (req: ExtendedRequest, res: Response) => {
+    try {
+      const userId = await userSchemas.userId.validateAsync(req.params.userId);
+      const result = await userServices.getUserData(userId);
 
-        res.status(200).json({ err: false, data: result });
-      } catch (error: any) {
-        handleErrors(error);
-      }
+      res.status(200).json({ err: false, data: result });
+    } catch (error: any) {
+      handleErrors(error);
     }
-  );
+  });
 
   return router;
 };

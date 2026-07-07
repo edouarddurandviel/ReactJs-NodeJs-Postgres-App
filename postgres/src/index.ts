@@ -4,6 +4,8 @@ import app from "./_config/app";
 import socketIo from "@libs/socketio";
 import { onError, normalizePort } from "@libs/server";
 import v1Routes from "./_api/v1";
+//import eventEmitter from "@libs/eventEmitter";
+//import websockets from "@libs/websockets";
 
 // Get port from environment and store in Express.
 const port = normalizePort(process.env.PORT || "3000");
@@ -20,6 +22,18 @@ const io = socketIo.init(server, {
     origin: [`http://localhost:${origin}`]
   }
 });
+
+//websockets.createSocketServer();
+
+// in app.use
+// const emitter = eventEmitter.createEventEmitter()
+// emitter.on("notification", (data, err) => {
+//   if(err){
+//     console.log(err)
+//   }else{
+//     console.log(`Send one notification: ${data.message}`);
+//   }
+// })
 
 // Send io instance through routes
 app.use(v1Routes(io));

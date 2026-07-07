@@ -31,6 +31,7 @@ export const createOneCompany = async (data: CreateCompany) => {
 
 export const createOneCompanyAddress = async (companyId: number, data: Address) => {
   try {
+    console.log(data);
     const company = await findOne<Company>("Company", {
       where: {
         id: companyId
@@ -51,7 +52,7 @@ export const insertManyCompanies = async (data: CreateManyCompanies) => {
   }
 };
 
-export const replaceOneCompany = async (companyId: string, data: CreateCompany) => {
+export const replaceOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
     const response = await update<Company>("Company", { where: { id: companyId } }, data);
 
@@ -61,26 +62,27 @@ export const replaceOneCompany = async (companyId: string, data: CreateCompany) 
   }
 };
 
-export const getOneCompany = async (companyId: string) => {
+export const getOneCompany = async (companyId: number) => {
+  const company = await findOne<Company>("Company", {
+    where: {
+      id: companyId
+    }
+  });
+
+  if (!company) throw new Error(`Company ${companyId} not found`);
+
+  return company;
+};
+
+export const updateOneCompany = async (companyId: number, data: any) => {
+  console.log(data)
   try {
-    const company = await findOne<Company>("Company", {
+    const document = await update<Company>("Company", data, {
       where: {
         id: companyId
       }
     });
-    return company;
-  } catch (err: any) {
-    return dbErrors(err);
-  }
-};
 
-export const updateOneCompany = async (companyId: string, data: CreateCompany) => {
-  try {
-    const document = await update<Company>("Company", data, {
-      where: {
-        id: Number(companyId)
-      }
-    });
     return document;
   } catch (err: any) {
     return dbErrors(err);

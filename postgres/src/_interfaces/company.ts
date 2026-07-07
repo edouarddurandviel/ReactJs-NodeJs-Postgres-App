@@ -8,12 +8,14 @@ export type CreateCompany = {
   name: string;
   activity: string;
   owner: string;
+  imgpath?: string;
 };
 
 export type Address = {
   street: string;
   postcode: number;
   city: string;
+  filePath: string;
 };
 
 export type CreateManyCompanies = Array<{

@@ -2,6 +2,7 @@ import ButtonLink from "../ButtonLink";
 import type { Company } from "../../stores/company/interfaces";
 import { ItemList, ItemListLeft, ItemListRight, SpanIso, SpanTitle, SpanRef } from "./style";
 import Button from "../Button";
+import { Image } from "../../components";
 import React from "react";
 
 const Index = ({ data, handleEditModal, handleDeleteItem }: MainListProps) => {
@@ -11,6 +12,15 @@ const Index = ({ data, handleEditModal, handleDeleteItem }: MainListProps) => {
     <ItemList key={data.id}>
       <ItemListLeft>
         <SpanTitle>{data.name}</SpanTitle>
+         {data.imgpath && (
+            <Image 
+              src={data.imgpath} 
+              alt={data.imgpath} 
+              width={150} 
+              height={100} 
+            />
+          )}
+    
         <SpanRef>
           {data.activity}{" "}
           {data.addresses &&

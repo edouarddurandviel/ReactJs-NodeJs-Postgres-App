@@ -15,6 +15,7 @@ export type Company = {
   owner: string;
   createdAt: Date;
   updatedAt: Date;
+  imgpath?: string;
 };
 
 interface State {
@@ -31,13 +32,13 @@ export interface ResponseState {
   [key: string]: CompanyState;
 }
 
-export type Payload = {
-  data: any;
+export type Payload<T> = {
+  data: T;
   params: PathParamsObject;
   query?: QueryObject;
 };
 
 export type Action = {
   type: string;
-  payload: Payload;
+  payload: Payload<any>;
 };

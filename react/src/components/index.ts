@@ -7,3 +7,4 @@ export { default as Button } from "./Button";
 export { default as Alerts } from "./Alerts";
 export { default as Meta } from "./Meta";
 export { default as MainList } from "./MainList";
+export { default as Image } from "./Image";

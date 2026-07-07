@@ -11,10 +11,10 @@ services:
       - /usr/src/app/node_modules
     restart: always
     depends_on:
-      - backend
+      - postgres-backend
 
-  backend:
-    container_name: backend
+  postgres-backend:
+    container_name: postgres-backend
     ports:
     - "3000:3000"
     build:
@@ -43,7 +43,7 @@ services:
       start_period: 20s
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./postgres/data/database.202605201629.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres/data/database.202607071422.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     ports:
       - "5432:5432"

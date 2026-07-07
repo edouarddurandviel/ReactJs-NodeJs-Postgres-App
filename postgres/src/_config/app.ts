@@ -6,11 +6,18 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import sequelize from "../models";
+import path from "node:path";
 
 const app = express();
 app.disable("x-powered-by");
 
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {
+      policy: "cross-origin"
+    }
+  })
+);
 // `cross scripting
 // Content-Security-Policy:
 // default-src 'self';
@@ -37,6 +44,9 @@ app.use(
     extended: true
   })
 );
+
+// serve images
+app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
 
 const origin = process.env.REACT_API_PORT;
 app.use(

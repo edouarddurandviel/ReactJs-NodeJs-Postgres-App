@@ -39,6 +39,7 @@ const SearchForm = ({ age, name, action }: { age: number; name: string; action: 
     <>
       <input onChange={onAgeChange} type="number" />
       {definedAge}
+      {optimisticAge}
 
       <form action={searchAction}>
         {optimisticSearch}

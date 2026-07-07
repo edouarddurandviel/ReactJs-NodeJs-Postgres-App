@@ -35,12 +35,14 @@ export default {
     formData.append("name", data.data.name);
     formData.append("activity", data.data.activity);
     formData.append("owner", data.data.owner);
+    if (data.data.imgpath) formData.append("image", data.data.imgpath);
 
     return request({
       path: companyApi.path,
       params: data.params,
       method: companyApi.method,
       data: formData,
+      headers: data.data.imgpath ? false : true,
     });
   },
   addOneCompanyAddress: (data: Payload<Address>) => {
@@ -60,24 +62,20 @@ export default {
   },
   updateOneCompany: (data: Payload<Company>) => {
     const companyApi = apiRoutes.companies.update;
-
-    console.log(data.data);
-    console.log({
-      path: companyApi.path,
-      params: data.params,
-      method: companyApi.method,
-    });
-
     const formData = new FormData();
     formData.append("name", data.data.name);
     formData.append("activity", data.data.activity);
     formData.append("owner", data.data.owner);
+    if (data.data.imgpath) {
+      formData.append("image", data.data.imgpath);
+    }
 
     return request({
       path: companyApi.path,
       params: data.params,
       method: companyApi.method,
       data: formData,
+      headers: data.data.imgpath ? false : true,
     });
   },
   deleteOneCompany: (data: Payload<Company>) => {

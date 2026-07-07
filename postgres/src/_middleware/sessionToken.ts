@@ -10,11 +10,11 @@ export const sessionToken: RequestHandler = async (
   next: any
 ): Promise<void> => {
   try {
-    const token = (await userActions.getUserTokenWithId(req.cookies.jwt)) as Token;
-    if (token) {
+    const user  = (await userActions.getUserTokenWithId(req.cookies.jwt)) as Token;
+    if (user) {
       const secret = process.env.ENV_SECRET;
       if (secret) {
-        const decode = (await jwt.verify(token.token, secret)) as any;
+        const decode = (await jwt.verify(user.token, secret)) as any;
         if (decode) {
           const isValid = decode && new Date(decode.exp).getTime() < new Date().getTime();
           if (isValid) {

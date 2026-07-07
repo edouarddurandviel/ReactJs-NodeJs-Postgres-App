@@ -1,32 +1,24 @@
 import { Sequelize, ValidationError, UniqueConstraintError } from "sequelize";
-import config from "../_config/postgres";
+import sequelize from "../models";
+const db = sequelize.instance();
 
-let db: any;
+export const checkConnection = async () => {
+  try {
+    await db.authenticate();
+    console.log("Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
 
-// export const sequelize = new Sequelize(config.db!, config.user!, config.password!, {
-//   dialect: "postgres",
-//   host: config.host!,
-//   port: Number(config.port!) || 3306,
-//   logging: console.log
-// });
-
-// export const checkConnection = async () => {
-//   try {
-//     await sequelize.authenticate();
-//     console.log("Connection has been established successfully.");
-//   } catch (error) {
-//     console.error("Unable to connect to the database:", error);
-//   }
-// };
-
-// export const forceSynchronization = async (args: any) => {
-//   try {
-//     await sequelize.sync(args);
-//     console.log("Tables has been synchronized successfully.");
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
+export const forceSynchronization = async (args: any) => {
+  try {
+    await db.sync(args);
+    console.log("Tables has been synchronized successfully.");
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 export const poolConnection = async () => {
   if (db) return;
@@ -46,11 +38,11 @@ export const getConnection = async (query: string, bindParams: any[]) => {
   };
 };
 
-// export const closeConnection = async () => {
-//   if (sequelize) {
-//     await sequelize.close();
-//   }
-// };
+export const closeConnection = async () => {
+  if (db) {
+    await db.close();
+  }
+};
 
 export const getDatabase = async () => {
   return db;

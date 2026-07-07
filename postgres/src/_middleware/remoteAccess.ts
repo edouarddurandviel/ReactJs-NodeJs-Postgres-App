@@ -1,8 +1,8 @@
 import cors from "cors";
-import remote from "../_config/remote";
+import config from "../_config/config";
 
 export const remotePostAccess = () => {
-  const whitelist = remote.domains;
+  const whitelist = config.remote.domains;
   cors({
     origin: (origin: any, callback: any) => {
       if (whitelist && whitelist.includes(origin)) {

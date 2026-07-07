@@ -15,7 +15,7 @@ import {
 } from "../../components/Layout/styles";
 import { ReactHookForm, RHFInputField } from "../../components/RHF";
 import { RHFform_Row, RHFform_Row_Btns } from "../../components/RHF/Form/styles";
-import type { SubmitHandler } from "react-hook-form";
+import { Controller, type SubmitHandler } from "react-hook-form";
 import { schemaCreateCompany } from "../../schemas/userSchema";
 
 const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
@@ -53,6 +53,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
             name: e.name,
             activity: e.activity,
             owner: e.owner,
+            imgpath: e.imgpath,
             ...(e.addresses && { addresses: e.addresses }),
             createdAt: e.createdAt,
             updatedAt: e.updatedAt,
@@ -112,7 +113,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
         <LeftColumn>
           <h3>{user?.userPermissions.email}</h3>
           <p>
-            <strong>Cache definitions</strong> for every viewed company detail pages. It prevents
+            <strong>Cache definition</strong> for every viewed company detail pages. It prevents
             from making any <strong>unnecessary requests</strong> twice. Content is stored in a Map.
             It could be sessionStorage
           </p>
@@ -137,10 +138,20 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
           >
             {({ control, handleSubmit, reset }) => (
               <RHFform_Row onSubmit={handleSubmit(submit)}>
-                <RHFInputField control={control} name="id" type="hidden" />
+                <RHFInputField control={control} name="id" type="hidden" style={{ padding: 0 }} />
                 <RHFInputField control={control} label="Company name" name="name" />
                 <RHFInputField control={control} label="Activity" name="activity" />
                 <RHFInputField control={control} label="Owner" name="owner" />
+                <Controller
+                  name="imgpath"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="file"
+                      onChange={(e) => field.onChange(e.target.files?.[0] ?? null)}
+                    />
+                  )}
+                />
 
                 <RHFform_Row_Btns>
                   <LoadingButton type="submit" content="Submit" />

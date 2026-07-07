@@ -36,15 +36,11 @@ export const Label = styled.label`
 export const RHFform = styled.form``;
 
 export const RHFform_Row = styled.form`
-  display: flex;
-  height: 82px;
-  flex-direction: row;
-  align-content: flex-start;
-  justify-content: flex-start;
-  align-items: flex-start;
   padding-bottom: 20px;
 `;
 
 export const RHFform_Row_Btns = styled.div`
-  margin-top: 32px;
+  margin: 20px 0 0 0;
+  float: left;
+  width: 100%;
 `;

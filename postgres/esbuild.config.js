@@ -20,7 +20,7 @@ build({
   outfile: "dist/index.js",
   sourcemap: !isProd,
   minify: isProd,
-  external: ["express"],
+  external: ["express", "sharp"],
   define: {
     "process.env.NODE_ENV": `"${process.env.NODE_ENV}"`
   }

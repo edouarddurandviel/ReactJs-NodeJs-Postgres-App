@@ -54,8 +54,8 @@ export default {
     Sequelize.useCLS(namespace);
 
     const sequelize = new Sequelize(config.database, config.username, config.password, config);
-    if(sequelize) sequelize.sync()
-      
+    if (sequelize) sequelize.sync();
+
     const files = fs.readdirSync(__dirname);
 
     const basename = path.basename(__filename);

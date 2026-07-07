@@ -4,6 +4,7 @@ import { findAll, findOne, count, create, destroy } from "@libs/queries";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
 import { dbErrors } from "@libs/sequelize";
+import user from "src/_routes/user";
 
 export const getOneUser = async (userId: string) => {
   try {
@@ -12,6 +13,9 @@ export const getOneUser = async (userId: string) => {
         id: userId
       }
     });
+
+    if (!user) throw new Error("No user found");
+
     return user;
   } catch (err) {
     return dbErrors(err);
@@ -25,6 +29,9 @@ export const getOneUserWithEmail = async (email: string) => {
         email: email
       }
     });
+
+    if (!user) throw new Error("No user found");
+
     return user;
   } catch (err: any) {
     return dbErrors(err);
@@ -36,6 +43,8 @@ export const getAllUsers = async () => {
     const users = await findAll<User>("User", {
       order: ["email", "ASC"]
     });
+
+    if (users.length === 0) throw new Error("No users found");
 
     return users;
   } catch (err: any) {
@@ -49,6 +58,8 @@ export const getSomeUsers = async (limit: number) => {
       order: ["email", "ASC"],
       limit: limit
     });
+
+    if (users.length === 0) throw new Error("No users found");
 
     return users;
   } catch (err: any) {
@@ -66,6 +77,8 @@ export const getUserWithSomeEmails = async (email: string) => {
       }
     });
 
+    if (users.length === 0) throw new Error("No user found");
+
     return users;
   } catch (err: any) {
     return dbErrors(err);
@@ -78,6 +91,8 @@ export const getUserData = async (userId: string) => {
         id: userId
       }
     });
+
+    if (users.length === 0) throw new Error("No users found");
 
     return users;
   } catch (err: any) {
@@ -92,6 +107,9 @@ export const getUserRole = async (userId: string) => {
         id: userId
       }
     });
+
+    if (!user) throw new Error("No user role found");
+
     return user;
   } catch (err: any) {
     return dbErrors(err);
@@ -111,6 +129,9 @@ export const countUsers = async () => {
 export const createOneUser = async (data: CreateUser) => {
   try {
     const user = await create<User>("User", data);
+
+    if (!user) throw new Error("Failed to create user");
+
     return user;
   } catch (err: any) {
     return dbErrors(err);
@@ -148,6 +169,9 @@ export const storeUserToken = async (token: string, userId: number) => {
       token: token,
       User_Id: userId
     });
+
+    if (!userToken) throw new Error("No user token found");
+
     return userToken;
   } catch (err: any) {
     return dbErrors(err);
@@ -170,6 +194,8 @@ export const getUserTokenWithId = async (token: string) => {
       }
     });
 
+    if (!user) throw new Error(`No token found with this token: ${token}`);
+
     return user;
   } catch (err: any) {
     return dbErrors(err);
@@ -183,6 +209,9 @@ export const deleteUserToken = async (User_Id: number) => {
         User_Id: User_Id
       }
     });
+
+    if (user === 0) throw new Error(`Failed to delete token for this user: ${User_Id}`);
+
     return user;
   } catch (err: any) {
     return dbErrors(err);

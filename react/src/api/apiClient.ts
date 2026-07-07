@@ -10,15 +10,20 @@ export default async (props: {
   params?: PathParamsObject;
   data?: any;
   query?: QueryObject;
+  headers?: boolean;
 }) => {
+  const { headers = true } = props;
+
   const cache = await apiCache.getInstance();
 
   const apiClient = await axios.create({
     baseURL: config.baseUrl,
     withCredentials: true,
-    headers: {
-      "Content-Type": "application/json",
-    },
+    ...(headers && {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }),
   });
 
   apiClient.interceptors.request.use(async (config) => {

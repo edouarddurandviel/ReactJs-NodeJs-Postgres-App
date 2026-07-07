@@ -1,14 +1,14 @@
 import { useController, type Control, type FieldValues, type Path } from "react-hook-form";
 import { FieldSet, InputField, Label } from "./styles";
 
-const Input = ({ name, control, label, type = "text", hidden }: InputFieldProps<any>) => {
+const Input = ({ name, control, label, type = "text", hidden, style }: InputFieldProps<any>) => {
   const {
     field,
     fieldState: { error },
   } = useController<any>({ name, control });
 
   return (
-    <FieldSet hidden={hidden}>
+    <FieldSet hidden={hidden} style={style}>
       <Label>{label}</Label>
       <InputField
         ref={field.ref}
@@ -34,6 +34,7 @@ interface InputFieldProps<T extends FieldValues> {
   label?: string;
   type?: string;
   hidden?: boolean;
+  style?: {};
 }
 
 export default Input;

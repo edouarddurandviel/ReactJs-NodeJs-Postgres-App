@@ -1,11 +1,13 @@
 import { Server } from "socket.io";
-import fs from "fs";
 import { Address, CreateCompany } from "../_interfaces/company";
-import * as companyActions from "../services/company/actions";
-import * as companySockets from "../services/company/sockets/clients";
-import CompanyAdminSocket from "../services/company/sockets/admin";
+import * as companyActions from "@services/company/actions";
+import * as companySockets from "@services/company/sockets/clients";
+import CompanyAdminSocket from "@services/company/sockets/admin";
 import path from "path";
 import { open } from "fs/promises";
+import { saveImageResizedFile } from "@services/company/images";
+import eventEmitter from "@libs/eventEmitter";
+import { getOneCompany } from "@services/company/actions";
 
 class CompanyController {
   private _io;
@@ -16,7 +18,7 @@ class CompanyController {
     this.admin = new CompanyAdminSocket();
   }
 
-  public async getOneCompany(companyId: string) {
+  public async getOneCompany(companyId: number) {
     const result = await companyActions.getOneCompany(companyId);
 
     return result;
@@ -27,23 +29,41 @@ class CompanyController {
     return companies;
   }
 
-  public async createOneCompany(company: CreateCompany) {
+  public async createOneCompany(company: CreateCompany, file?: any) {
+    if (file) {
+      const createdFile = await saveImageResizedFile(file, 300, 200);
+      company.imgpath = createdFile.outputFileName;
+    }
     await companyActions.createOneCompany(company);
+
     companySockets.reloadCompanies();
   }
 
   public async createOneCompanyAddress(companyId: number, address: Address) {
-    await companyActions.createOneCompanyAddress(companyId, address);
+    await companyActions.createOneCompanyAddress(Number(companyId), address);
+
     companySockets.reloadCompanies();
   }
 
-  public async updateOneCompany(companyId: string, data: CreateCompany) {
+  public async updateOneCompany(companyId: number, data: CreateCompany, file?: any) {
+    if (file) {
+      const currentFile = await companyActions.getOneCompany(companyId);
+      const createdFile = await saveImageResizedFile(file, 300, 200, currentFile.imgpath);
+      data.imgpath = createdFile.outputFileName;
+    }
+
+
+
     await companyActions.updateOneCompany(companyId, data);
 
     companySockets.reloadCompanies();
   }
 
-  public async replaceOneCompany(companyId: string, data: CreateCompany) {
+  public async replaceOneCompany(companyId: number, data: CreateCompany, file: any) {
+    if (file) {
+      const createdFile = await saveImageResizedFile(file, 300, 200);
+      data.imgpath = createdFile.outputFileName;
+    }
     await companyActions.replaceOneCompany(companyId, data);
 
     companySockets.reloadCompanies();

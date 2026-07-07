@@ -15,6 +15,7 @@ export class Company extends Model<InferAttributes<Company>, InferCreationAttrib
   declare name: string;
   declare activity: string;
   declare owner: string;
+  declare imgpath: string;
 
   declare getAddresses: HasManyGetAssociationsMixin<CompanyAddress>;
   declare createAddress: HasManyCreateAssociationMixin<CompanyAddress, "Company_Id">;
@@ -47,6 +48,10 @@ export default (sequelize: any) => {
         allowNull: false
       },
       owner: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      imgpath: {
         type: DataTypes.STRING,
         allowNull: false
       }

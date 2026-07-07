@@ -5,10 +5,10 @@ import * as selectors from "../../stores/rootSelectors";
 import * as actions from "../../stores/rootActions";
 import type { Address, Company } from "../../stores/company/interfaces";
 import type { AppDispatch, RootState } from "../../stores";
-import { Container, InlineWrapper } from "../../components/Layout/styles";
-import { Button, LoadingButton, Meta } from "../../components";
+import { Container, ContainerCentered, InlineWrapper } from "../../components/Layout/styles";
+import { Button, LoadingButton, Meta, Image } from "../../components";
 import { ReactHookForm, RHFInputField } from "../../components/RHF";
-import type { SubmitHandler } from "react-hook-form";
+import { type SubmitHandler } from "react-hook-form";
 import { schemaCreateAddress } from "../../schemas/userSchema";
 import { RHFform_Row, RHFform_Row_Btns } from "../../components/RHF/Form/styles";
 
@@ -49,6 +49,7 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
   }, [company]);
 
   const submit: SubmitHandler<Address> = (values: Address) => {
+    console.log(values);
     dispatch(
       actions.company.addOneCompanyAddress({
         params: {
@@ -75,8 +76,14 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
 
         {companyLoading && <p>Loading...</p>}
         {companyDetail && (
-          <>
+          <ContainerCentered>
             <InlineWrapper>
+              {companyDetail.imgpath && (
+                <Image 
+                  src={companyDetail.imgpath} 
+                  alt={companyDetail.imgpath} 
+                />
+              )}
               <p>{companyDetail.name}</p>
               <p>{companyDetail.owner}</p>
             </InlineWrapper>
@@ -103,7 +110,7 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
                 </RHFform_Row>
               )}
             </ReactHookForm>
-          </>
+          </ContainerCentered>
         )}
       </Container>
     </>

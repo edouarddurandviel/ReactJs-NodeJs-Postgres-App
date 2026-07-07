@@ -1,7 +1,7 @@
 import express from "express";
-import UsersRoutes from "./user/user";
-import CompanyRoutes from "./company/company";
-import RemoteRoutes from "./remote/remote";
+import UsersRoutes from "./user";
+import CompanyRoutes from "./company";
+import RemoteRoutes from "./remote";
 import { Server } from "socket.io";
 import { sessionToken } from "@middleware/sessionToken";
 
