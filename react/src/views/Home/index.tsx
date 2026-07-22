@@ -36,11 +36,11 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   };
 
   useEffect(() => {
-    dispatch(actions.socket.subscribeAllCompanies());
+    dispatch(actions.socket.company.subscribeAllCompanies());
     dispatch(actions.company.getAllCompanies());
 
     return () => {
-      dispatch(actions.socket.unsubscribeAllCompanies());
+      dispatch(actions.socket.company.unsubscribeAllCompanies());
     };
   }, [dispatch]);
 

@@ -1,9 +1,7 @@
 import { ButtonLink } from "./styles";
 
 const Index = ({ path, text }: ButtonLinkProps) => {
-  return (
-    <ButtonLink to={path}>{text}</ButtonLink>
-  );
+  return <ButtonLink to={path}>{text}</ButtonLink>;
 };
 
 interface ButtonLinkProps {

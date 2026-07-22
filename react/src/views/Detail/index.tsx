@@ -36,11 +36,10 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
         },
       }),
     );
-
-    dispatch(actions.socket.subscribeOneCompany(companyId));
+    dispatch(actions.socket.company.subscribeOneCompany(companyId));
 
     return () => {
-      dispatch(actions.socket.unsubscribeOneCompany(companyId));
+      dispatch(actions.socket.company.unsubscribeOneCompany(companyId));
     };
   }, [dispatch, companyId]);
 
@@ -49,7 +48,6 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
   }, [company]);
 
   const submit: SubmitHandler<Address> = (values: Address) => {
-    console.log(values);
     dispatch(
       actions.company.addOneCompanyAddress({
         params: {
@@ -79,10 +77,7 @@ const Index = ({ dispatch, company, companyLoading }: DetailsProps) => {
           <ContainerCentered>
             <InlineWrapper>
               {companyDetail.imgpath && (
-                <Image 
-                  src={companyDetail.imgpath} 
-                  alt={companyDetail.imgpath} 
-                />
+                <Image src={companyDetail.imgpath} alt={companyDetail.imgpath} />
               )}
               <p>{companyDetail.name}</p>
               <p>{companyDetail.owner}</p>

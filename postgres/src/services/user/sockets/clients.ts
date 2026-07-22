@@ -4,3 +4,8 @@ export const reloadUser = (userId: number, params: {}) => {
   const io = socketIo.getInstance();
   return io.emit(`user:${userId}`, params);
 };
+
+export const reloadUsers = () => {
+  const io = socketIo.getInstance();
+  return io.emit(`user`);
+};

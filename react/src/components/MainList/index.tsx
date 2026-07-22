@@ -12,15 +12,8 @@ const Index = ({ data, handleEditModal, handleDeleteItem }: MainListProps) => {
     <ItemList key={data.id}>
       <ItemListLeft>
         <SpanTitle>{data.name}</SpanTitle>
-         {data.imgpath && (
-            <Image 
-              src={data.imgpath} 
-              alt={data.imgpath} 
-              width={150} 
-              height={100} 
-            />
-          )}
-    
+        {data.imgpath && <Image src={data.imgpath} alt={data.imgpath} width={150} height={100} />}
+
         <SpanRef>
           {data.activity}{" "}
           {data.addresses &&

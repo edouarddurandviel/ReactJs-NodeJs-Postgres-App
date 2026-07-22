@@ -1,11 +1,11 @@
 import type { Middleware } from "redux";
 import requests from "./api";
 import * as actionTypes from "./types";
-import type { Company, Payload } from "./interfaces";
+import type { Payload } from "./interfaces";
 
 type Action = {
   type?: string;
-  payload: Payload<Company>;
+  payload: Payload<any>;
   message?: string;
   socket?: boolean;
 };
@@ -74,7 +74,7 @@ export const companyMiddleware: Middleware = (api) => (next) => async (action: u
 
       case actionTypes.ADD_ONE_COMPANY_ADDRESS_REQUEST:
         try {
-          const resp = await requests.addOneCompanyAddress((typedAction.payload as any).addresses);
+          const resp = await requests.addOneCompanyAddress(typedAction.payload);
           dispatch({
             type: actionTypes.ADD_ONE_COMPANY_ADDRESS_LOADING,
             payload: resp && resp.data.data,

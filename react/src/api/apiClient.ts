@@ -13,8 +13,7 @@ export default async (props: {
   headers?: boolean;
 }) => {
   const { headers = true } = props;
-
-  const cache = await apiCache.getInstance();
+  const cache = await apiCache.init();
 
   const apiClient = await axios.create({
     baseURL: config.baseUrl,

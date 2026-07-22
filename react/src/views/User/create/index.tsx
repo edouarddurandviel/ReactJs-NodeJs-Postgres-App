@@ -7,12 +7,25 @@ import { BthForm, Form, H2, Message, PLaceHolder } from "../../../components/Lay
 import { Formik, type FormikProps } from "formik";
 import { Input } from "../../../components/Formik";
 import { schemaUserCreate } from "../../../schemas/userSchema";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { User } from "../../../stores/user/interfaces";
+import { formatFrDate } from "../../../utils";
+import { UserDate, UserList } from "./styles";
 
-const Index = ({ dispatch, addUserLoading }: UserProps) => {
+const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
   const [data, setData] = useState<boolean>(false);
   const formRef = useRef<FormikProps<any>>(null);
   const ref = formRef.current as any;
+
+  useEffect(() => {
+    dispatch(actions.user.getAllUsers());
+
+    dispatch(actions.socket.user.subscribeAllUsers());
+
+    return () => {
+      dispatch(actions.socket.user.unsubscribeAllUsers());
+    };
+  }, [dispatch]);
 
   const handleSubmitCreateUser = (values: any) => {
     dispatch(
@@ -30,6 +43,18 @@ const Index = ({ dispatch, addUserLoading }: UserProps) => {
       <Message>
         Built with <strong>Formik</strong> forms library.
       </Message>
+      {users &&
+        users.length > 0 &&
+        users.map((user) => {
+          return (
+            <UserList key={user._id}>
+              {user.email} -{" "}
+              <UserDate>
+                {formatFrDate(user.createdAt!).date}
+              </UserDate>
+            </UserList>
+          );
+        })}
       <Formik
         innerRef={formRef}
         initialValues={{
@@ -89,10 +114,12 @@ const Index = ({ dispatch, addUserLoading }: UserProps) => {
 const mapStateToProps = (state: RootState) => {
   return {
     addUserLoading: selectors.user.addUserLoadingSelector(state),
+    users: selectors.user.usersSelector(state),
   };
 };
 
 interface UserProps {
+  users: User[];
   addUserLoading: boolean;
   dispatch: AppDispatch;
 }

@@ -6,8 +6,6 @@ import CompanyAdminSocket from "@services/company/sockets/admin";
 import path from "path";
 import { open } from "fs/promises";
 import { saveImageResizedFile } from "@services/company/images";
-import eventEmitter from "@libs/eventEmitter";
-import { getOneCompany } from "@services/company/actions";
 
 class CompanyController {
   private _io;

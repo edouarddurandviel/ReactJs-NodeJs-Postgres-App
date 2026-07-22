@@ -41,7 +41,7 @@ export const getOneUserWithEmail = async (email: string) => {
 export const getAllUsers = async () => {
   try {
     const users = await findAll<User>("User", {
-      order: ["email", "ASC"]
+      sort: ["email", "ASC"]
     });
 
     if (users.length === 0) throw new Error("No users found");
@@ -55,7 +55,7 @@ export const getAllUsers = async () => {
 export const getSomeUsers = async (limit: number) => {
   try {
     const users = await findAll<User>("User", {
-      order: ["email", "ASC"],
+      sort: ["email", "ASC"],
       limit: limit
     });
 

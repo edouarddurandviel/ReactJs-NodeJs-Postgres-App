@@ -36,7 +36,7 @@ export const socketMiddleware: Middleware = (api) => (next) => async (action) =>
         io.on(`${typedAction.message}`, (err) => {
           if (err) return;
 
-          const cacheMap = cache.getInstance();
+          const cacheMap = cache.init();
           if (cacheMap.hasCache("operation")) {
             cacheMap.delete("operation");
           }

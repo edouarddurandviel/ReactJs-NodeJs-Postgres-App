@@ -3,6 +3,7 @@ import { CreateUser } from "../_interfaces/user";
 import * as userActions from "../services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
+import * as userSockets from "@services/user/sockets/clients";
 import { User, UserToken } from "../_interfaces/models";
 
 class UserController {
@@ -36,15 +37,16 @@ class UserController {
       password: derivedKey,
       salt: salt.toString("hex")
     };
-    const user = await userActions.createOneUser(dataHash);
+    userActions.createOneUser(dataHash);
 
-    return user;
+    userSockets.reloadUsers();
+
   }
 
   // public async createProfil(data: any, userId: string) {
   //   const user = await userActions.createProfil(data, userId);
   //   return user;
-  // }
+  // } 
 
   public async getUserData(userId: string) {
     const user = await userActions.getUserData(userId);

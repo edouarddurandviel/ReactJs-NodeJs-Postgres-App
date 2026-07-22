@@ -28,8 +28,9 @@ term: Higher-Order Component (HOC)
 7. Container / Presentational Pattern (component / list)
 
 8. Render Props Pattern (children, render)
-render(data), children as a function children(data)
-==> parent
+   render(data), children as a function children(data)
+   ==> parent
+
  <!-- <MouseTracker
       render={({ x, y }) => (
         <h1>Mouse at: {x}, {y}</h1>

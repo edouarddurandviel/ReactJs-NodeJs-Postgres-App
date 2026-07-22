@@ -14,6 +14,7 @@ export type User = {
   email: string;
   password: string;
   token: string;
+  createdAt?: Date;
   profil?: Profil;
   _id?: string;
 };

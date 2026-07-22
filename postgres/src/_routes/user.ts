@@ -19,9 +19,9 @@ export default (io: Server) => {
   router.post("/create", sessionToken, async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await userSchemas.user.validateAsync(req.body);
-      const result = await userServices.createOneUser(data);
+      await userServices.createOneUser(data);
 
-      res.status(200).json({ err: false, data: result });
+      res.status(200).json({ err: false});
     } catch (error: any) {
       handleErrors(error);
     }

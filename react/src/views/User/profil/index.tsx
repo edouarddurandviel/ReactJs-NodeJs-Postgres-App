@@ -13,7 +13,7 @@ import { formizUser, schemaUser } from "../../../schemas/userSchema";
 import type { AnyAction } from "redux";
 import { RHFform } from "../../../components/RHF/Form/styles";
 import { ReactHookForm, RHFInputField } from "../../../components/RHF";
-//import Selector from "./Selector";
+import Selector from "../../../components/Selector";
 
 const Index = ({ profil, dispatch }: UserProps) => {
   const appDispatch = useDispatch<ThunkDispatch<RootState, undefined, AnyAction>>();
@@ -147,17 +147,22 @@ const Index = ({ profil, dispatch }: UserProps) => {
         <ReactHookForm
           defaultValues={{
             firstName: "",
-            region: "",
-            phone: "",
+            email: "",
+            position: "",
           }}
           validationSchema={schemaUser}
           onSubmit={onRHFSubmit}
         >
           {({ control, handleSubmit, reset }) => (
-            <RHFform onSubmit={handleSubmit(onRHFSubmit)}>
+            <RHFform onSubmit={handleSubmit(onRHFSubmit)} auto-complete="off">
               <RHFInputField control={control} label="First name" name="firstName" />
               <RHFInputField control={control} label="email" name="email" />
-              {/* <Selector spinner data={["Administrator", "Marketing", "Translator", "Commercial"]} /> */}
+              <Selector
+                control={control}
+                spinner
+                data={["Administrator", "Marketing", "Translator", "Commercial"]}
+                name="position"
+              />
               <input type="submit" />
               <input type="button" onClick={() => reset()} value="Reset" />
             </RHFform>
