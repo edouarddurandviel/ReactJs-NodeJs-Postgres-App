@@ -37,6 +37,9 @@ const Index = () => {
       </NavLink>
       {contextValue && (
         <>
+          <NavLink className="links" to="/tanstack">
+            TanStack query
+          </NavLink>
           <NavLink className="links" to="/user/add">
             Create user
           </NavLink>

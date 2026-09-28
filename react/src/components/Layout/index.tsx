@@ -8,6 +8,7 @@ import LoadingButton from "../LoadingButton";
 import type { UserConnected } from "../../stores/auth/interfaces";
 import { UserContext } from "../../contexts/UserContext";
 import Menu from "../Menu";
+import { footerText } from "../../theme/variables";
 
 const Index = ({ dispatch, user }: LayoutProps) => {
   const handleLogout = useCallback(() => {
@@ -42,10 +43,19 @@ const Index = ({ dispatch, user }: LayoutProps) => {
             </>
           )}
         </Header>
+         <span style={footerText as React.CSSProperties}>
+            Typescript - React - Redux - Immer - Axios - WebSockets - TanStack queries -
+            ReactHookForms - Formiz - argon2
+          </span>
         <Main>
           <Outlet />
         </Main>
-        <Footer>Footer</Footer>
+        <Footer>
+          <span style={footerText as React.CSSProperties}>
+            Typescript - React - Redux - Immer - Axios - WebSockets - TanStack queries -
+            ReactHookForms - Formiz - argon2
+          </span>
+        </Footer>
       </PLaceHolder>
     </UserContext>
   );

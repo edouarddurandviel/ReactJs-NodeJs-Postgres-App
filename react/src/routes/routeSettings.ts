@@ -2,6 +2,7 @@ import AppLegacy from "../views/Home";
 import Auth from "../views/Auth";
 import CreateUser from "../views/User/create";
 import UserProfil from "../views/User/profil";
+import TanStackQuery from "../views/TanStack";
 import { lazy } from "react";
 
 const RouteSettings = [
@@ -10,6 +11,11 @@ const RouteSettings = [
     name: "home",
     index: true,
     component: AppLegacy,
+  },
+  {
+    path: "/tanstack",
+    name: "tanstack",
+    component: TanStackQuery,
   },
   {
     path: "/user/add",
