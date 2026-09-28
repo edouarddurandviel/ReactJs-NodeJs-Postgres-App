@@ -22,6 +22,14 @@ class UserController {
     const salt = randomBytes(16);
     const secret = process.env.ENV_SECRET;
 
+    // auth à la 3ème bloque le compte 5 10 20 30 minutes
+    // ip de la machine avec le compte + MFA
+    // nouveau de pass toutes les 6/12 mois pour les données sensibles ?
+    // auth fails => _until timestamp as connection fails (filed_attemps/lock_until)
+    // then update if auth has succeeded.
+    // lock_until = Date.now() + 5 * 60 * 1000; ou directement dans sql NOW()+ INTERVAL '5 minutes'
+    // redis if several node servers and force brut
+
     const derivedKey = argon2Sync("argon2id", {
       message: data.password,
       nonce: salt,
@@ -40,13 +48,12 @@ class UserController {
     userActions.createOneUser(dataHash);
 
     userSockets.reloadUsers();
-
   }
 
   // public async createProfil(data: any, userId: string) {
   //   const user = await userActions.createProfil(data, userId);
   //   return user;
-  // } 
+  // }
 
   public async getUserData(userId: string) {
     const user = await userActions.getUserData(userId);
@@ -77,7 +84,7 @@ class UserController {
       const payload = { User_Id: user.id };
       const secret = process.env.ENV_SECRET;
 
-      const token = secret && jwt.sign(payload, secret, { expiresIn: "1w" });
+      const token = secret && jwt.sign(payload, secret, { expiresIn: 60 * 60 * 24 * 7 });
       token && (await userActions.storeUserToken(token, user.id));
 
       const userPermissions = {
