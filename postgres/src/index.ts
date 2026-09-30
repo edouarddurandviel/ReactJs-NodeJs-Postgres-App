@@ -2,29 +2,31 @@ import "dotenv/config";
 import http from "http";
 import app from "./_config/app";
 import socketIo from "@libs/socketio";
-import { onError, normalizePort } from "@libs/server";
+import { onErrorEvent, normalizePort } from "@libs/server";
 import v1Routes from "./_api/v1";
 //import eventEmitter from "@libs/eventEmitter";
-//import websockets from "@libs/websockets";
+//import websockets from "@libs/ws";
 
-// Get port from environment and store in Express.
-const port = normalizePort(process.env.PORT || "3000");
+const origin = process.env.REACT_API_PORT;
+const domain = process.env.DOMAIN_URL;
+const apiPort = process.env.PORT;
+
+// Get port from environment and store it in Express
+const port = normalizePort(apiPort || "3000");
 app.set("port", port);
 
 // Create HTTP server.
 const server = http.createServer(app);
 
-// Initialize With an HTTP server.
-const origin = process.env.REACT_API_PORT;
+// Initialize HTTP server.
 const io = socketIo.init(server, {
   path: "/socket",
   cors: {
-    origin: [`http://localhost:${origin}`]
+    origin: [`${domain}:${origin}`]
   }
 });
 
 //websockets.createSocketServer();
-
 // in app.use
 // const emitter = eventEmitter.createEventEmitter()
 // emitter.on("notification", (data, err) => {
@@ -38,12 +40,13 @@ const io = socketIo.init(server, {
 // Send io instance through routes
 app.use(v1Routes(io));
 
-// Listen on provided port, on all network interfaces.
+// Listen on provided port, on all network interfaces
 server.listen(port);
 
-// EACCES require elevated privileges - EADDRINUSE already in use
+// - EACCES - Require elevated privileges 
+// - EADDRINUSE - Already in use
 server.on("error", (error: any) => {
-  onError(error, port);
+  onErrorEvent(error, port);
 });
 
 // Must be an address to listen
@@ -52,7 +55,7 @@ server.on("listening", () => {
   if (addr) {
     const bind = typeof addr === "string" ? "pipe " + addr : addr.port;
 
-    console.info(`[Listening] on http://localhost: ${bind}`);
+    console.info(`[Listening] on ${domain}: ${bind}`);
   }
 });
 
