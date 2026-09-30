@@ -2,7 +2,7 @@
 
 **auth argon2Async** uniquement disponible à partir de la version **node: v24.7.0** 
 
-Frontend: "React", redux, "ReactHookForms", 'Formiz", "Formik"
+Frontend: "React", redux, "ReactHookForms", 'Formiz", "Formik", "Tanstask React Query"
 Backend: "node.js", "express.js", connecté à une base de données relationnelle, "Postgres".
 
 Utilisation de **react-persist** pour sauvegarder les utilisateurs connectés, **cache des requêtes avec une Map**   
