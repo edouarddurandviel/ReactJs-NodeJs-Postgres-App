@@ -7,6 +7,7 @@ import * as selectors from "../../stores/rootSelectors";
 import type { RootState } from "../../stores";
 import type { UserConnected } from "../../stores/auth/interfaces";
 
+
 const Index = ({ user }: RootProps) => {
   return (
     <Routes>
