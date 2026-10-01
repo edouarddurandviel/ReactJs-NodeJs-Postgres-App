@@ -4,6 +4,7 @@ import { FieldSet, InputField, Label } from "./styles";
 type Value = string | number | readonly string[] | undefined;
 
 const Input = ({
+  autoComplete,
   name,
   id,
   type,
@@ -16,6 +17,7 @@ const Input = ({
 }: InputProps) => {
   const { value, isValid, errorMessage, setValue, isPristine } = useField({
     name,
+    autoComplete,
     id,
     type,
     required,
@@ -32,6 +34,7 @@ const Input = ({
     <FieldSet>
       <Label>{label}</Label>
       <InputField
+        autoComplete={autoComplete}
         value={(value as Value) ?? ""}
         id={id}
         type={type}
@@ -49,6 +52,7 @@ interface InputProps {
   name: string;
   id: string;
   type: string;
+  autoComplete?: string;
   required?: string;
   placeholder?: string;
   label?: string;

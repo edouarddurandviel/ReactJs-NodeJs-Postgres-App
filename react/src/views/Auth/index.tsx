@@ -8,6 +8,10 @@ import { RVInput, LoadingButton, Meta } from "../../components";
 import { BthForm, Container, Form, LoginForm, Message } from "../../components/Layout/styles";
 import type { User } from "../../stores/user/interfaces";
 
+// cookies une semaine + auth à la 3ème bloque le compte 5 10 20 30 minutes
+// ip de la machine avec le compte + MFA
+// nouveau de pass toutes les 6/12 mois pour les données sensibles ?
+
 const Index = ({ dispatch }: UserProps) => {
   const form = useForm({
     initialValues: {
@@ -52,12 +56,14 @@ const Index = ({ dispatch }: UserProps) => {
           </Message>
           <Formiz connect={form}>
             <Form
+              autoComplete="off"
               onSubmit={(e) => {
                 e.preventDefault();
                 form.submit();
               }}
             >
               <RVInput
+                autoComplete="off"
                 name="email"
                 type="text"
                 id="1"
@@ -71,6 +77,7 @@ const Index = ({ dispatch }: UserProps) => {
                 ]}
               />
               <RVInput
+                autoComplete="off"
                 name="password"
                 type="text"
                 id="2"

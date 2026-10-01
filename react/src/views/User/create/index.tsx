@@ -48,10 +48,7 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
         users.map((user) => {
           return (
             <UserList key={user._id}>
-              {user.email} -{" "}
-              <UserDate>
-                {formatFrDate(user.createdAt!).date}
-              </UserDate>
+              {user.email} - <UserDate>{formatFrDate(user.createdAt!).date}</UserDate>
             </UserList>
           );
         })}

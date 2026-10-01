@@ -1,8 +1,7 @@
-import AppLegacy from "../views/Home";
+//import AppLegacy from "../views/Home";
 import Auth from "../views/Auth";
 import CreateUser from "../views/User/create";
 import UserProfil from "../views/User/profil";
-import TanStackQuery from "../views/TanStack";
 import { lazy } from "react";
 
 const RouteSettings = [
@@ -10,12 +9,12 @@ const RouteSettings = [
     path: "/",
     name: "home",
     index: true,
-    component: AppLegacy,
+    component: lazy(() => import("../views/Home")),
   },
   {
     path: "/tanstack",
     name: "tanstack",
-    component: TanStackQuery,
+    component: lazy(() => import("../views/TanStack")),
   },
   {
     path: "/user/add",
