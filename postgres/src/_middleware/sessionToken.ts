@@ -15,19 +15,26 @@ export const sessionToken: RequestHandler = async (
       if (secret) {
         const decode = (await jwt.verify(req.cookies.jwt, secret)) as any;
         if (decode) {
-           const user = (await userActions.getUserTokenWithId(decode.Session_Id)) as Token;
-          const isValid = decode && new Date(decode.exp).getTime() < new Date().getTime();
-          if (isValid) {
-            req.User_Id = user.id;
-            next();
+          const user = (await userActions.getUserTokenWithId(decode.Session_Id)) as Token;
+          if(user){
+            const isValid = decode && new Date(decode.exp).getTime() < new Date().getTime();
+            if (isValid) {
+              req.User_Id = user.id;
+              next();
+            }else{
+              throw new NotFound("Session expiry");
+            }
+          }else{
+            throw new NotFound("Unauthorized user session token");
           }
+         
+        }else{
+           throw new NotFound("Unauthorized session token");
         }
-      } else {
-        throw new NotFound("Session expiry");
       }
-    } else {
-      throw new NotFound("Unauthorized session token");
-    }
+    }else{
+      throw new NotFound("Need a session token");
+    } 
   } catch (error: any) {
     res.status(401).json({ message: error.message });
   }
