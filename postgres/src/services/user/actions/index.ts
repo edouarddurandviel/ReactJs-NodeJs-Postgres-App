@@ -1,41 +1,39 @@
 import { Op } from "sequelize";
 import { CreateUser } from "../../../_interfaces/user";
-import { findAll, findOne, count, create, destroy } from "@libs/queries";
+import { findAll, findOne, count, create, destroy } from "@libs/modelStatic";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
-import { dbErrors } from "@libs/sequelize";
-import user from "src/_routes/user";
+import { manageError } from "@libs/sequelize";
+import { UserBadRequestError, UserNotFoundError, UserTokenBadRequestError, UserTokenNotFoundError } from "../errors";
 
+/**
+ *
+ * @param userId
+ * @returns user object
+ */
 export const getOneUser = async (userId: string) => {
-  try {
     const user = await findOne<User>("User", {
       where: {
         id: userId
       }
     });
 
-    if (!user) throw new Error("No user found");
+    if (!user) throw new UserNotFoundError();
 
     return user;
-  } catch (err) {
-    return dbErrors(err);
-  }
+
 };
 
 export const getOneUserWithEmail = async (email: string) => {
-  try {
     const user = await findOne<User>("User", {
       where: {
         email: email
       }
     });
 
-    if (!user) throw new Error("No user found");
+    if (!user) throw new UserNotFoundError();
 
     return user;
-  } catch (err: any) {
-    return dbErrors(err);
-  }
 };
 
 export const getAllUsers = async () => {
@@ -44,11 +42,11 @@ export const getAllUsers = async () => {
       sort: ["email", "ASC"]
     });
 
-    if (users.length === 0) throw new Error("No users found");
+    if (users.length === 0) throw new UserNotFoundError();
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -59,11 +57,11 @@ export const getSomeUsers = async (limit: number) => {
       limit: limit
     });
 
-    if (users.length === 0) throw new Error("No users found");
+    if (users.length === 0) throw new UserNotFoundError();
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -77,11 +75,11 @@ export const getUserWithSomeEmails = async (email: string) => {
       }
     });
 
-    if (users.length === 0) throw new Error("No user found");
+    if (users.length === 0) throw new UserNotFoundError();
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 export const getUserData = async (userId: string) => {
@@ -92,11 +90,11 @@ export const getUserData = async (userId: string) => {
       }
     });
 
-    if (users.length === 0) throw new Error("No users found");
+    if (users.length === 0) throw new UserNotFoundError();
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -108,11 +106,11 @@ export const getUserRole = async (userId: string) => {
       }
     });
 
-    if (!user) throw new Error("No user role found");
+    if (!user) throw new UserNotFoundError();
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -122,7 +120,7 @@ export const countUsers = async () => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -130,11 +128,11 @@ export const createOneUser = async (data: CreateUser) => {
   try {
     const user = await create<User>("User", data);
 
-    if (!user) throw new Error("Failed to create user");
+    if (!user) throw new UserBadRequestError();
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -157,12 +155,7 @@ export const createOneUser = async (data: CreateUser) => {
 //   return searchedUser;
 // };
 
-/**
- *
- * @param token
- * @param userId
- * @returns user object
- */
+
 export const storeUserToken = async (token: string, userId: number) => {
   try {
     const userToken = await create<Token>("Token", {
@@ -170,11 +163,11 @@ export const storeUserToken = async (token: string, userId: number) => {
       User_Id: userId
     });
 
-    if (!userToken) throw new Error("No user token found");
+    if (!userToken) throw new UserTokenNotFoundError(token);
 
     return userToken;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -194,11 +187,11 @@ export const getUserTokenWithId = async (token: string) => {
       }
     });
 
-    if (!user) throw new Error(`No token found with this token: ${token}`);
+    if (!user) throw new UserTokenNotFoundError(token);
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -210,10 +203,10 @@ export const deleteUserToken = async (User_Id: number) => {
       }
     });
 
-    if (user === 0) throw new Error(`Failed to delete token for this user: ${User_Id}`);
+    if (user === 0) throw new UserTokenBadRequestError(User_Id);
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
