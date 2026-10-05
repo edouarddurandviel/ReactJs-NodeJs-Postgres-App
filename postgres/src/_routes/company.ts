@@ -4,13 +4,12 @@ import * as companySchemas from "@schemas/company";
 import * as generalSchemas from "@schemas/general";
 import { handleErrors } from "@libs/server";
 import { ExtendedRequest } from "../_interfaces/requests";
-import { Server } from "socket.io";
 import { upload } from "@middleware/downloadImages";
 import { deleteFileSession } from "@services/company/images";
 
-export default (io: Server) => {
+export default () => {
   const router = express.Router();
-  const companyServices = new CompanyController(io);
+  const companyServices = new CompanyController();
 
   // Write
   router.post("/create", upload.single("image"), async (req: ExtendedRequest, res: Response) => {
@@ -20,7 +19,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -32,7 +31,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -48,7 +47,7 @@ export default (io: Server) => {
 
         res.status(200).json({ err: false });
       } catch (error: any) {
-        handleErrors(error);
+        handleErrors(res, error);
       }
     }
   );
@@ -65,7 +64,7 @@ export default (io: Server) => {
 
         res.status(200).json({ err: false, data: result });
       } catch (error: any) {
-        handleErrors(error);
+        handleErrors(res, error);
       } finally {
         deleteFileSession(req.file);
       }
@@ -80,7 +79,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -90,7 +89,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -102,7 +101,7 @@ export default (io: Server) => {
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
       console.log(error);
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 

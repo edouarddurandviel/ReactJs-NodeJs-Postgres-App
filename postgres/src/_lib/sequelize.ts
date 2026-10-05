@@ -1,4 +1,4 @@
-import { Sequelize, ValidationError, UniqueConstraintError } from "sequelize";
+import { ValidationError, UniqueConstraintError } from "sequelize";
 import sequelize from "../models";
 const db = sequelize.instance();
 
@@ -15,8 +15,8 @@ export const forceSynchronization = async (args: any) => {
   try {
     await db.sync(args);
     console.log("Tables has been synchronized successfully.");
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -27,13 +27,12 @@ export const poolConnection = async () => {
 };
 
 export const getConnection = async (query: string, bindParams: any[]) => {
-  // For pool initialization, see above
+  // Pool initialization
   const conn = await db.getConnection();
 
   return async () => {
-    // Do something with the connection
     await conn.query(query, bindParams);
-    // Don't forget to release the connection when finished!
+    // When finished, release connection
     db.releaseConnection(conn);
   };
 };
@@ -48,7 +47,7 @@ export const getDatabase = async () => {
   return db;
 };
 
-export const dbErrors = (err: any) => {
+export const manageError = (err: any) => {
   if (err instanceof ValidationError) {
     return {
       message: "Validation error",

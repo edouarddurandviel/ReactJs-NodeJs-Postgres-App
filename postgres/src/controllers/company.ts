@@ -8,13 +8,8 @@ import { open } from "fs/promises";
 import { saveImageResizedFile } from "@services/company/images";
 
 class CompanyController {
-  private _io;
-  private admin;
 
-  constructor(io: Server) {
-    this._io = io;
-    this.admin = new CompanyAdminSocket();
-  }
+  constructor() {}
 
   public async getOneCompany(companyId: number) {
     const result = await companyActions.getOneCompany(companyId);
@@ -49,8 +44,6 @@ class CompanyController {
       const createdFile = await saveImageResizedFile(file, 300, 200, currentFile.imgpath);
       data.imgpath = createdFile.outputFileName;
     }
-
-
 
     await companyActions.updateOneCompany(companyId, data);
 

@@ -21,9 +21,9 @@ export default (io: Server) => {
       const data = await userSchemas.user.validateAsync(req.body);
       await userServices.createOneUser(data);
 
-      res.status(200).json({ err: false});
+      res.status(200).json({ err: false });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -43,7 +43,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -55,7 +55,7 @@ export default (io: Server) => {
       res.clearCookie("jwt");
       res.status(200).json({ err: false });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -78,7 +78,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 
@@ -89,7 +89,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 

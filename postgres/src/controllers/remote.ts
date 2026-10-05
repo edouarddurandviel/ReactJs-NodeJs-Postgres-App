@@ -3,12 +3,11 @@ import CompanyController from "./company";
 import { handleErrors } from "@libs/server";
 import { remotePostAccess } from "@middleware/remoteAccess";
 import { ExtendedRequest } from "../_interfaces/requests";
-import { Server } from "socket.io";
 
-export default (io: Server) => {
+export default () => {
   const router = express.Router();
 
-  const companyServices = new CompanyController(io);
+  const companyServices = new CompanyController();
 
   router.post("/remote/post", remotePostAccess, async (req: ExtendedRequest, res: Response) => {
     try {
@@ -16,7 +15,7 @@ export default (io: Server) => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      handleErrors(error);
+      handleErrors(res, error);
     }
   });
 

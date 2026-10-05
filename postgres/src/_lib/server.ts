@@ -1,7 +1,24 @@
-import createError from "http-errors";
+import { UniqueConstraintError, ValidationError } from "sequelize";
 
-export const handleErrors = async (error: any) => {
-  createError(404, error);
+export const handleErrors = async (res: any, error: any) => {
+   if (error instanceof ValidationError) {
+   res.status(401).json({ 
+      error: {
+        message: "Validation Error",
+        errors: error.errors.map(e => e.message)
+      }
+    });
+  } else if (error instanceof UniqueConstraintError) {
+    res.status(401).json({ 
+      error: {
+        message: "Duplicate value",
+        errors: error.errors.map(e => e.message)
+      }
+    });
+  } else
+    return res.status(error.statusCode).json({ 
+    error: error.message 
+  });
 };
 
 // Normalize a port into a number, string, or false
