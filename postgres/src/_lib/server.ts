@@ -1,6 +1,7 @@
 
 export const handleErrors = async (res: any, error: any) => {
-  return res.status(error.statusCode).json({ 
+  return res.status(error.statusCode).json({
+    err: true, 
     error: error.message 
   });
 };

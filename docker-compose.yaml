@@ -12,6 +12,9 @@ services:
     restart: always
     depends_on:
       - postgres-backend
+    networks:
+    - postgres_net
+
 
   postgres-backend:
     container_name: postgres-backend
@@ -50,10 +53,110 @@ services:
     networks:
       - postgres_net
 
-    
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    user: '0'
+    restart: unless-stopped  
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
+      - loki
+      - tempo
+      - mimir
+    networks:
+      - postgres_net
+
+
+  alloy: 
+    image: grafana/alloy
+    container_name: alloy
+    restart: unless-stopped
+    ports: 
+      - "12347:12347"
+    volumes: 
+      - ./alloy/config.alloy:/etc/alloy/config.alloy.ro
+    command:
+      - run
+      - /etc/alloy/config.alloy
+    depends_on:
+      - loki
+      - tempo
+    networks:
+      - postgres_net
+
+  loki:
+    image: grafana/loki
+    container_name: loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    volumes:
+      - loki-storage:/loki
+    networks:
+      - postgres_net
+
+  tempo:
+    image: grafana/tempo:2.8.1
+    container_name: tempo
+    restart: unless-stopped
+    command: ["-config.file=/etc/tempo/tempo.yaml"]
+    ports:
+      - "3200:3200"
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - tempo-storage:/var/tempo
+      - ./tempo/tempo.yaml:/etc/tempo/tempo.yaml:ro
+    networks:
+      - postgres_net
+
+  mimir:
+    image: grafana/mimir
+    command: ["-config.file=/etc/mimir/mimir.yaml"]
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./mimir/mimir.yaml:/etc/mimir/mimir.yaml:ro
+      - mimir-storage:/data
+    networks:
+      - postgres_net
+
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter
+    environment:
+      DATA_SOURCE_NAME: "postgresql://dbuser:dbpassword@postgresdb:5432/companiesdb?sslmode=disable"
+    depends_on:
+      - postgresdb
+    networks:
+      - postgres_net
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on: 
+      - postgres-exporter
+    networks:
+      - postgres_net
+
 
 volumes:
   pgdata:
+  grafana-storage:
+  loki-storage:
+  tempo-storage:
+  mimir-storage:
 
 networks:
   postgres_net:

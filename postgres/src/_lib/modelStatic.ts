@@ -3,23 +3,24 @@ import sequelize from "../models";
 
 const db = sequelize.instance();
 
-const staticModel = (key: any): ModelStatic<Model> => {
+const modelStatic = (key: any): ModelStatic<Model> => {
+  // transaction CLS is enabled
   return db[key];
 };
 
 export const findOne = <T extends Model>(model: string, args: any): Promise<T | null> => {
-  return staticModel(model).findOne(args) as Promise<T | null>;
+  return modelStatic(model).findOne(args) as Promise<T | null>;
 };
 
 export const findOrCreate = <T extends Model>(
   model: string,
   args: any
 ): Promise<[Model<T>, boolean]> => {
-  return staticModel(model).findOrCreate(args) as Promise<[Model<T>, boolean]>;
+  return modelStatic(model).findOrCreate(args) as Promise<[Model<T>, boolean]>;
 };
 
 export const findAll = <T extends Model>(model: string, args: any): Promise<T[]> => {
-  return staticModel(model).findAll(args) as Promise<T[]>;
+  return modelStatic(model).findAll(args) as Promise<T[]>;
 };
 
 export const update = <T extends Model>(
@@ -27,11 +28,11 @@ export const update = <T extends Model>(
   args: any,
   options: any
 ): Promise<[number, T[]]> => {
-  return staticModel(model).update(args, options) as Promise<[number, T[]]>;
+  return modelStatic(model).update(args, options) as Promise<[number, T[]]>;
 };
 
 export const create = <T extends Model>(model: string, args: any): Promise<T | null> => {
-  return staticModel(model).create(args) as Promise<T | null>;
+  return modelStatic(model).create(args) as Promise<T | null>;
 };
 
 export const bulkCreate = <T extends Model>(
@@ -39,17 +40,23 @@ export const bulkCreate = <T extends Model>(
   args: any[],
   options: any
 ): Promise<T[]> => {
-  return staticModel(model).bulkCreate(args, options) as Promise<T[]>;
+  return modelStatic(model).bulkCreate(args, options) as Promise<T[]>;
 };
 
 export const destroy = (model: string, args: any): Promise<number> => {
-  return staticModel(model).destroy(args);
+  return modelStatic(model).destroy(args);
 };
 
 export const increment = <T extends Model>(model: string, args: any): Promise<[T[], number?]> => {
-  return staticModel(model).increment("number", args) as Promise<[T[], number?]>;
+  return modelStatic(model).increment("number", args) as Promise<[T[], number?]>;
 };
 
 export const count = (model: string): Promise<number> => {
-  return staticModel(model).count();
+  return modelStatic(model).count();
 };
+
+// export const managedTransaction = (model: string, args: any) => {
+//   db.sequelize?.transaction(async (t) => {
+//     return modelStatic(model).[]
+//   })
+// }

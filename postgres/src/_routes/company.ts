@@ -100,7 +100,6 @@ export default () => {
 
       res.status(200).json({ err: false, data: result });
     } catch (error: any) {
-      console.log(error);
       handleErrors(res, error);
     }
   });
