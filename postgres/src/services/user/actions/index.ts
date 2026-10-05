@@ -21,7 +21,6 @@ export const getOneUser = async (userId: string) => {
     if (!user) throw new UserNotFoundError();
 
     return user;
-
 };
 
 export const getOneUserWithEmail = async (email: string) => {
