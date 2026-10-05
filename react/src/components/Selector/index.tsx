@@ -32,7 +32,7 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
     return () => {
       document.removeEventListener("mousedown", handleClick);
     };
-  }, [open]);
+  }, []);
 
   return (
     <>
@@ -48,12 +48,16 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
       </datalist>
 
       <SelectPlaceholder>
-        <SelectorHeader role="combobox" aria-expanded="false" ref={ref}>
+        <SelectorHeader 
+          role="combobox" 
+          aria-expanded={open} 
+          ref={ref}
+        >
           <SelectedValue
+            tabIndex={0}
             auto-complete="off"
             aria-autocomplete="list"
-            tabIndex={0}
-            type="text"
+            readOnly
             name={field.name}
             value={field.value !== "" ? field.value : "Select a value"}
             onFocus={() => {
@@ -67,7 +71,7 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
                 data.map((option) => (
                   <SelectorList
                     role="option"
-                    aria-checked={optionSate === option ? "true" : "false"}
+                    aria-checked={optionSate === option}
                     onClick={() => {
                       field.onChange(option);
                       setOpen(false);
@@ -79,28 +83,31 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
                 ))}
             </SelectorListWrapper>
           )}
-        </SelectorHeader>
 
-        {field.value !== "" && (
-          <SelectorStatus
+          {field.value !== "" && (
+            <SelectorStatus
+              onClick={() => {
+                field.onChange("");
+                setOption(null);
+              }}
+            >
+              X
+            </SelectorStatus>
+          )}
+
+          {/* {spinner && "loader"} */}
+
+          <SelectorCommand
+            aria-label={open ? "Close options" : "Open options"}
             onClick={() => {
-              field.onChange("");
+              setOpen((previous) => !previous);
               setOption(null);
             }}
           >
-            X
-          </SelectorStatus>
-        )}
+            {open ? "Close" : "Open"}
+          </SelectorCommand>
+        </SelectorHeader>
 
-        {/* {spinner && "loader"} */}
-
-        <SelectorCommand
-          onClick={(e) => {
-            if (e) setOpen(!open);
-          }}
-        >
-          o
-        </SelectorCommand>
         {error && <span role="alert">{error.message}</span>}
       </SelectPlaceholder>
     </>

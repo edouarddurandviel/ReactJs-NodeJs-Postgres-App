@@ -1,22 +1,7 @@
 import { UniqueConstraintError, ValidationError } from "sequelize";
 
 export const handleErrors = async (res: any, error: any) => {
-   if (error instanceof ValidationError) {
-   res.status(401).json({ 
-      error: {
-        message: "Validation Error",
-        errors: error.errors.map(e => e.message)
-      }
-    });
-  } else if (error instanceof UniqueConstraintError) {
-    res.status(401).json({ 
-      error: {
-        message: "Duplicate value",
-        errors: error.errors.map(e => e.message)
-      }
-    });
-  } else
-    return res.status(error.statusCode).json({ 
+  return res.status(error.statusCode).json({ 
     error: error.message 
   });
 };

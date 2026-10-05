@@ -43,10 +43,10 @@ const Index = ({ dispatch, user }: LayoutProps) => {
             </>
           )}
         </Header>
-         <span style={footerText as React.CSSProperties}>
-            Typescript - React - Redux - Immer - Axios - WebSockets - TanStack queries -
-            ReactHookForms - Formiz - argon2
-          </span>
+        <span style={footerText as React.CSSProperties}>
+          Typescript - React - Redux - Immer - Axios - WebSockets - TanStack queries -
+          ReactHookForms - Formiz - argon2
+        </span>
         <Main>
           <Outlet />
         </Main>

@@ -18,7 +18,7 @@ app.use(
     }
   })
 );
-// `cross scripting
+// cross scripting
 // Content-Security-Policy:
 // default-src 'self';
 // base-uri 'self';
@@ -45,20 +45,20 @@ app.use(
   })
 );
 
-// serve images
+// Serve images
 app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
 
 const origin = process.env.REACT_API_PORT;
 app.use(
   cors({
-    origin: `http://localhost:${origin}`, // allow frontend origin
+    origin: `http://localhost:${origin}`, // Allow frontend origin
     credentials: true
   })
 );
 app.use(bodyParser.json());
 app.use(morgan("dev"));
 
-// check sequelize connection
+// Check sequelize connection
 sequelize.init();
 
 export default app;

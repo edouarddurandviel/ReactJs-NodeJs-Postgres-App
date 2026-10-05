@@ -1,9 +1,9 @@
 import { Op } from "sequelize";
 import { CreateUser } from "../../../_interfaces/user";
-import { findAll, findOne, count, create, destroy } from "@libs/queries";
+import { findAll, findOne, count, create, destroy } from "@libs/modelStatic";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
-import { dbErrors } from "@libs/sequelize";
+import { manageError } from "@libs/sequelize";
 import user from "src/_routes/user";
 
 export const getOneUser = async (userId: string) => {
@@ -18,7 +18,7 @@ export const getOneUser = async (userId: string) => {
 
     return user;
   } catch (err) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -34,7 +34,7 @@ export const getOneUserWithEmail = async (email: string) => {
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -48,7 +48,7 @@ export const getAllUsers = async () => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -63,7 +63,7 @@ export const getSomeUsers = async (limit: number) => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -81,7 +81,7 @@ export const getUserWithSomeEmails = async (email: string) => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 export const getUserData = async (userId: string) => {
@@ -96,7 +96,7 @@ export const getUserData = async (userId: string) => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -112,7 +112,7 @@ export const getUserRole = async (userId: string) => {
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -122,7 +122,7 @@ export const countUsers = async () => {
 
     return users;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -134,7 +134,7 @@ export const createOneUser = async (data: CreateUser) => {
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -174,7 +174,7 @@ export const storeUserToken = async (token: string, userId: number) => {
 
     return userToken;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -198,7 +198,7 @@ export const getUserTokenWithId = async (token: string) => {
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };
 
@@ -214,6 +214,6 @@ export const deleteUserToken = async (User_Id: number) => {
 
     return user;
   } catch (err: any) {
-    return dbErrors(err);
+    return manageError(err);
   }
 };

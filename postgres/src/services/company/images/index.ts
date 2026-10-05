@@ -33,6 +33,6 @@ export const deleteFileSession = (file: any) => {
 };
 
 export const getImageInformation = async (filePath: string) => {
-  const { fileDirectory, fileName, fileExtention, isDirectory, isFile, isSymbolicLink, fileSize } =
-    await getFileDetailedStats(filePath);
+  const stats = await getFileDetailedStats(filePath);
+  return stats
 };

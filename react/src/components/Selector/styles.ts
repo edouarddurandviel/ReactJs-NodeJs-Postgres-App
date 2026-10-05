@@ -30,13 +30,17 @@ export const SelectPlaceholder = styled.div`
 `;
 
 export const SelectorHeader = styled.div`
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  width: 300px;
-  z-index: 10;
-  float: left;
-  width: 202px;
+ display: flex;
+    position: relative;
+    float: left;
+    width: 300px;
+    z-index: 10;
+
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+}
 `;
 
 export const SelectedValue = styled.input`
@@ -73,7 +77,7 @@ export const SelectorList = styled.div`
   background-color: white;
 `;
 
-export const SelectorStatus = styled.div`
+export const SelectorStatus = styled.button`
   margin: 0;
   display: block;
   height: 30px;
@@ -82,7 +86,7 @@ export const SelectorStatus = styled.div`
   background-color: green;
 `;
 
-export const SelectorCommand = styled.div`
+export const SelectorCommand = styled.button`
   margin: 0;
   cursor: pointer;
   height: 30px;
