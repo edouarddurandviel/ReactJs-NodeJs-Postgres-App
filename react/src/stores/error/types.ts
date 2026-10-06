@@ -1,0 +1,4 @@
+export const ERROR_MESSAGE = "ERROR_MESSAGE";
+export const ERROR_MESSAGE_RESET = "ERROR_MESSAGE_RESET";
+
+export type ActionTypes = "ERROR_MESSAGE" | "ERROR_MESSAGE_RESET";

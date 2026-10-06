@@ -4,7 +4,13 @@ import { findAll, findOne, count, create, destroy } from "@libs/modelStatic";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
 import { manageError } from "@libs/sequelize";
-import { UserBadRequestError, UserNotFoundError, UserTokenBadRequestError, UserTokenNotFoundError } from "../errors";
+import {
+  UserBadRequestError,
+  UserNotFoundError,
+  UsersNotFoundError,
+  UserTokenBadRequestError,
+  UserTokenNotFoundError
+} from "../errors";
 
 /**
  *
@@ -12,105 +18,85 @@ import { UserBadRequestError, UserNotFoundError, UserTokenBadRequestError, UserT
  * @returns user object
  */
 export const getOneUser = async (userId: string) => {
-    const user = await findOne<User>("User", {
-      where: {
-        id: userId
-      }
-    });
+  const user = await findOne<User>("User", {
+    where: {
+      id: userId
+    }
+  });
 
-    if (!user) throw new UserNotFoundError();
+  if (!user) throw new UserNotFoundError();
 
-    return user;
+  return user;
 };
 
 export const getOneUserWithEmail = async (email: string) => {
-    const user = await findOne<User>("User", {
-      where: {
-        email: email
-      }
-    });
+  const user = await findOne<User>("User", {
+    where: {
+      email: email
+    }
+  });
 
-    if (!user) throw new UserNotFoundError();
+  if (!user) throw new UserNotFoundError();
 
-    return user;
+  return user;
 };
 
 export const getAllUsers = async () => {
-  try {
-    const users = await findAll<User>("User", {
-      sort: ["email", "ASC"]
-    });
+  const users = await findAll<User>("User", {
+    sort: ["email", "ASC"]
+  });
 
-    if (users.length === 0) throw new UserNotFoundError();
+  if (users.length === 0) throw new UsersNotFoundError();
 
-    return users;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return users;
 };
 
 export const getSomeUsers = async (limit: number) => {
-  try {
-    const users = await findAll<User>("User", {
-      sort: ["email", "ASC"],
-      limit: limit
-    });
+  const users = await findAll<User>("User", {
+    sort: ["email", "ASC"],
+    limit: limit
+  });
 
-    if (users.length === 0) throw new UserNotFoundError();
+  if (users.length === 0) throw new UsersNotFoundError();
 
-    return users;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return users;
 };
 
 export const getUserWithSomeEmails = async (email: string) => {
-  try {
-    const users = await findAll<User>("User", {
-      where: {
-        email: {
-          [Op.or]: [email, "default@email.com"]
-        }
+  const users = await findAll<User>("User", {
+    where: {
+      email: {
+        [Op.or]: [email, "default@email.com"]
       }
-    });
+    }
+  });
 
-    if (users.length === 0) throw new UserNotFoundError();
+  if (users.length === 0) throw new UsersNotFoundError();
 
-    return users;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return users;
 };
 export const getUserData = async (userId: string) => {
-  try {
-    const users = await findAll<User>("User", {
-      where: {
-        id: userId
-      }
-    });
+  const users = await findAll<User>("User", {
+    where: {
+      id: userId
+    }
+  });
 
-    if (users.length === 0) throw new UserNotFoundError();
+  if (users.length === 0) throw new UserNotFoundError();
 
-    return users;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return users;
 };
 
 export const getUserRole = async (userId: string) => {
-  try {
-    const user = await findOne<User>("User", {
-      where: {
-        id: userId
-      }
-    });
+  const user = await findOne<User>("User", {
+    where: {
+      id: userId
+    }
+  });
 
-    if (!user) throw new UserNotFoundError();
+  if (!user) throw new UserNotFoundError();
 
-    return user;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return user;
 };
 
 export const countUsers = async () => {
@@ -124,15 +110,11 @@ export const countUsers = async () => {
 };
 
 export const createOneUser = async (data: CreateUser) => {
-  try {
-    const user = await create<User>("User", data);
+  const user = await create<User>("User", data);
 
-    if (!user) throw new UserBadRequestError();
+  if (!user) throw new UserBadRequestError();
 
-    return user;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return user;
 };
 
 // export const createProfil = async (data: any, userId: string) => {
@@ -154,20 +136,15 @@ export const createOneUser = async (data: CreateUser) => {
 //   return searchedUser;
 // };
 
-
 export const storeUserToken = async (token: string, userId: number) => {
-  try {
-    const userToken = await create<Token>("Token", {
-      token: token,
-      User_Id: userId
-    });
+  const userToken = await create<Token>("Token", {
+    token: token,
+    User_Id: userId
+  });
 
-    if (!userToken) throw new UserTokenNotFoundError(token);
+  if (!userToken) throw new UserBadRequestError();
 
-    return userToken;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return userToken;
 };
 
 // export const getUserToken = async (token: string) => {
@@ -179,33 +156,25 @@ export const storeUserToken = async (token: string, userId: number) => {
 // };
 
 export const getUserTokenWithId = async (token: string) => {
-  try {
-    const user = await findOne<Token>("Token", {
-      where: {
-        token: token
-      }
-    });
+  const user = await findOne<Token>("Token", {
+    where: {
+      token: token
+    }
+  });
 
-    if (!user) throw new UserTokenNotFoundError(token);
+  if (!user) throw new UserTokenNotFoundError(token);
 
-    return user;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return user;
 };
 
 export const deleteUserToken = async (User_Id: number) => {
-  try {
-    const user = await destroy("Token", {
-      where: {
-        User_Id: User_Id
-      }
-    });
+  const user = await destroy("Token", {
+    where: {
+      User_Id: User_Id
+    }
+  });
 
-    if (user === 0) throw new UserTokenBadRequestError(User_Id);
+  if (user === 0) throw new UserTokenBadRequestError(User_Id);
 
-    return user;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  return user;
 };

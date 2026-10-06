@@ -27,12 +27,46 @@ export const H2 = styled.h2`
 
 export const Header = styled.div`
   display: flex;
+  position: relative;
   color: #ffffff;
   align-items: center;
   position: relative;
   height: 100px;
   background-color: ${secondary};
   transition: background-color 0.5s ease-in-out;
+`;
+
+export const Alert = styled.div`
+  display: flex;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  margin-left: -150px;
+  width: 300px;
+  height: 100px;
+  background: red;
+  color: white;
+`;
+
+export const CloseAlert = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: red;
+  color: white;
+`;
+
+export const CloseAlertButton = styled.button`
+  position: absolute;
+  width: 100px;
+  bottom: 10;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: red;
+  color: white;
 `;
 
 export const Menu = styled.div`

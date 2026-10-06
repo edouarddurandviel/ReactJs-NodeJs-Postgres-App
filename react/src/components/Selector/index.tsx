@@ -48,11 +48,7 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
       </datalist>
 
       <SelectPlaceholder>
-        <SelectorHeader 
-          role="combobox" 
-          aria-expanded={open} 
-          ref={ref}
-        >
+        <SelectorHeader role="combobox" aria-expanded={open} ref={ref}>
           <SelectedValue
             tabIndex={0}
             auto-complete="off"

@@ -1,6 +1,6 @@
 ## Web sockets usefull for:
 
-- WebSockets make more sense when you need real-time 
+- WebSockets make more sense when you need real-time
 - bidirectional transfer, e.g
 - live camera frames
 - collaborative editing

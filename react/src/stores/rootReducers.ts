@@ -4,11 +4,13 @@ import storage from "redux-persist/lib/storage";
 import companyReducers from "./company/reducers";
 import userReducers from "./user/reducers";
 import authReducers from "./auth/reducers";
+import errorReducers from "./error/reducers";
 
 const rootReducer = combineReducers({
   company: companyReducers,
   user: userReducers,
   auth: authReducers,
+  error: errorReducers,
 });
 
 const persistConfig = {

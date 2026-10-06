@@ -9,7 +9,6 @@ const checkConnections = async (
 }> => {
   const int = setInterval(() => {
     wss.clients.forEach(ws => {
-   
       if (!isAlive) {
         return ws.terminate();
       }
@@ -26,10 +25,9 @@ const checkConnections = async (
   };
 };
 
-const wsRouter = async (path: string, ) => {
+const wsRouter = async (path: string) => {
   let clientUrl = "http://localhost:5733";
-  return clientUrl.concat(path)
-
-}
+  return clientUrl.concat(path);
+};
 
 export { checkConnections, wsRouter };

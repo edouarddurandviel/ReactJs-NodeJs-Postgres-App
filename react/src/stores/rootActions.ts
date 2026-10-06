@@ -6,4 +6,5 @@ export * as socket from "./socket";
 export * as socketUsers from "./socket/user/actions";
 export * as socketPC from "./socket/visio/actions";
 export * as auth from "./auth/actions";
+export * as error from "./error/actions";
 export * as authThunk from "./auth/thunks";

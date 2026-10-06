@@ -81,7 +81,7 @@ class UserController {
 
     if (hash.toString("hex") === user.password) {
       // create jwt token
-      const Session_Id = Date.now().toString()
+      const Session_Id = Date.now().toString();
       const payload = { Session_Id: Session_Id }; // session id
       const secret = process.env.ENV_SECRET;
 

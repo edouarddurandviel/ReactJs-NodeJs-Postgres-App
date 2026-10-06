@@ -8,8 +8,6 @@ let connectedIps = new Map();
 
 export default {
   createSocketServer: async () => {
-
-
     if (!wss) {
       wss = new WebSocketServer({
         port: 8080,
@@ -35,7 +33,6 @@ export default {
       });
     }
 
-
     const _heartBeat = await checkConnections(wss);
 
     wss.on("connection", (ws, req) => {
@@ -54,9 +51,8 @@ export default {
       // router.of("/companies", WS_CompaniesController(req));
       // router.of("/profiles", WS_ProfilesController(req));
 
-
-      const routes = router.getRoutes()
-      console.log(routes)
+      const routes = router.getRoutes();
+      console.log(routes);
 
       // all is ok - isAlive
       _heartBeat.isAlive = true;
@@ -68,7 +64,7 @@ export default {
       });
 
       // Standard message endpoint
-      ws.on("message", async (data) => {
+      ws.on("message", async data => {
         console.info("[WebSocketServer]: received: %s", data);
         await router.handler(ws as unknown as WebSocket, data);
       });
@@ -76,7 +72,6 @@ export default {
       // Standard message sender enpoint
       ws.send("[WebSocketServer]: was sent from WebSocket server");
     });
-
 
     wss.on("close", (req: IncomingMessage) => {
       clearInterval(_heartBeat.interval);

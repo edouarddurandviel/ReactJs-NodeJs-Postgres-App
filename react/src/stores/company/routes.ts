@@ -2,6 +2,8 @@ import type { Middleware } from "redux";
 import requests from "./api";
 import * as actionTypes from "./types";
 import type { Payload } from "./interfaces";
+import { errorMessage } from "../error/actions";
+import axios from "axios";
 
 type Action = {
   type?: string;
@@ -17,20 +19,17 @@ export const companyMiddleware: Middleware = (api) => (next) => async (action: u
   if (!typedAction.socket) {
     switch (typedAction.type) {
       case actionTypes.GET_ALL_COMPANIES_REQUEST:
-        try {
-          dispatch({
-            type: actionTypes.GET_ALL_COMPANIES_LOADING,
-          });
+        dispatch({
+          type: actionTypes.GET_ALL_COMPANIES_LOADING,
+        });
 
-          const resp = await requests.getAllCompanies();
+        const resp = await requests.getAllCompanies();
+        if (axios.isAxiosError(resp)) {
+          dispatch(errorMessage(resp.response?.data?.message));
+        } else {
           dispatch({
             type: actionTypes.GET_ALL_COMPANIES_SUCCESS,
             payload: resp.data.data,
-          });
-        } catch (error: unknown) {
-          dispatch({
-            type: actionTypes.GET_ALL_COMPANIES_FAILURE,
-            payload: error,
           });
         }
         break;

@@ -43,7 +43,7 @@ app.use(v1Routes(io));
 // Listen on provided port, on all network interfaces
 server.listen(port);
 
-// - EACCES - Require elevated privileges 
+// - EACCES - Require elevated privileges
 // - EADDRINUSE - Already in use
 server.on("error", (error: any) => {
   onErrorEvent(error, port);

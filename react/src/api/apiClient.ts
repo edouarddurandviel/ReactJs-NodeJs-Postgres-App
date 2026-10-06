@@ -56,7 +56,8 @@ export default async (props: {
     return resp;
   } catch (err: any) {
     if (err.__fromCache) {
-      console.log(err);
+      return err;
+    } else {
       return err;
     }
   }

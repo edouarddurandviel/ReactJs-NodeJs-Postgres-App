@@ -8,7 +8,6 @@ import { open } from "fs/promises";
 import { saveImageResizedFile } from "@services/company/images";
 
 class CompanyController {
-
   constructor() {}
 
   public async getOneCompany(companyId: number) {

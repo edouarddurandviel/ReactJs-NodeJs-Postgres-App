@@ -10,33 +10,30 @@ import {
   create
 } from "@libs/modelStatic";
 import { manageError } from "@libs/sequelize";
-import { ComapniesNotFoundError, ComapnyNotFoundError } from "../errors";
+import { CompaniesBadRequestError, ComapniesNotFoundError, ComapnyNotFoundError } from "../errors";
 
 // READ
 export const getAllCompanies = async () => {
+  const companies = await findAll<Company>("Company", {
+    include: [
+      {
+        association: "addresses"
+      }
+    ]
+  });
 
-    const companies = await findAll<Company>("Company", {
-      include: [
-        {
-          association: "addresses"
-        }
-      ]
-    });
+  if (!companies) throw new ComapniesNotFoundError();
 
-    if(!companies) throw new ComapniesNotFoundError()
-
-    return companies;
-
+  return companies;
 };
 
 // WRITE
 export const createOneCompany = async (data: CreateCompany) => {
-  try {
-    const company = await create<Company>("Company", data);
-    return company;
-  } catch (err: any) {
-    return manageError(err);
-  }
+  const company = await create<Company>("Company", data);
+
+  if (!company) throw new CompaniesBadRequestError();
+
+  return company;
 };
 
 export const createOneCompanyAddress = async (companyId: number, data: Address) => {
@@ -78,7 +75,7 @@ export const getOneCompany = async (companyId: number) => {
     }
   });
 
-  if(!company) throw new ComapnyNotFoundError()
+  if (!company) throw new ComapnyNotFoundError();
 
   return company;
 };
