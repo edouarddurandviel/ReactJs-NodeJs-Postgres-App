@@ -17,7 +17,7 @@ export const sessionToken: RequestHandler = async (
         if (decode) {
           const user = (await userActions.getUserTokenWithId(decode.Session_Id)) as Token;
           if (user) {
-            const isValid = decode && new Date(decode.exp).getTime() < new Date().getTime();
+            const isValid = new Date(decode.exp) > new Date();
             if (isValid) {
               req.User_Id = user.id;
               next();

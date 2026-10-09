@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import { Address, CreateCompany } from "../_interfaces/company";
+import { Address, CreateCompany } from "@interfaces/company";
 import * as companyActions from "@services/company/actions";
 import * as companySockets from "@services/company/sockets/clients";
 import CompanyAdminSocket from "@services/company/sockets/admin";

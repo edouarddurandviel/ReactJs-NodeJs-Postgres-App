@@ -1,4 +1,4 @@
-import { Model, ModelStatic } from "node_modules/sequelize/types";
+import { Attributes, FindOptions, FindOrCreateOptions, Model, ModelStatic } from "node_modules/sequelize/types";
 import sequelize from "../models";
 
 const db = sequelize.instance();
@@ -8,19 +8,24 @@ const modelStatic = (key: any): ModelStatic<Model> => {
   return db[key];
 };
 
-export const findOne = <T extends Model>(model: string, args: any): Promise<T | null> => {
-  return modelStatic(model).findOne(args) as Promise<T | null>;
+export const findOne = <T extends Model>( 
+  model: string, 
+  options?: FindOptions<Attributes<T>>): Promise<T | null> => {
+  return modelStatic(model).findOne(options) as Promise<T | null>;
 };
 
 export const findOrCreate = <T extends Model>(
   model: string,
-  args: any
+  options: FindOrCreateOptions<Attributes<T>>
 ): Promise<[Model<T>, boolean]> => {
-  return modelStatic(model).findOrCreate(args) as Promise<[Model<T>, boolean]>;
+  return modelStatic(model).findOrCreate(options) as Promise<[Model<T>, boolean]>;
 };
 
-export const findAll = <T extends Model>(model: string, args: any): Promise<T[]> => {
-  return modelStatic(model).findAll(args) as Promise<T[]>;
+export const findAll = <T extends Model>(
+  model: string, 
+  options?: FindOptions<Attributes<T>>
+): Promise<T[]> => {
+  return modelStatic(model).findAll(options) as Promise<T[]>;
 };
 
 export const update = <T extends Model>(

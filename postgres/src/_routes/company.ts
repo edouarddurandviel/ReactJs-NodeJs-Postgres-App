@@ -3,7 +3,7 @@ import CompanyController from "@controllers/company";
 import * as companySchemas from "@schemas/company";
 import * as generalSchemas from "@schemas/general";
 import { handleErrors } from "@libs/server";
-import { ExtendedRequest } from "../_interfaces/requests";
+import { ExtendedRequest } from "@interfaces/requests";
 import { upload } from "@middleware/downloadImages";
 import { deleteFileSession } from "@services/company/images";
 

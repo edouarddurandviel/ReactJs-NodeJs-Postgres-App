@@ -8,6 +8,7 @@
     "paths": {
       "@libs/*": ["src/_lib/*"],
       "@middleware/*": ["src/_middleware/*"],
+      "@interfaces/*": ["src/_interfaces/*"],
       "@services/*": ["src/services/*"],
       "@controllers/*": ["src/controllers/*"],
       "@schemas/*": ["src/_joiSchemas/*"]

@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { CreateUser } from "../../../_interfaces/user";
+import { CreateUser } from "@interfaces/user";
 import { findAll, findOne, count, create, destroy } from "@libs/modelStatic";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
@@ -43,7 +43,7 @@ export const getOneUserWithEmail = async (email: string) => {
 
 export const getAllUsers = async () => {
   const users = await findAll<User>("User", {
-    sort: ["email", "ASC"]
+    order: [["email", "ASC"]]
   });
 
   if (users.length === 0) throw new UsersNotFoundError();
@@ -53,7 +53,7 @@ export const getAllUsers = async () => {
 
 export const getSomeUsers = async (limit: number) => {
   const users = await findAll<User>("User", {
-    sort: ["email", "ASC"],
+    order: [["email", "ASC"]],
     limit: limit
   });
 

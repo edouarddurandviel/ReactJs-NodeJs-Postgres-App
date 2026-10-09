@@ -1,10 +1,10 @@
 import { Unauthorized } from "http-json-errors";
-import { CreateUser } from "../_interfaces/user";
-import * as userActions from "../services/user/actions";
+import { CreateUser } from "@interfaces/user";
+import * as userActions from "@services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
 import * as userSockets from "@services/user/sockets/clients";
-import { User, UserToken } from "../_interfaces/models";
+import { User, UserToken } from "@interfaces/models";
 
 class UserController {
   private _io;
@@ -65,7 +65,7 @@ class UserController {
     return user;
   }
 
-  public async login(email: string, password: string) {
+  public async login(email: string, password: string, maxAge: any) {
     const user = (await userActions.getOneUserWithEmail(email)) as unknown as User;
     const salt = Buffer.from(user.salt, "hex");
 
@@ -85,7 +85,7 @@ class UserController {
       const payload = { Session_Id: Session_Id }; // session id
       const secret = process.env.ENV_SECRET;
 
-      const token = secret && jwt.sign(payload, secret, { expiresIn: 60 * 60 * 24 * 7 });
+      const token = secret && jwt.sign(payload, secret, { expiresIn: maxAge });
 
       token && (await userActions.storeUserToken(Session_Id, user.id));
 

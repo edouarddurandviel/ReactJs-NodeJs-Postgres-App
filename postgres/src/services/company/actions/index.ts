@@ -1,5 +1,5 @@
 import { Company } from "../../../models/company";
-import { Address, CreateCompany, CreateManyCompanies } from "../../../_interfaces/company";
+import { Address, CreateCompany, CreateManyCompanies } from "@interfaces/company";
 import {
   findAll,
   findOne,
@@ -15,11 +15,7 @@ import { CompaniesBadRequestError, ComapniesNotFoundError, ComapnyNotFoundError 
 // READ
 export const getAllCompanies = async () => {
   const companies = await findAll<Company>("Company", {
-    include: [
-      {
-        association: "addresses"
-      }
-    ]
+    include: ["addresses"]
   });
 
   if (!companies) throw new ComapniesNotFoundError();
