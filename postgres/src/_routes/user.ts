@@ -32,7 +32,7 @@ export default (io: Server) => {
       const email = await userSchemas.textSchema.validateAsync(req.query.email);
       const password = await userSchemas.textSchema.validateAsync(req.query.password);
 
-      const maxAge = Date.now() + 24 * 60 * 60 * 1000 * 7
+      const maxAge = 7 * 24 * 60 * 60 * 1000 // 7 days
       const result = await userServices.login(email, password, maxAge);
 
       res.cookie("jwt", result.token, {

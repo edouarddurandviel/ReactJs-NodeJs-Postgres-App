@@ -85,7 +85,7 @@ class UserController {
       const payload = { Session_Id: Session_Id }; // session id
       const secret = process.env.ENV_SECRET;
 
-      const token = secret && jwt.sign(payload, secret, { expiresIn: maxAge });
+      const token = secret && jwt.sign(payload, secret, { expiresIn: Date.now() + maxAge });
 
       token && (await userActions.storeUserToken(Session_Id, user.id));
 
