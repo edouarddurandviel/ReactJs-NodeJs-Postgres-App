@@ -1,4 +1,4 @@
-export class CustomResponse {
+export class StatusCode {
   static HTTP_CONTINUE = 100;
   static HTTP_SWITCHING_PROTOCOLS = 101;
   static HTTP_PROCESSING = 102; // RFC2518

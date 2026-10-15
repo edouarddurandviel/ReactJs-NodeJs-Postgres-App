@@ -4,7 +4,7 @@ import * as companySockets from "@services/company/sockets/clients";
 import path from "path";
 import { open } from "fs/promises";
 import { saveImageResizedFile } from "@services/company/images";
-import { CompaniesFilesBadRequestError } from "@services/company/errors";
+import { CompaniesFilesBadRequestError } from "@services/company/httpErrors";
 // import eventEmitter from "@libs/eventEmitter";
 // import emitter from "@services/company/emitters/company";
 

@@ -1,7 +1,7 @@
-import { CustomResponse } from "./response";
+import { StatusCode } from "../../../_config/statusCode";
 
 export class ComapnyNotFoundError extends Error {
-  statusCode = CustomResponse.HTTP_NOT_FOUND;
+  statusCode = StatusCode.HTTP_NOT_FOUND;
   constructor() {
     super(`Company not found`);
     this.name = "ComapnyNotFoundError";
@@ -9,7 +9,7 @@ export class ComapnyNotFoundError extends Error {
 }
 
 export class ComapnyDeleteError extends Error {
-  statusCode = CustomResponse.HTTP_NOT_FOUND;
+  statusCode = StatusCode.HTTP_NOT_FOUND;
   constructor() {
     super(`Company could note be delete`);
     this.name = "ComapnyDeleteError";
@@ -17,7 +17,7 @@ export class ComapnyDeleteError extends Error {
 }
 
 export class ComapniesNotFoundError extends Error {
-  statusCode = CustomResponse.HTTP_NOT_FOUND;
+  statusCode = StatusCode.HTTP_NOT_FOUND;
   constructor() {
     super(`Companies not found`);
     this.name = "ComapniesNotFoundError";
@@ -25,7 +25,7 @@ export class ComapniesNotFoundError extends Error {
 }
 
 export class CompaniesBadRequestError extends Error {
-  statusCode = CustomResponse.HTTP_BAD_REQUEST;
+  statusCode = StatusCode.HTTP_BAD_REQUEST;
   constructor() {
     super(`Could not create company`);
     this.name = "CompaniesBadRequestError";
@@ -33,7 +33,7 @@ export class CompaniesBadRequestError extends Error {
 }
 
 export class CompaniesFilesBadRequestError extends Error {
-  statusCode = CustomResponse.HTTP_BAD_REQUEST;
+  statusCode = StatusCode.HTTP_BAD_REQUEST;
   constructor() {
     super(`Image files are mandatory`);
     this.name = "CompaniesFilesBadRequestError";
