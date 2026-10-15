@@ -4,15 +4,9 @@ import * as userActions from "@services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
 import * as userSockets from "@services/user/sockets/clients";
-import { User, UserToken } from "@interfaces/models";
+import { User } from "@interfaces/models";
 
 class UserController {
-  private _io;
-
-  constructor(io: any) {
-    this._io = io;
-  }
-
   public async getAllUsers() {
     const user = await userActions.getAllUsers();
     return user;
@@ -80,7 +74,7 @@ class UserController {
     });
 
     if (hash.toString("hex") === user.password) {
-      const expire = Date.now()
+      const expire = Date.now();
       // create jwt token
       const Session_Id = expire.toString();
       const payload = { Session_Id: Session_Id }; // session id
