@@ -56,6 +56,7 @@ class CompanyController {
     if (file) {
       const currentFile = await companyActions.getOneCompany(companyId);
       const createdFile = await saveImageResizedFile(file, 300, 200, currentFile.imgpath);
+      console.log(createdFile)
       data.imgpath = createdFile.outputFileName;
     }
 

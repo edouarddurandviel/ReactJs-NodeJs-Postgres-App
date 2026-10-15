@@ -104,7 +104,7 @@ export const insertManyCompanies = async (data: CreateManyCompanies) => {
 
 export const replaceOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
-    const response = await update("Company", data, {
+    const response = await update("Company", {...data}, {
       where: { id: companyId },
       returning: true
     });
@@ -129,7 +129,7 @@ export const getOneCompany = async (companyId: number) => {
 
 export const updateOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
-    const document = await update<Company>("Company", data, {
+    const document = await update<Company>("Company", {...data}, {
       where: {
         id: companyId
       },

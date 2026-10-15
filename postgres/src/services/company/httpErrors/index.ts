@@ -1,4 +1,4 @@
-import { StatusCode } from "../../../_config/statusCode";
+import { StatusCode } from "@src/_config/statusCode";
 
 export class ComapnyNotFoundError extends Error {
   statusCode = StatusCode.HTTP_NOT_FOUND;
