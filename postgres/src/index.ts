@@ -3,7 +3,7 @@ import http from "http";
 import app from "./_config/app";
 import socketIo from "@libs/socketio";
 import { onErrorEvent, normalizePort } from "@libs/server";
-import v1Routes from "./_api/v1";
+import v1Routes from "./api/v1";
 //import websockets from "@libs/ws";
 
 const origin = process.env.REACT_API_PORT;

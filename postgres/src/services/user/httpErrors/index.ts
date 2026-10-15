@@ -1,41 +1,39 @@
-import { StatusCode } from "./statusCodes";
-
-export class ComapnyNotFoundError extends Error {
-  statusCode = StatusCode.HTTP_NOT_FOUND;
+export class UserNotFoundError extends Error {
+  statusCode = 404;
   constructor() {
-    super(`Company not found`);
-    this.name = "ComapnyNotFoundError";
+    super(`User not found`);
+    this.name = "UserNotFoundError";
   }
 }
 
-export class ComapnyDeleteError extends Error {
-  statusCode = StatusCode.HTTP_NOT_FOUND;
+export class UsersNotFoundError extends Error {
+  statusCode = 404;
   constructor() {
-    super(`Company could note be delete`);
-    this.name = "ComapnyDeleteError";
+    super(`Users not found`);
+    this.name = "UsersNotFoundError";
   }
 }
 
-export class ComapniesNotFoundError extends Error {
-  statusCode = StatusCode.HTTP_NOT_FOUND;
-  constructor() {
-    super(`Companies not found`);
-    this.name = "ComapniesNotFoundError";
+export class UserTokenNotFoundError extends Error {
+  statusCode = 404;
+  constructor(token: string) {
+    super(`User token not found ${token}`);
+    this.name = "UserTokenNotFoundError";
   }
 }
 
-export class CompaniesBadRequestError extends Error {
-  statusCode = StatusCode.HTTP_BAD_REQUEST;
+export class UserBadRequestError extends Error {
+  statusCode = 400;
   constructor() {
-    super(`Could not create company`);
-    this.name = "CompaniesBadRequestError";
+    super(`Bad Request: could not create user`);
+    this.name = "UserBadRequestError";
   }
 }
 
-export class CompaniesFilesBadRequestError extends Error {
-  statusCode = StatusCode.HTTP_BAD_REQUEST;
-  constructor() {
-    super(`Image files are mandatory`);
-    this.name = "CompaniesFilesBadRequestError";
+export class UserTokenBadRequestError extends Error {
+  statusCode = 400;
+  constructor(user: number) {
+    super(`Bad Request: could not create token for this user: ${user}`);
+    this.name = "UserTokenBadRequestError";
   }
 }

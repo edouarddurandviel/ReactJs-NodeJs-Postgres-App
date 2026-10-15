@@ -10,7 +10,7 @@ import {
   UsersNotFoundError,
   UserTokenBadRequestError,
   UserTokenNotFoundError
-} from "../errors";
+} from "../httpErrors";
 
 /**
  *
