@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
-import CompanyController from "@controllers/company";
-import * as companySchemas from "@schemas/company";
-import * as generalSchemas from "@schemas/general";
+import CompanyController from "@services/company";
+import * as companySchemas from "@joiSchemas/company";
+import * as generalSchemas from "@joiSchemas/general";
 import { handleErrors } from "@libs/server";
 import { ExtendedRequest } from "@interfaces/requests";
 import { upload } from "@middleware/downloadImages";

@@ -1,5 +1,5 @@
 import express from "express";
-import appRoutes from "../_routes";
+import appRoutes from "../controllers";
 import { Server } from "socket.io";
 
 export default (io: Server) => {

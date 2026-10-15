@@ -11,7 +11,7 @@
       "@interfaces/*": ["src/_interfaces/*"],
       "@services/*": ["src/services/*"],
       "@controllers/*": ["src/controllers/*"],
-      "@schemas/*": ["src/_joiSchemas/*"]
+      "@joiSchemas/*": ["src/_joiSchemas/*"]
     },
     "sourceMap": false,
     "esModuleInterop": true,
