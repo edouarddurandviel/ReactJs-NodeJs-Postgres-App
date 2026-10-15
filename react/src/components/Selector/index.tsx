@@ -3,14 +3,16 @@ import {
   SelectedValue,
   SelectorCommand,
   SelectorHeader,
+  SelectorLabel,
   SelectorList,
   SelectorListWrapper,
   SelectorStatus,
   SelectPlaceholder,
+  InputError,
 } from "./styles";
 import { useController, type Control, type FieldValues, type Path } from "react-hook-form";
 
-const Index = ({ control, data, name }: SelectorProps<any>) => {
+const Index = ({ control, data, name, label }: SelectorProps<any>) => {
   const {
     field,
     fieldState: { error },
@@ -36,18 +38,17 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
 
   return (
     <>
-      <label htmlFor="company">Company</label>
-
-      <input list="companies" id="company" name="company" />
+      {/* <input list="companies" id="company" name="company" />
 
       <datalist id="companies">
         <option value="Company">Company</option>
         <option value="One">One</option>
         <option value="Two">Two</option>
         <option value="Three">Three</option>
-      </datalist>
+      </datalist> */}
 
       <SelectPlaceholder>
+        <SelectorLabel htmlFor="company">{label}</SelectorLabel>
         <SelectorHeader role="combobox" aria-expanded={open} ref={ref}>
           <SelectedValue
             tabIndex={0}
@@ -104,7 +105,7 @@ const Index = ({ control, data, name }: SelectorProps<any>) => {
           </SelectorCommand>
         </SelectorHeader>
 
-        {error && <span role="alert">{error.message}</span>}
+        {error && <InputError role="alert">{error.message}</InputError>}
       </SelectPlaceholder>
     </>
   );

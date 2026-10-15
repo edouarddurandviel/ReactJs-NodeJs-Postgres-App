@@ -1,5 +1,6 @@
 import { useController, type Control, type FieldValues, type Path } from "react-hook-form";
 import { FieldSet, InputField, Label } from "./styles";
+import { InputError } from "../../Selector/styles";
 
 const Input = ({ name, control, label, type = "text", hidden, style }: InputFieldProps<any>) => {
   const {
@@ -23,7 +24,7 @@ const Input = ({ name, control, label, type = "text", hidden, style }: InputFiel
           field.onBlur();
         }}
       />
-      {error && <span role="alert">{error.message}</span>}
+      {error && <InputError role="alert">{error.message}</InputError>}
     </FieldSet>
   );
 };

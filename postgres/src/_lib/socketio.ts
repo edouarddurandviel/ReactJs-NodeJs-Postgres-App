@@ -21,7 +21,7 @@ export default {
 
     return io;
   },
-  getInstance: () => {
+  instance: () => {
     return io;
   },
   emit: (ev: any, ...args: any[]) => {

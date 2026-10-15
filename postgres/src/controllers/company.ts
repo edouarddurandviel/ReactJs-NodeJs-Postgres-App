@@ -1,11 +1,12 @@
-import { Server } from "socket.io";
 import { Address, CreateCompany } from "@interfaces/company";
 import * as companyActions from "@services/company/actions";
 import * as companySockets from "@services/company/sockets/clients";
-import CompanyAdminSocket from "@services/company/sockets/admin";
 import path from "path";
 import { open } from "fs/promises";
 import { saveImageResizedFile } from "@services/company/images";
+import { CompaniesFilesBadRequestError } from "@services/company/errors";
+// import eventEmitter from "@libs/eventEmitter";
+// import emitter from "@services/company/emitters/company";
 
 class CompanyController {
   constructor() {}
@@ -18,6 +19,17 @@ class CompanyController {
 
   public async getCompanies() {
     const companies = await companyActions.getAllCompanies();
+
+    // emitter.task("task", {
+    //   instruction: "Do something",
+    //   from: "Edouard",
+    //   data: Date.now()
+    // });
+
+    // emitter.mail("mail", {
+    //   userId: 6
+    // });
+
     return companies;
   }
 
@@ -25,14 +37,17 @@ class CompanyController {
     if (file) {
       const createdFile = await saveImageResizedFile(file, 300, 200);
       company.imgpath = createdFile.outputFileName;
-    }
-    await companyActions.createOneCompany(company);
 
-    companySockets.reloadCompanies();
+      await companyActions.createOneCompany(company);
+
+      companySockets.reloadCompanies();
+    } else {
+      throw new CompaniesFilesBadRequestError();
+    }
   }
 
   public async createOneCompanyAddress(companyId: number, address: Address) {
-    await companyActions.createOneCompanyAddress(Number(companyId), address);
+    await companyActions.createOneCompanyAddress(companyId, address);
 
     companySockets.reloadCompanies();
   }

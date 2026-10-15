@@ -1,6 +1,6 @@
 import { Op } from "sequelize";
 import { CreateUser } from "@interfaces/user";
-import { findAll, findOne, count, create, destroy } from "@libs/modelStatic";
+import { findAll, findOne, count, create, destroy } from "@libs/sequelizeModelStatic";
 import { Token } from "../../../models/token";
 import { User } from "../../../models/user";
 import { manageError } from "@libs/sequelize";
@@ -156,6 +156,7 @@ export const storeUserToken = async (token: string, userId: number) => {
 // };
 
 export const getUserTokenWithId = async (token: string) => {
+  console.log(token);
   const user = await findOne<Token>("Token", {
     where: {
       token: token

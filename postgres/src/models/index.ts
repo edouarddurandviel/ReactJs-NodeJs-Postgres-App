@@ -3,6 +3,7 @@ import path from "path";
 import { Model, ModelStatic, Sequelize } from "sequelize";
 import process from "process";
 import cls from "cls-hooked";
+import { Connection } from "sequelize/types/dialects/abstract/connection-manager";
 
 let db: {
   sequelize?: Sequelize;
@@ -86,5 +87,14 @@ export default {
 
   instance: () => {
     return db;
+  },
+  authenticate: () => {
+    if (db.sequelize) return db.sequelize.authenticate();
+  },
+  sync: (args: any) => {
+    if (db.sequelize) return db.sequelize.sync(args);
+  },
+  close: () => {
+    if (db.sequelize) return db.sequelize.close();
   }
 };

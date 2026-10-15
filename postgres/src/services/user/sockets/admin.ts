@@ -4,7 +4,7 @@ import socketIo from "@libs/socketio";
 class UserAdminSocket {
   private _io: Server;
   constructor() {
-    this._io = socketIo.getInstance();
+    this._io = socketIo.instance();
   }
 
   public refreshUser(userId: number, params: any) {

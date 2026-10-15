@@ -8,6 +8,14 @@ export class ComapnyNotFoundError extends Error {
   }
 }
 
+export class ComapnyDeleteError extends Error {
+  statusCode = CustomResponse.HTTP_NOT_FOUND;
+  constructor() {
+    super(`Company could note be delete`);
+    this.name = "ComapnyDeleteError";
+  }
+}
+
 export class ComapniesNotFoundError extends Error {
   statusCode = CustomResponse.HTTP_NOT_FOUND;
   constructor() {
@@ -21,5 +29,13 @@ export class CompaniesBadRequestError extends Error {
   constructor() {
     super(`Could not create company`);
     this.name = "CompaniesBadRequestError";
+  }
+}
+
+export class CompaniesFilesBadRequestError extends Error {
+  statusCode = CustomResponse.HTTP_BAD_REQUEST;
+  constructor() {
+    super(`Image files are mandatory`);
+    this.name = "CompaniesFilesBadRequestError";
   }
 }

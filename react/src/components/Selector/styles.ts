@@ -4,6 +4,8 @@ interface AlertProps {
   color: string;
 }
 
+const height = "30px";
+
 export const Alert = styled.div<AlertProps>`
   display: flex;
   padding: 10px;
@@ -22,34 +24,46 @@ export const SelectPlaceholder = styled.div`
   display: flex;
   position: relative;
   float: left;
-  flex-direction: row;
+  flex-direction: column;
   width: auto;
+  height: ${height};
+  line-height: ${height};
+  padding: 10px 10px 10px 0;
+  box-sizing: border-box;
   margin: 0;
-  padding: 0;
   z-index: 0;
+`;
+export const SelectorLabel = styled.label`
+  color: #000000;
+  font-size: 14px;
+  line-height: 20px;
+  display: block;
+  padding: 0 0 2px 0;
 `;
 
 export const SelectorHeader = styled.div`
- display: flex;
-    position: relative;
-    float: left;
-    width: 300px;
-    z-index: 10;
-
-    flex-direction: row;
-    align-content: center;
-    justify-content: flex-end;
-    align-items: center;
-}
+  display: flex;
+  position: relative;
+  float: left;
+  width: 300px;
+  z-index: 10;
+  border-radius: 4px;
+  flex-direction: row;
+  height: ${height};
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
 `;
 
 export const SelectedValue = styled.input`
-  height: 30px;
-  line-height: 30px;
-  position: absolute;
+  border: none;
+  position: relative;
   left: 0;
-  top: 0px;
-  margin: 0px;
+  top: 0;
+  border-radius: 4px;
+  margin: 0;
+  height: ${height};
   width: 200px;
   cursor: pointer;
 `;
@@ -57,20 +71,22 @@ export const SelectedValue = styled.input`
 export const SelectorListWrapper = styled.div`
   cursor: pointer;
   position: absolute;
-  left: 0;
-  top: 30px;
+  left: -1px;
+  top: 28px;
   z-index: 10;
-  width: 200px;
+  width: 240px;
   padding: 0px;
   margin: 0px;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
   border-bottom: 1px solid grey;
   border-left: 1px solid grey;
   border-right: 1px solid grey;
 `;
 
 export const SelectorList = styled.div`
-  height: 30px;
-  width: 200px;
+  height: ${height};
+  width: 220px;
   padding: 5px 10px;
   line-heigth: 20px;
   margin: 0px;
@@ -80,8 +96,8 @@ export const SelectorList = styled.div`
 export const SelectorStatus = styled.button`
   margin: 0;
   display: block;
-  height: 30px;
-  width: 30px;
+  height: ${height};
+  width: ${height};
   cursor: pointer;
   background-color: green;
 `;
@@ -89,7 +105,11 @@ export const SelectorStatus = styled.button`
 export const SelectorCommand = styled.button`
   margin: 0;
   cursor: pointer;
-  height: 30px;
-  width: 30px;
+  height: ${height};
+  width: ${height};
   background-color: yellow;
+`;
+
+export const InputError = styled.span`
+  line-height: 15px;
 `;

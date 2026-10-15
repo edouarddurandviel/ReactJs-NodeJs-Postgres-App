@@ -8,13 +8,20 @@ import {
   bulkCreate,
   findOrCreate,
   create
-} from "@libs/modelStatic";
+} from "@libs/sequelizeModelStatic";
 import { manageError } from "@libs/sequelize";
-import { CompaniesBadRequestError, ComapniesNotFoundError, ComapnyNotFoundError } from "../errors";
+import {
+  CompaniesBadRequestError,
+  ComapniesNotFoundError,
+  ComapnyNotFoundError,
+  ComapnyDeleteError
+} from "../errors";
 
-// READ
+// findOne() OR findOne<Company>()
+//////////////////////////////////
+
 export const getAllCompanies = async () => {
-  const companies = await findAll<Company>("Company", {
+  const companies: Company[] = await findAll("Company", {
     include: ["addresses"]
   });
 
@@ -23,23 +30,64 @@ export const getAllCompanies = async () => {
   return companies;
 };
 
-// WRITE
 export const createOneCompany = async (data: CreateCompany) => {
-  const company = await create<Company>("Company", data);
+  const company: Company | null = await create<Company>("Company", { ...data });
 
   if (!company) throw new CompaniesBadRequestError();
 
   return company;
 };
 
+export const findOrcreateOneCompany = async (data: Company) => {
+  const [company, created] = await findOrCreate<Company>("Company", {
+    where: {
+      name: data.name
+    },
+    defaults: data
+  });
+
+  if (!company || !created) throw new CompaniesBadRequestError();
+
+  return company;
+};
+
 export const createOneCompanyAddress = async (companyId: number, data: Address) => {
   try {
-    const company = await findOne<Company>("Company", {
+    const company: Company | null = await findOne("Company", {
       where: {
         id: companyId
       }
     });
-    await company?.createAddress({ ...data });
+    if (company) await company.createAddress({ ...data });
+  } catch (err: any) {
+    return manageError(err);
+  }
+};
+
+export const deleteOneCompanyAddress = async (companyId: number, addressId: number) => {
+  try {
+    const result = await destroy("CompanyAddress", {
+      where: {
+        id: addressId,
+        Company_Id: companyId
+      }
+    });
+    return result;
+  } catch (err: any) {
+    return manageError(err);
+  }
+};
+
+export const destroyOneCompany = async (companyId: number) => {
+  try {
+    const result: Company | null = await findOne("Company", {
+      where: {
+        id: companyId
+      }
+    });
+    if (result) await result.destroy();
+
+    return result;
   } catch (err: any) {
     return manageError(err);
   }
@@ -47,7 +95,7 @@ export const createOneCompanyAddress = async (companyId: number, data: Address) 
 
 export const insertManyCompanies = async (data: CreateManyCompanies) => {
   try {
-    const companies = await bulkCreate<Company>("Company", [...data], { updateOnDuplicate: true });
+    const companies: Company[] = await bulkCreate("Company", [...data]);
     return companies;
   } catch (err: any) {
     return manageError(err);
@@ -56,7 +104,10 @@ export const insertManyCompanies = async (data: CreateManyCompanies) => {
 
 export const replaceOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
-    const response = await update<Company>("Company", { where: { id: companyId } }, data);
+    const response = await update("Company", data, {
+      where: { id: companyId },
+      returning: true
+    });
 
     return response;
   } catch (err: any) {
@@ -76,14 +127,18 @@ export const getOneCompany = async (companyId: number) => {
   return company;
 };
 
-export const updateOneCompany = async (companyId: number, data: any) => {
+export const updateOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
     const document = await update<Company>("Company", data, {
       where: {
         id: companyId
-      }
+      },
+      returning: true
     });
-    return document;
+
+    if (document[0] === 0) throw new CompaniesBadRequestError();
+
+    return document[1];
   } catch (err: any) {
     return manageError(err);
   }
@@ -96,6 +151,8 @@ export const deleteOneCompany = async (companyId: string) => {
         id: companyId
       }
     });
+    if (document === 0) throw new ComapnyDeleteError();
+
     return document;
   } catch (err: any) {
     return manageError(err);

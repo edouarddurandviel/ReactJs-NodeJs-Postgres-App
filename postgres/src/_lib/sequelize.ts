@@ -1,10 +1,11 @@
 import { ValidationError, UniqueConstraintError } from "sequelize";
 import sequelize from "../models";
-const db = sequelize.instance();
+
+const dbInstance = sequelize.instance();
 
 export const checkConnection = async () => {
   try {
-    await db.authenticate();
+    await sequelize.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);
@@ -13,7 +14,7 @@ export const checkConnection = async () => {
 
 export const forceSynchronization = async (args: any) => {
   try {
-    await db.sync(args);
+    await sequelize.sync(args);
     console.log("Tables has been synchronized successfully.");
   } catch (error) {
     console.error(error);
@@ -21,30 +22,28 @@ export const forceSynchronization = async (args: any) => {
 };
 
 export const poolConnection = async () => {
-  if (db) return;
-
-  return db;
+  return dbInstance.poolConnection();
 };
 
 export const getConnection = async (query: string, bindParams: any[]) => {
   // Pool initialization
-  const conn = await db.getConnection();
+  const conn = await dbInstance.getConnection();
 
   return async () => {
     await conn.query(query, bindParams);
     // When finished, release connection
-    db.releaseConnection(conn);
+    dbInstance.releaseConnection(conn);
   };
 };
 
 export const closeConnection = async () => {
-  if (db) {
-    await db.close();
+  if (sequelize) {
+    await sequelize.close();
   }
 };
 
 export const getDatabase = async () => {
-  return db;
+  return sequelize;
 };
 
 export const manageError = (err: any) => {

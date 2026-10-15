@@ -15,6 +15,7 @@ export class CompanyAddress extends Model<
   declare street: string;
   declare postcode: number;
   declare city: string;
+
   static associate(models: any) {
     CompanyAddress.belongsTo(models.Company, {
       foreignKey: "Company_Id",

@@ -21,6 +21,7 @@ export const schemaRHF = Yup.object({
 export const schemaUser = Yup.object({
   firstName: Yup.string().required("Firstname is required"),
   email: Yup.string().email("Value must be an email").required("Email is required"),
+  position: Yup.string().required("Position is required"),
 }).required();
 
 export const schemaCreateCompany = Yup.object({

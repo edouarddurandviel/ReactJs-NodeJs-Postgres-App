@@ -7,6 +7,9 @@ import cors from "cors";
 import "dotenv/config";
 import sequelize from "../models";
 import path from "node:path";
+// import * as StepFunction from "@libs/stepFunctions";
+// import { ROUTE_TASK } from "@libs/stepFunctions/task/config";
+// import { taskStepFunction } from "@libs/stepFunctions/task/stepFunction";
 
 const app = express();
 app.disable("x-powered-by");
@@ -60,5 +63,10 @@ app.use(morgan("dev"));
 
 // Check sequelize connection
 sequelize.init();
+
+// custom registering listeners for step function
+// StepFunction.initEvent();
+// StepFunction.createRoute(ROUTE_TASK, taskStepFunction);
+// StepFunction.createRoute(ROUTE_MAILS, mailsStepFunction);
 
 export default app;

@@ -52,7 +52,6 @@ export default {
       // router.of("/profiles", WS_ProfilesController(req));
 
       const routes = router.getRoutes();
-      console.log(routes);
 
       // all is ok - isAlive
       _heartBeat.isAlive = true;

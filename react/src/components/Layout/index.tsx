@@ -10,7 +10,7 @@ import { UserContext } from "../../contexts/UserContext";
 import Menu from "../Menu";
 import { footerText } from "../../theme/variables";
 import * as selectors from "../../stores/rootSelectors";
-import { errorMessage, errorReset } from "../../stores/error/actions";
+import { errorReset } from "../../stores/error/actions";
 
 const Index = ({ dispatch, user, error }: LayoutProps) => {
   const [alert, setAlert] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
     <UserContext value={user}>
       <PLaceHolder>
         <Header>
-          {(error && error.length>0) && alert && (
+          {error && error.length > 0 && alert && (
             <Alert>
               {error}
               <CloseAlert
@@ -55,7 +55,9 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
                   dispatch(errorReset(["error"]));
                   handleLogout();
                 }}
-              >Logout</CloseAlertButton>
+              >
+                Logout
+              </CloseAlertButton>
             </Alert>
           )}
           {user && (

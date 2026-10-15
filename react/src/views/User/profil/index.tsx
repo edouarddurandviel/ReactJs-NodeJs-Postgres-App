@@ -156,8 +156,9 @@ const Index = ({ profil, dispatch }: UserProps) => {
           {({ control, handleSubmit, reset }) => (
             <RHFform onSubmit={handleSubmit(onRHFSubmit)} auto-complete="off">
               <RHFInputField control={control} label="First name" name="firstName" />
-              <RHFInputField control={control} label="email" name="email" />
+              <RHFInputField control={control} label="Email" name="email" />
               <Selector
+                label="Select position"
                 control={control}
                 spinner
                 data={["Administrator", "Marketing", "Translator", "Commercial"]}
