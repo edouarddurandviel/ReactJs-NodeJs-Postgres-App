@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import CompanyController from "@services/company";
 import { handleErrors } from "@libs/server";
-import { remotePostAccess } from "@middleware/remoteAccess";
+import { remotePostAccess } from "src/middleware/remoteAccess";
 import { ExtendedRequest } from "../../_interfaces/requests";
 import { Server } from "socket.io";
 

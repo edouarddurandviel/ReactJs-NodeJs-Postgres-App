@@ -1,10 +1,10 @@
-import { Address, CreateCompany } from "@interfaces/company";
-import * as companyActions from "@services/company/actions";
-import * as companySockets from "@services/company/sockets/clients";
+import { Address, CreateCompany } from "@src/_interfaces/company";
+import * as companyActions from "@src/services/company/actions";
+import * as companySockets from "@src/services/company/sockets/clients";
 import path from "path";
 import { open } from "fs/promises";
-import { saveImageResizedFile } from "@services/company/images";
-import { CompaniesFilesBadRequestError } from "@services/company/httpErrors";
+import { saveImageResizedFile } from "@src/services/company/images";
+import { CompaniesFilesBadRequestError } from "@src/services/company/httpErrors";
 // import eventEmitter from "@libs/eventEmitter";
 // import emitter from "@services/company/emitters/company";
 

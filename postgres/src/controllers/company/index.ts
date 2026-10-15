@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
-import CompanyController from "@services/company";
-import * as companySchemas from "@joiSchemas/company";
-import * as generalSchemas from "@joiSchemas/general";
-import { handleErrors } from "@libs/server";
-import { ExtendedRequest } from "@interfaces/requests";
-import { upload } from "@middleware/downloadImages";
-import { deleteFileSession } from "@services/company/images";
+import CompanyController from "@src/services/company";
+import * as companySchemas from "@src/_joiSchemas/company";
+import * as generalSchemas from "@src/_joiSchemas/general";
+import { handleErrors } from "@src/_lib/server";
+import { ExtendedRequest } from "@src/_interfaces/requests";
+import { upload } from "@src/middleware/downloadImages";
+import { deleteFileSession } from "@src/services/company/images";
 
 export default () => {
   const router = express.Router();

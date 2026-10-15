@@ -1,5 +1,5 @@
-import { Company } from "../../../models/company";
-import { Address, CreateCompany, CreateManyCompanies } from "@interfaces/company";
+import { Company } from "@src/models/company";
+import { Address, CreateCompany, CreateManyCompanies } from "@src/_interfaces/company";
 import {
   findAll,
   findOne,
@@ -8,8 +8,8 @@ import {
   bulkCreate,
   findOrCreate,
   create
-} from "@libs/sequelizeModelStatic";
-import { manageError } from "@libs/sequelize";
+} from "@src/_lib/sequelizeModelStatic";
+import { manageError } from "@src/_lib/sequelize";
 import {
   CompaniesBadRequestError,
   ComapniesNotFoundError,

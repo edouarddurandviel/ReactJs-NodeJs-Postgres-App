@@ -1,4 +1,4 @@
-import socketIo from "@libs/socketio";
+import socketIo from "@src/_lib/socketio";
 
 export const reloadUser = (userId: number, params: {}) => {
   const io = socketIo.instance();

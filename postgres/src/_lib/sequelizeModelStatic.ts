@@ -13,7 +13,7 @@ import {
   Optional,
   UpdateOptions
 } from "sequelize/types";
-import sequelize from "../models";
+import sequelize from "@src/models";
 
 const db = sequelize.instance();
 

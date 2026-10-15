@@ -1,10 +1,10 @@
 import { Unauthorized } from "http-json-errors";
-import { CreateUser } from "@interfaces/user";
-import * as userActions from "@services/user/actions";
+import { CreateUser } from "@src/_interfaces/user";
+import * as userActions from "@src/services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
-import * as userSockets from "@services/user/sockets/clients";
-import { User } from "@interfaces/models";
+import * as userSockets from "@src/services/user/sockets/clients";
+import { User } from "@src/_interfaces/models";
 
 class UserController {
   public async getAllUsers() {

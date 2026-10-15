@@ -1,5 +1,5 @@
 import { ValidationError, UniqueConstraintError } from "sequelize";
-import sequelize from "../models";
+import sequelize from "@src/models";
 
 const dbInstance = sequelize.instance();
 

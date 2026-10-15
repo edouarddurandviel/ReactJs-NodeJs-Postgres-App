@@ -1,6 +1,6 @@
 import fs from "fs";
-import { resizeImage } from "../../../_utils/sharp";
-import { getFileDetailedStats } from "@services/files";
+import { resizeImage } from "@src/_utils/sharp";
+import { getFileDetailedStats } from "@src/services/files";
 
 export const saveImageResizedFile = async (
   file: any,

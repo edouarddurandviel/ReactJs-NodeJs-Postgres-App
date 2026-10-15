@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import { ExtendedRequest } from "@interfaces/requests";
-import * as userSchemas from "@joiSchemas/users";
-import { handleErrors } from "@libs/server";
-import { sessionToken } from "@middleware/sessionToken";
-import UserController from "@services/user";
+import { ExtendedRequest } from "@src/_interfaces/requests";
+import * as userSchemas from "@src/_joiSchemas/users";
+import { handleErrors } from "@src/_lib/server";
+import { sessionToken } from "@src/middleware/sessionToken";
+import UserController from "@src/services/user";
 
 export default () => {
   const router = express.Router({

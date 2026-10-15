@@ -1,7 +1,8 @@
 import { IncomingMessage } from "node:http";
 import { WebSocketServer } from "ws";
-import { checkConnections, wsRouter } from "./heartbeat";
+import { checkConnections } from "./heartbeat";
 import WebSocketRouter from "./wsRouter";
+
 
 let wss: WebSocketServer | undefined;
 let connectedIps = new Map();

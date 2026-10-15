@@ -1,4 +1,4 @@
-import io from "@libs/socketio";
+import io from "@src/_lib/socketio";
 
 export const reloadCompany = (userId: number, params: {}) => {
   return io.emit(`company:${userId}`, params);

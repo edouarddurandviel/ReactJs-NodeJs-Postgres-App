@@ -1,9 +1,9 @@
 import { Op } from "sequelize";
-import { CreateUser } from "@interfaces/user";
-import { findAll, findOne, count, create, destroy } from "@libs/sequelizeModelStatic";
-import { Token } from "../../../models/token";
-import { User } from "../../../models/user";
-import { manageError } from "@libs/sequelize";
+import { CreateUser } from "@src/_interfaces/user";
+import { findAll, findOne, count, create, destroy } from "@src/_lib/sequelizeModelStatic";
+import { Token } from "@src/models/token";
+import { User } from "@src/models/user";
+import { manageError } from "@src/_lib/sequelize";
 import {
   UserBadRequestError,
   UserNotFoundError,

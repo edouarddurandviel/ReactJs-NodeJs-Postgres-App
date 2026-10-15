@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
-import sequelize from "../models";
+import sequelize from "@src/models";
 import path from "node:path";
 // import * as StepFunction from "@libs/stepFunctions";
 // import { ROUTE_TASK } from "@libs/stepFunctions/task/config";
