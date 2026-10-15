@@ -1,9 +1,9 @@
 import "dotenv/config";
 import http from "http";
-import app from "./_config/app";
+import app from "@src/_config/app";
 import socketIo from "@src/_lib/socketio";
 import { onErrorEvent, normalizePort } from "@src/_lib/server";
-import v1Routes from "./api/v1";
+import v1Routes from "@src/api/v1";
 //import websockets from "@libs/ws";
 
 const origin = process.env.REACT_API_PORT;
