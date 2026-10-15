@@ -4,16 +4,15 @@ import * as userSchemas from "../_joiSchemas/users";
 import { handleErrors } from "@libs/server";
 import { sessionToken } from "@middleware/sessionToken";
 import UserController from "@controllers/user";
-import { Server } from "socket.io";
 
-export default (io: Server) => {
+export default () => {
   const router = express.Router({
     mergeParams: false,
     caseSensitive: true,
     strict: true
   });
 
-  const userServices = new UserController(io);
+  const userServices = new UserController();
 
   /* users pages. */
   router.post("/create", sessionToken, async (req: ExtendedRequest, res: Response) => {

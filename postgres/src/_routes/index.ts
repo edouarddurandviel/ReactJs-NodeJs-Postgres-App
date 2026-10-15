@@ -1,11 +1,10 @@
 import express from "express";
 import UsersRoutes from "./user";
 import CompanyRoutes from "./company";
-import RemoteRoutes from "./remote";
-import { Server } from "socket.io";
+// import RemoteRoutes from "./remote";
 import { sessionToken } from "@middleware/sessionToken";
 
-export default (io: Server) => {
+export default () => {
   const app = express.Router({
     mergeParams: false,
     caseSensitive: true,
@@ -13,7 +12,7 @@ export default (io: Server) => {
   });
 
   app.use("/company", sessionToken, CompanyRoutes());
-  app.use("/user", UsersRoutes(io));
+  app.use("/user", UsersRoutes());
   //app.use("/remote", RemoteRoutes(io));
 
   return app;

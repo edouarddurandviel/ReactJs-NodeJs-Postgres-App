@@ -74,10 +74,10 @@ class UserController {
     });
 
     if (hash.toString("hex") === user.password) {
-      const expire = Date.now();
       // create jwt token
+      const expire = Date.now();
       const Session_Id = expire.toString();
-      const payload = { Session_Id: Session_Id }; // session id
+      const payload = { Session_Id: Session_Id };
       const secret = process.env.ENV_SECRET;
 
       const token = secret && jwt.sign(payload, secret, { expiresIn: expire + maxAge });

@@ -9,7 +9,7 @@ export default (io: Server) => {
     strict: true
   });
 
-  app.use("/api/v1", appRoutes(io));
+  app.use("/api/v1", appRoutes());
 
   return app;
 };
