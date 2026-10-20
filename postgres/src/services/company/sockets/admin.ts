@@ -1,6 +1,7 @@
 import { Server } from "socket.io";
 import { Response } from "express";
 import socketIo from "@src/_lib/socketio";
+import { noServerError } from "@src/_lib/server";
 
 class CompanyAdminSocket {
   private _io: Server;
@@ -10,7 +11,7 @@ class CompanyAdminSocket {
 
   public refreshCompany(res: Response, userId: number, params: any) {
     res.on("finish", () => {
-      if (res.statusCode >= 200 && res.statusCode < 400) {
+      if (noServerError(res.statusCode)) {
         return this._io.emit(`company:${userId}`, params);
       }
     });
@@ -18,7 +19,7 @@ class CompanyAdminSocket {
 
   public refreshCompanyAddress(res: Response, number: number, addrId: string, params: any) {
     res.on("finish", () => {
-      if (res.statusCode >= 200 && res.statusCode < 400) {
+      if (noServerError(res.statusCode)) {
         return this._io.emit(`address:${addrId}`, params);
       }
     });

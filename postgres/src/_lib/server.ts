@@ -40,3 +40,18 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
       throw error;
   }
 };
+
+export const noServerError = (
+  statusCode: number,
+  start: number = 500,
+  stop: number = 599,
+  step = 1
+): Boolean => {
+  const codes = Array.from(
+    {
+      length: Math.floor((stop - start) / step) + 1
+    },
+    (_, i) => start + i * step
+  );
+  return !codes.includes(statusCode);
+};

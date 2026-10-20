@@ -1,5 +1,7 @@
 import { Server } from "socket.io";
+import { Response } from "express";
 import socketIo from "@src/_lib/socketio";
+import { noServerError } from "@src/_lib/server";
 
 class UserAdminSocket {
   private _io: Server;
@@ -7,12 +9,16 @@ class UserAdminSocket {
     this._io = socketIo.instance();
   }
 
-  public refreshUser(userId: number, params: any) {
-    return this._io.emit(`user:${userId}`, params);
+  public refreshUser(res: Response, userId: number, params: any) {
+    if (noServerError(res.statusCode)) {
+      return this._io.emit(`user:${userId}`, params);
+    }
   }
 
-  public refreshUserAddress(number: number, addrId: string, params: any) {
-    return this._io.emit(`user:${addrId}:address`, params);
+  public refreshUserAddress(res: Response, number: number, addrId: string, params: any) {
+    if (noServerError(res.statusCode)) {
+      return this._io.emit(`user:${addrId}:address`, params);
+    }
   }
 
   public closeConnection() {
