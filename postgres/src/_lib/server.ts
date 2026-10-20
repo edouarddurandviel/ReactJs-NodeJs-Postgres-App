@@ -10,7 +10,6 @@ export const normalizePort = (portValue: string) => {
   const port = parseInt(portValue, 10);
 
   if (isNaN(port)) {
-    // named pipe
     return portValue;
   }
 
@@ -21,24 +20,24 @@ export const normalizePort = (portValue: string) => {
   return false;
 };
 
+
 // Event listener for HTTP server "error" event
-export const onErrorEvent = (error: any, port: any) => {
+export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string | false) => {
   if (error.syscall !== "listen") {
     throw error;
   }
 
-  let msg = typeof port === "string" ? `Pipe: ${port}` : `Port: ${port}`;
-
   // Error messages
-  switch (error.code) {
+  switch (error.code && port) {
+    // Pipe
     case "EACCES":
-      console.error(`${msg} requires elevated privileges`);
-
-      break;
+      throw new Error(`For pipe ${port} - permission denied: requires elevated privileges`);
+  
+    // Port
     case "EADDRINUSE":
-      console.error(`${msg} is already in use`);
+      throw new Error(`For port address ${port} already in use`);
 
-      break;
+
     default:
       throw error;
   }

@@ -3,8 +3,7 @@ import { CreateUser } from "@src/_interfaces/user";
 import * as userActions from "@src/services/user/actions";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
-import * as userSockets from "@src/services/user/sockets/clients";
-import { User } from "@src/_interfaces/models";
+import { Rights } from "@src/models/rights";
 
 class UserController {
   public async getAllUsers() {
@@ -41,7 +40,7 @@ class UserController {
     };
     userActions.createOneUser(dataHash);
 
-    userSockets.reloadUsers();
+
   }
 
   // public async createProfil(data: any, userId: string) {
@@ -60,7 +59,7 @@ class UserController {
   }
 
   public async login(email: string, password: string, maxAge: any) {
-    const user = (await userActions.getOneUserWithEmail(email)) as unknown as User;
+    const user: any = await userActions.getOneUserWithEmail(email);
     const salt = Buffer.from(user.salt, "hex");
 
     const hash = argon2Sync("argon2id", {
@@ -84,20 +83,20 @@ class UserController {
 
       token && (await userActions.storeUserToken(Session_Id, user.id));
 
-      const userPermissions = {
+      const loggedUser = {
         id: user.id,
-        email: user.email
+        email: user.email,
+        perms: user.user_rights as unknown as Rights
       };
 
-      return { userPermissions, token };
+      return { loggedUser, token };
     } else {
       throw new Unauthorized("Invalid email or password");
     }
   }
 
   public async logout(userId: number) {
-    const result = await userActions.deleteUserToken(userId);
-    return result;
+    await userActions.deleteUserToken(userId);
   }
 }
 

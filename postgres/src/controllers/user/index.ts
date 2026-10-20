@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { ExtendedRequest } from "@src/_interfaces/requests";
 import * as userSchemas from "@src/_joiSchemas/users";
+import * as userSockets from "@src/services/user/sockets/clients";
 import { handleErrors } from "@src/_lib/server";
 import { sessionToken } from "@src/middleware/sessionToken";
 import UserController from "@src/services/user";
@@ -23,6 +24,8 @@ export default () => {
       res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
+    } finally{
+      userSockets.reloadUsers();
     }
   });
 

@@ -3,8 +3,9 @@ import * as companyActions from "@src/services/company/actions";
 import * as companySockets from "@src/services/company/sockets/clients";
 import path from "path";
 import { open } from "fs/promises";
-import { saveImageResizedFile } from "@src/services/company/images";
+
 import { CompaniesFilesBadRequestError } from "@src/services/company/httpErrors";
+import { saveImageResizedFile } from "./images";
 // import eventEmitter from "@libs/eventEmitter";
 // import emitter from "@services/company/emitters/company";
 
@@ -39,8 +40,6 @@ class CompanyController {
       company.imgpath = createdFile.outputFileName;
 
       await companyActions.createOneCompany(company);
-
-      companySockets.reloadCompanies();
     } else {
       throw new CompaniesFilesBadRequestError();
     }
@@ -48,21 +47,18 @@ class CompanyController {
 
   public async createOneCompanyAddress(companyId: number, address: Address) {
     await companyActions.createOneCompanyAddress(companyId, address);
-
-    companySockets.reloadCompanies();
   }
 
   public async updateOneCompany(companyId: number, data: CreateCompany, file?: any) {
     if (file) {
       const currentFile = await companyActions.getOneCompany(companyId);
       const createdFile = await saveImageResizedFile(file, 300, 200, currentFile.imgpath);
-      console.log(createdFile)
       data.imgpath = createdFile.outputFileName;
     }
 
     await companyActions.updateOneCompany(companyId, data);
 
-    companySockets.reloadCompanies();
+
   }
 
   public async replaceOneCompany(companyId: number, data: CreateCompany, file: any) {
@@ -71,14 +67,11 @@ class CompanyController {
       data.imgpath = createdFile.outputFileName;
     }
     await companyActions.replaceOneCompany(companyId, data);
-
-    companySockets.reloadCompanies();
   }
 
   public async deleteOneCompany(companyId: string) {
     await companyActions.deleteOneCompany(companyId);
 
-    companySockets.reloadCompanies();
   }
 
   public async getCompanyLogs() {
