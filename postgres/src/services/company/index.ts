@@ -40,7 +40,6 @@ class CompanyController {
       company.imgpath = createdFile.outputFileName;
 
       await companyActions.createOneCompany(company);
-      companySockets.reloadCompanies();
     } else {
       throw new CompaniesFilesBadRequestError();
     }
@@ -48,7 +47,6 @@ class CompanyController {
 
   public async createOneCompanyAddress(companyId: number, address: Address) {
     await companyActions.createOneCompanyAddress(companyId, address);
-    companySockets.reloadCompanies();
   }
 
   public async updateOneCompany(companyId: number, data: CreateCompany, file?: any) {
@@ -59,8 +57,6 @@ class CompanyController {
     }
 
     await companyActions.updateOneCompany(companyId, data);
-    
-    companySockets.reloadCompanies();
   }
 
   public async replaceOneCompany(companyId: number, data: CreateCompany, file: any) {
@@ -73,7 +69,6 @@ class CompanyController {
 
   public async deleteOneCompany(companyId: string) {
     await companyActions.deleteOneCompany(companyId);
-    companySockets.reloadCompanies();
   }
 
   public async getCompanyLogs() {

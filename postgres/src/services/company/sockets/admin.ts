@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { Response } from "express";
 import socketIo from "@src/_lib/socketio";
 
 class CompanyAdminSocket {
@@ -7,12 +8,20 @@ class CompanyAdminSocket {
     this._io = socketIo.instance();
   }
 
-  public refreshCompany(userId: number, params: any) {
-    return this._io.emit(`company:${userId}`, params);
+  public refreshCompany(res: Response, userId: number, params: any) {
+    res.on("finish", () => {
+      if (res.statusCode >= 200 && res.statusCode < 400) {
+        return this._io.emit(`company:${userId}`, params);
+      }
+    });
   }
 
-  public refreshCompanyAddress(number: number, addrId: string, params: any) {
-    return this._io.emit(`address:${addrId}`, params);
+  public refreshCompanyAddress(res: Response, number: number, addrId: string, params: any) {
+    res.on("finish", () => {
+      if (res.statusCode >= 200 && res.statusCode < 400) {
+        return this._io.emit(`address:${addrId}`, params);
+      }
+    });
   }
 
   public closeConnection() {

@@ -2,7 +2,6 @@ import fs from "fs";
 import { resizeImage } from "@src/_utils/sharp";
 import { getFileDetailedStats } from "@src/services/files";
 
-
 export const saveImageResizedFile = async (
   file: any,
   width: number,
@@ -37,4 +36,3 @@ export const getImageInformation = async (filePath: string) => {
   const stats = await getFileDetailedStats(filePath);
   return stats;
 };
-

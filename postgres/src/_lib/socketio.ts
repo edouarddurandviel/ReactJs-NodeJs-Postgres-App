@@ -17,7 +17,7 @@ export default {
     httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>,
     handleOptions: {}
   ): Server => {
-    if(io){
+    if (io) {
       return io;
     }
     io = new Server(httpServer, handleOptions);
@@ -25,7 +25,7 @@ export default {
     return io;
   },
   instance: (): Server => {
-     if(!io){
+    if (!io) {
       throw new Error("Socket.Io was not initialized");
     }
 

@@ -4,6 +4,7 @@ import * as userSchemas from "@src/_joiSchemas/users";
 import { handleErrors } from "@src/_lib/server";
 import { sessionToken } from "@src/middleware/sessionToken";
 import UserController from "@src/services/user";
+import * as userSockets from "@src/services/user/sockets/clients";
 
 export default () => {
   const router = express.Router({
@@ -20,10 +21,12 @@ export default () => {
       const data = await userSchemas.user.validateAsync(req.body);
       await userServices.createOneUser(data);
 
+      userSockets.reloadUsers(res);
+
       res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
-    } 
+    }
   });
 
   router.get("/login", async (req: Request, res: Response) => {

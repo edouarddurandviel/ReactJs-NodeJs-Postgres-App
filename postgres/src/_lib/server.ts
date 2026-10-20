@@ -20,7 +20,6 @@ export const normalizePort = (portValue: string) => {
   return false;
 };
 
-
 // Event listener for HTTP server "error" event
 export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string | false) => {
   if (error.syscall !== "listen") {
@@ -32,11 +31,10 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
     // Pipe
     case "EACCES":
       throw new Error(`For pipe ${port} - permission denied: requires elevated privileges`);
-  
+
     // Port
     case "EADDRINUSE":
       throw new Error(`For port address ${port} already in use`);
-
 
     default:
       throw error;

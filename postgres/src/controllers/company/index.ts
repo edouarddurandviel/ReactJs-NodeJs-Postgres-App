@@ -6,6 +6,7 @@ import { handleErrors } from "@src/_lib/server";
 import { ExtendedRequest } from "@src/_interfaces/requests";
 import { upload } from "@src/middleware/downloadImages";
 import * as filesManagement from "@src/services/company/images";
+import * as companySockets from "@src/services/company/sockets/clients";
 
 export default () => {
   const router = express.Router();
@@ -16,6 +17,8 @@ export default () => {
     try {
       const data = await companySchemas.fullCompany.validateAsync(req.body);
       await companyServices.createOneCompany(data, req.file);
+
+      companySockets.reloadCompanies(res);
 
       res.status(200).json({ err: false });
     } catch (error: any) {
@@ -29,10 +32,12 @@ export default () => {
       const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
       await companyServices.createOneCompanyAddress(parseInt(companyId), data);
 
+      companySockets.reloadCompanies(res);
+
       res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
-    } 
+    }
   });
 
   router.patch(
@@ -62,6 +67,8 @@ export default () => {
 
         await companyServices.updateOneCompany(parseInt(companyId), data, req.file);
 
+        companySockets.reloadCompanies(res);
+
         res.status(200).json({ err: false });
       } catch (error: any) {
         handleErrors(res, error);
@@ -76,6 +83,8 @@ export default () => {
       const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
 
       await companyServices.deleteOneCompany(companyId);
+
+      companySockets.reloadCompanies(res);
 
       res.status(200).json({ err: false });
     } catch (error: any) {

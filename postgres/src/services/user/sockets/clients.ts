@@ -1,11 +1,18 @@
-import socketIo from "@src/_lib/socketio";
+import { Response } from "express";
+import io from "@src/_lib/socketio";
 
-export const reloadUser = (userId: number, params: {}) => {
-  const io = socketIo.instance();
-  return io.emit(`user:${userId}`, params);
+export const reloadUser = (res: Response, userId: number, params: {}) => {
+  res.on("finish", () => {
+    if (res.statusCode >= 200 && res.statusCode < 400) {
+      return io.emit(`user:${userId}`, params);
+    }
+  });
 };
 
-export const reloadUsers = () => {
-  const io = socketIo.instance();
-  return io.emit(`user`);
+export const reloadUsers = (res: Response) => {
+  res.on("finish", () => {
+    if (res.statusCode >= 200 && res.statusCode < 400) {
+      return io.emit(`user`);
+    }
+  });
 };
