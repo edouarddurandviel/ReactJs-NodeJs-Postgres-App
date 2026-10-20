@@ -1,6 +1,7 @@
 import { Unauthorized } from "http-json-errors";
 import { CreateUser } from "@src/_interfaces/user";
 import * as userActions from "@src/services/user/actions";
+import * as userSockets from "@src/services/user/sockets/clients";
 import { argon2Sync, randomBytes } from "node:crypto";
 import * as jwt from "jsonwebtoken";
 import { Rights } from "@src/models/rights";
@@ -39,7 +40,7 @@ class UserController {
       salt: salt.toString("hex")
     };
     userActions.createOneUser(dataHash);
-
+    userSockets.reloadUsers();
 
   }
 
