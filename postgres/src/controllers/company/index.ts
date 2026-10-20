@@ -5,7 +5,8 @@ import * as generalSchemas from "@src/_joiSchemas/general";
 import { handleErrors } from "@src/_lib/server";
 import { ExtendedRequest } from "@src/_interfaces/requests";
 import { upload } from "@src/middleware/downloadImages";
-import { deleteFileSession } from "@src/services/company/images";
+import * as filesManagement from "@src/services/company/images";
+import * as companySockets from "@src/services/company/sockets/clients";
 
 export default () => {
   const router = express.Router();
@@ -15,11 +16,13 @@ export default () => {
   router.post("/create", upload.single("image"), async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await companySchemas.fullCompany.validateAsync(req.body);
-      const result = await companyServices.createOneCompany(data, req.file);
+      await companyServices.createOneCompany(data, req.file);
 
-      res.status(200).json({ err: false, data: result });
+      res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
+    } finally{
+      companySockets.reloadCompanies();
     }
   });
 
@@ -32,6 +35,8 @@ export default () => {
       res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
+    } finally {
+      companySockets.reloadCompanies();
     }
   });
 
@@ -48,6 +53,8 @@ export default () => {
         res.status(200).json({ err: false });
       } catch (error: any) {
         handleErrors(res, error);
+      } finally {
+        companySockets.reloadCompanies();
       }
     }
   );
@@ -60,13 +67,14 @@ export default () => {
         const data = await companySchemas.updateCompany.validateAsync(req.body);
         const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
 
-        const result = await companyServices.updateOneCompany(parseInt(companyId), data, req.file);
+        await companyServices.updateOneCompany(parseInt(companyId), data, req.file);
 
-        res.status(200).json({ err: false, data: result });
+        res.status(200).json({ err: false });
       } catch (error: any) {
         handleErrors(res, error);
       } finally {
-        deleteFileSession(req.file);
+        companySockets.reloadCompanies();
+        filesManagement.deleteFileSession(req.file);
       }
     }
   );
@@ -75,11 +83,13 @@ export default () => {
     try {
       const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
 
-      const result = await companyServices.deleteOneCompany(companyId);
+      await companyServices.deleteOneCompany(companyId);
 
-      res.status(200).json({ err: false, data: result });
+      res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
+    } finally {
+      companySockets.reloadCompanies();
     }
   });
 

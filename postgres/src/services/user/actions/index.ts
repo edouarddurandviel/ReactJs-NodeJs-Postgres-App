@@ -30,10 +30,11 @@ export const getOneUser = async (userId: string) => {
 };
 
 export const getOneUserWithEmail = async (email: string) => {
-  const user = await findOne<User>("User", {
+  const user: User | null = await findOne("User", {
     where: {
       email: email
-    }
+    },
+    include: ["user_rights"]
   });
 
   if (!user) throw new UserNotFoundError();
@@ -43,7 +44,8 @@ export const getOneUserWithEmail = async (email: string) => {
 
 export const getAllUsers = async () => {
   const users = await findAll<User>("User", {
-    order: [["email", "ASC"]]
+    order: [["email", "ASC"]],
+    include: ["user_rights"]
   });
 
   if (users.length === 0) throw new UsersNotFoundError();
@@ -142,7 +144,7 @@ export const storeUserToken = async (token: string, userId: number) => {
     User_Id: userId
   });
 
-  if (!userToken) throw new UserBadRequestError();
+  //if (!userToken) throw new UserBadRequestError();
 
   return userToken;
 };

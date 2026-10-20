@@ -10,7 +10,7 @@ const Index = () => {
   const currentUser = useContext(UserContext);
   const contextValue = useMemo(
     () => ({
-      currentUser,
+      ...(currentUser && currentUser.loggedUser.perms.content.routes),
     }),
     [currentUser],
   );
@@ -28,7 +28,7 @@ const Index = () => {
     return () => {
       document.removeEventListener("selectionchange", handleSelectionChange);
     };
-  }, []);
+  }, [contextValue]);
 
   return (
     <Menu>
@@ -37,15 +37,21 @@ const Index = () => {
       </NavLink>
       {contextValue && (
         <>
-          <NavLink className="links" to="/tanstack">
-            TanStack query
-          </NavLink>
-          <NavLink className="links" to="/user/add">
-            Create user
-          </NavLink>
-          <NavLink className="links" to="/user/profil">
-            User profil
-          </NavLink>
+          {contextValue["tanstack"].read && (
+            <NavLink className="links" to="/tanstack">
+              TanStack query
+            </NavLink>
+          )}
+          {contextValue["createUser"].read && (
+            <NavLink className="links" to="/user/add">
+              Create user
+            </NavLink>
+          )}
+          {contextValue["profil"].read && (
+            <NavLink className="links" to="/user/profil">
+              User profil
+            </NavLink>
+          )}
           <Button
             disabled={typeof seletedTextArea === "boolean"}
             content="Voices"

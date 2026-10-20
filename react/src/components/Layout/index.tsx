@@ -19,7 +19,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
       dispatch(
         actions.auth.userLogout({
           params: {
-            userId: user.userPermissions.id,
+            userId: user.loggedUser.id,
           },
         }),
       );
@@ -69,7 +69,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
                   handleLogout();
                 }}
               />
-              <div>{user.userPermissions.email}</div>
+              <div>{user.loggedUser.email}</div>
             </>
           )}
         </Header>

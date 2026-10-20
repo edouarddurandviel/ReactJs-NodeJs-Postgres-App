@@ -1,7 +1,7 @@
-import { Server } from "socket.io";
+import { Server, ServerOptions } from "socket.io";
 import http from "http";
 
-let io: Server;
+let io: Server | undefined;
 
 // Type	ID	Usage
 // CONNECT -	0	- Used during the connection to a namespace.
@@ -16,15 +16,22 @@ export default {
   init: (
     httpServer: http.Server<typeof http.IncomingMessage, typeof http.ServerResponse>,
     handleOptions: {}
-  ) => {
+  ): Server => {
+    if(io){
+      return io;
+    }
     io = new Server(httpServer, handleOptions);
 
     return io;
   },
-  instance: () => {
+  instance: (): Server => {
+     if(!io){
+      throw new Error("Socket.Io was not initialized");
+    }
+
     return io;
   },
-  emit: (ev: any, ...args: any[]) => {
-    return io.emit(ev, ...args);
+  emit: (ev: string, ...args: unknown[]) => {
+    return io!.emit(ev, ...args);
   }
 };

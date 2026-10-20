@@ -3,7 +3,6 @@ import path from "path";
 import { Model, ModelStatic, Sequelize } from "sequelize";
 import process from "process";
 import cls from "cls-hooked";
-import { Connection } from "sequelize/types/dialects/abstract/connection-manager";
 
 let db: {
   sequelize?: Sequelize;
@@ -76,6 +75,13 @@ export default {
         db[modelName].associate(db);
       }
     });
+
+    if (process.env.NODE_ENV === "development") {
+      console.info(db);
+      for (const [name, model] of Object.entries(db)) {
+        console.info(`${name} associations:`, Object.keys(model.associations));
+      }
+    }
 
     if (db.sequelize) return;
 

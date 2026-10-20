@@ -38,7 +38,7 @@ export class Company extends Model<InferAttributes<Company>, InferCreationAttrib
 
   static associate(models: any) {
     Company.hasMany(models.CompanyAddress, {
-      as: "addresses",
+      as: "company_addresses",
       foreignKey: "Company_Id",
       onDelete: "CASCADE",
       hooks: true

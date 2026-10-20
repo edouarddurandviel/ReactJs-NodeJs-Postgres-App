@@ -17,7 +17,8 @@ export class Token extends Model<InferAttributes<Token>, InferCreationAttributes
   static associate(models: any) {
     // foreign key defined in Token
     Token.belongsTo(models.User, {
-      foreignKey: "User_Id"
+      foreignKey: "User_Id",
+      as: "user_token"
     });
   }
 }

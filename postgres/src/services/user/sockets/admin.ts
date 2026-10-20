@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import socketIo from "@libs/socketio";
+import socketIo from "@src/_lib/socketio";
 
 class UserAdminSocket {
   private _io: Server;

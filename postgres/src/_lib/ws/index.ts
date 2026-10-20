@@ -3,7 +3,6 @@ import { WebSocketServer } from "ws";
 import { checkConnections } from "./heartbeat";
 import WebSocketRouter from "./wsRouter";
 
-
 let wss: WebSocketServer | undefined;
 let connectedIps = new Map();
 

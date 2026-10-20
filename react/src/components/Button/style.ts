@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { fontSize, primary, radius, secondary } from "../../theme/variables";
 
-export const Button = styled.button`
+export const Button = styled.button<{ background?: boolean }>`
   width: auto;
   height: 31px;
   padding: 0 20px;
@@ -12,7 +12,7 @@ export const Button = styled.button`
   line-height: 31px;
   color: #ffffff;
   border: none;
-  background-color: ${primary};
+  background-color: ${(background) => (!background ? secondary : primary)};
 
   &:hover {
     background-color: ${secondary};

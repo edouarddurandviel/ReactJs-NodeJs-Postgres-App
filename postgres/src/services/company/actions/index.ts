@@ -22,7 +22,7 @@ import {
 
 export const getAllCompanies = async () => {
   const companies: Company[] = await findAll("Company", {
-    include: ["addresses"]
+    include: ["company_addresses"]
   });
 
   if (!companies) throw new ComapniesNotFoundError();
@@ -104,10 +104,14 @@ export const insertManyCompanies = async (data: CreateManyCompanies) => {
 
 export const replaceOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
-    const response = await update("Company", {...data}, {
-      where: { id: companyId },
-      returning: true
-    });
+    const response = await update(
+      "Company",
+      { ...data },
+      {
+        where: { id: companyId },
+        returning: true
+      }
+    );
 
     return response;
   } catch (err: any) {
@@ -129,12 +133,16 @@ export const getOneCompany = async (companyId: number) => {
 
 export const updateOneCompany = async (companyId: number, data: CreateCompany) => {
   try {
-    const document = await update<Company>("Company", {...data}, {
-      where: {
-        id: companyId
-      },
-      returning: true
-    });
+    const document = await update<Company>(
+      "Company",
+      { ...data },
+      {
+        where: {
+          id: companyId
+        },
+        returning: true
+      }
+    );
 
     if (document[0] === 0) throw new CompaniesBadRequestError();
 

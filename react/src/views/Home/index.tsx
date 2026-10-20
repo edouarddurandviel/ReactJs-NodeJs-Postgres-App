@@ -111,7 +111,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
       <Container>
         <LeftColumn>
-          <h3>{user?.userPermissions.email}</h3>
+          <h3>{user?.loggedUser.email}</h3>
           <p>
             <strong>Cache definition</strong> for every viewed company detail pages. It prevents
             from making any <strong>unnecessary requests</strong> twice. Content is stored in a Map.

@@ -1,9 +1,10 @@
 import type { PathParamsObject, QueryObject } from "../../api/interfaces";
 
 export type UserConnected = {
-  userPermissions: {
+  loggedUser: {
     id: string;
     email: string;
+    perms: any;
   };
 };
 

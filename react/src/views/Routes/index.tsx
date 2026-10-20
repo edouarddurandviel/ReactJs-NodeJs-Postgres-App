@@ -6,8 +6,12 @@ import { connect } from "react-redux";
 import * as selectors from "../../stores/rootSelectors";
 import type { RootState } from "../../stores";
 import type { UserConnected } from "../../stores/auth/interfaces";
+import { useEffect } from "react";
 
 const Index = ({ user }: RootProps) => {
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <Routes>
       <Route

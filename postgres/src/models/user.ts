@@ -1,18 +1,28 @@
 import {
   Model,
   DataTypes,
-  Sequelize,
   InferAttributes,
   InferCreationAttributes,
   CreationOptional
 } from "sequelize";
-import { Token } from "./token";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
   declare email: string;
   declare password: string;
   declare salt: string;
+
+  static associate(models: any) {
+    User.hasOne(models.Rights, {
+      foreignKey: "User_Id",
+      as: "user_rights"
+    });
+
+    User.hasOne(models.Token, {
+      foreignKey: "User_Id",
+      as: "user_token"
+    });
+  }
 }
 
 export default (sequelize: any) => {
