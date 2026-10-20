@@ -1,4 +1,4 @@
-import event from "@libs/eventEmitter";
+import event from "@src/_lib/eventEmitter";
 // TODO: should be islolated in a differand network events
 // background jobs
 // domain events

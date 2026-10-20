@@ -1,6 +1,6 @@
 import { Incoming, ROUTE_TASK } from "../config";
-import event from "@libs/eventEmitter";
-import * as companyActions from "@services/company/actions";
+import event from "@src/_lib/eventEmitter";
+import * as companyActions from "@src/services/company/actions";
 
 export const handleProcess = async (incoming: Incoming) => {
   const extracted: any = incoming[0];

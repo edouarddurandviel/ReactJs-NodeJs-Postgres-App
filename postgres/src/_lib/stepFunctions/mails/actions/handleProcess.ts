@@ -1,5 +1,5 @@
-import { Incoming, ROUTE_MAILS } from "../config";
-import event from "@libs/eventEmitter";
+import { Incoming, ROUTE_MAILS } from "@src/_lib/stepFunctions/mails/config";
+import event from "@src/_lib/eventEmitter";
 
 export const handleProcess = (incoming: Incoming) => {
   const extracted: {} = incoming[0];

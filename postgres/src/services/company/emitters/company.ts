@@ -1,4 +1,4 @@
-import eventEmitter from "@libs/eventEmitter";
+import eventEmitter from "@src/_lib/eventEmitter";
 
 const task = (
   eventName: string,

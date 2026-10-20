@@ -1,6 +1,6 @@
 import { ROUTE_MAILS } from "../config";
-import event from "@libs/eventEmitter";
-import * as userActions from "@services/user/actions";
+import event from "@src/_lib/eventEmitter";
+import * as userActions from "@src/services/user/actions";
 
 type Email = {
   userId: string;

@@ -1,4 +1,4 @@
-import event from "@libs/eventEmitter";
+import event from "@src/_lib/eventEmitter";
 import { handleGet } from "./actions/handleGet";
 import { handleProcess } from "./actions/handleProcess";
 import { handleCompleted } from "./actions/handleCompleted";

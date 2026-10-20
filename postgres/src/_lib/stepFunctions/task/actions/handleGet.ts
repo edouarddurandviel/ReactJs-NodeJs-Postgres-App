@@ -1,6 +1,6 @@
 import { ROUTE_TASK } from "../config";
-import event from "@libs/eventEmitter";
-import * as companyActions from "@services/company/actions";
+import event from "@src/_lib/eventEmitter";
+import * as companyActions from "@src/services/company/actions";
 
 export const handleGet = async (incoming: any[]) => {
   const extracted = incoming[0];

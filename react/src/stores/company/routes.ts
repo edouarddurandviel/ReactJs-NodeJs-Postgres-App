@@ -22,7 +22,6 @@ export const companyMiddleware: Middleware = (api) => (next) => async (action: u
         dispatch({
           type: actionTypes.GET_ALL_COMPANIES_LOADING,
         });
-
         const resp = await requests.getAllCompanies();
         if (axios.isAxiosError(resp)) {
           dispatch(errorMessage(resp.response?.data?.message));

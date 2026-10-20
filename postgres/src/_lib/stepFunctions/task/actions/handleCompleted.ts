@@ -1,5 +1,5 @@
 import { ROUTE_TASK } from "../config";
-import event from "@libs/eventEmitter";
+import event from "@src/_lib/eventEmitter";
 
 export const createEmitter = event.createEventEmitter();
 export const handleCompleted = (incoming: any[]) => {
