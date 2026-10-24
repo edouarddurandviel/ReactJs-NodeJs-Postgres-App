@@ -24,4 +24,7 @@ export default defineConfig({
     }),
     ///babel()
   ],
+  html: {
+    cspNonce: "__CSP_NONCE__",
+  },
 });
