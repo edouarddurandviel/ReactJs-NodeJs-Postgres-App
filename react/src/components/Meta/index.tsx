@@ -1,13 +1,22 @@
 import { Helmet } from "react-helmet";
 
+
 const Index = ({ metaData }: MetaProps) => {
-  return (
-    <Helmet>
-      <meta charSet="utf-8" />
-      <title>{metaData.title}</title>
-      <meta name="description" content={metaData.description} />
-      <link rel="canonical" href={`http://mysite.com/${metaData.url}`} />
-    </Helmet>
+    const nonce = document
+    .querySelector('meta[name="csp-nonce"]')
+    ?.getAttribute("content");
+
+  return (nonce && (
+      <Helmet>
+            <meta charSet="utf-8" />
+            <title>{metaData.title}</title>
+            <meta name="description" content={metaData.description} />
+            <link rel="canonical" href={`http://localhost/${metaData.url}`} />
+            <style nonce={nonce}>
+              {`.custom-class { color: red; }`}
+            </style>
+          </Helmet>
+  )
   );
 };
 
