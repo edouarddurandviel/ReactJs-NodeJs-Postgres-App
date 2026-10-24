@@ -38,15 +38,17 @@ app.use((req, res, next) => {
           "http://127.0.0.1:3000",
         ],
         fontSrc: ["'self'"],
-        connectSrc: ["'self'", "http://localhost:3000", "ws://localhost:3000"],
+        connectSrc: ["'self'", "http://localhost:3000", "ws://localhost:3000"], // change in production mode
       },
     },
   }),
   express.static(dist, {
+    maxAge: "1y",
+    immutable: true,
     index: [reactIndexPath],
     setHeaders(res, filePath) {
       if (filePath.includes(`${path.sep}assets${path.sep}`)) {
-        res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        res.setHeader("X-Content-Type-Options", "nosniff");
       }
     },
   })

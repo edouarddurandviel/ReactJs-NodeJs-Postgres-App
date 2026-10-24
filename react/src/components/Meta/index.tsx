@@ -8,14 +8,14 @@ const Index = ({ metaData }: MetaProps) => {
 
   return (nonce && (
       <Helmet>
-            <meta charSet="utf-8" />
-            <title>{metaData.title}</title>
-            <meta name="description" content={metaData.description} />
-            <link rel="canonical" href={`http://localhost/${metaData.url}`} />
-            <style nonce={nonce}>
-              {`.custom-class { color: red; }`}
-            </style>
-          </Helmet>
+          <meta charSet="utf-8" />
+          <title>{metaData.title}</title>
+          <meta name="description" content={metaData.description} />
+          <link rel="canonical" href={`http://localhost/${metaData.url}`} />
+          <style nonce={nonce}>
+            {`.custom-class { color: red; }`}
+          </style>
+      </Helmet>
   )
   );
 };
