@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import config from "../../config";
 
 
 const Index = ({ metaData }: MetaProps) => {
@@ -11,7 +12,7 @@ const Index = ({ metaData }: MetaProps) => {
           <meta charSet="utf-8" />
           <title>{metaData.title}</title>
           <meta name="description" content={metaData.description} />
-          <link rel="canonical" href={`http://localhost/${metaData.url}`} />
+          <link rel="canonical" href={`${config.domain}/${metaData.url}`} />
           <style nonce={nonce}>
             {`.custom-class { color: red; }`}
           </style>

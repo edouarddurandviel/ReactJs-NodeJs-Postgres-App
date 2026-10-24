@@ -22,13 +22,15 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   const [companyList, setCompanyList] = useState<Company[]>([]);
   const [createEntry, setCreateEntry] = useState<boolean | null>(null);
   const formRef = useRef("home") as any;
-  const emptyDefaultValues = {
+  const handleHomeForm = formRef.current;
+  const KHFdefaultValues = {
     id: "",
     name: "",
     activity: "",
     owner: "",
   };
 
+  // TODO: db or not db
   const meta = {
     title: "Dashboard",
     description: "dashboard page",
@@ -45,31 +47,36 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   }, [dispatch]);
 
   useEffect(() => {
-    companies?.length &&
+    if(companies && companies.length){
       setCompanyList(
-        companies.map((e) => {
+        companies.map((c: any) => {
           return {
-            id: e.id,
-            name: e.name,
-            activity: e.activity,
-            owner: e.owner,
-            imgpath: e.imgpath,
-            ...(e.addresses && { addresses: e.addresses }),
-            createdAt: e.createdAt,
-            updatedAt: e.updatedAt,
+            id: c.id,
+            name: c.name,
+            activity: c.activity,
+            owner: c.owner,
+            imgpath: c.imgpath,
+            ...(c.addresses && { addresses: c.addresses }),
+            createdAt: c.createdAt,
+            updatedAt: c.updatedAt,
           };
         }),
       );
+    }
+
   }, [companies]);
 
   const submit: SubmitHandler<Company> = (values: Company) => {
-    createEntry
-      ? dispatch(
+    switch(createEntry){
+      case true:
+        dispatch(
           actions.company.addOneCompany({
             data: values,
           }),
         )
-      : dispatch(
+        break;
+      default:
+        dispatch(
           actions.company.updateOneCompany({
             params: {
               companyId: values.id,
@@ -77,7 +84,9 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
             data: values,
           }),
         );
-    formRef.current?.resetForm(emptyDefaultValues);
+      }
+
+    handleHomeForm?.resetForm(KHFdefaultValues);
   };
 
   const handleDeleteItem = (item: string) => {
@@ -92,7 +101,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
   const handleEditModal = (data: Company) => {
     setCreateEntry(false);
-    formRef.current?.resetForm({
+    handleHomeForm?.resetForm({
       id: data.id,
       name: data.name,
       activity: data.activity,
@@ -102,7 +111,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
   const handleNewModal = () => {
     setCreateEntry(!createEntry);
-    formRef.current?.resetForm(emptyDefaultValues);
+    handleHomeForm?.resetForm(KHFdefaultValues);
   };
 
   return (
@@ -133,7 +142,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
           <ReactHookForm
             ref={formRef}
-            defaultValues={emptyDefaultValues}
+            defaultValues={KHFdefaultValues}
             validationSchema={schemaCreateCompany}
           >
             {({ control, handleSubmit, reset }) => (
@@ -158,7 +167,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
                   <LoadingButton
                     type="button"
                     content="Reset"
-                    onClick={() => reset(emptyDefaultValues)}
+                    onClick={() => reset(KHFdefaultValues)}
                   />
                 </RHFform_Row_Btns>
               </RHFform_Row>

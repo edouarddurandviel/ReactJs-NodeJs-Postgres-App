@@ -1,5 +1,6 @@
 export default {
   baseUrl: import.meta.env.VITE_API_BASE_URL,
+  domain: import.meta.env.VITE_API_DOMAIN,
   socket: import.meta.env.VITE_API_URL,
   websocket: import.meta.env.VITE_API_SOCKET,
 };
