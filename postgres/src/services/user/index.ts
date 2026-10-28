@@ -58,8 +58,9 @@ class UserController {
 
   public async login(email: string, password: string, maxAge: any) {
     const user: any = await userActions.getOneUserWithEmail(email);
-    const salt = Buffer.from(user.salt, "hex");
 
+    // extract encoded password
+    const salt = Buffer.from(user.salt, "hex");
     const hash = argon2Sync("argon2id", {
       message: password,
       nonce: salt,
@@ -77,6 +78,7 @@ class UserController {
       const payload = { Session_Id: Session_Id };
       const secret = process.env.ENV_SECRET;
 
+      // attach Session_Id to token
       const token = secret && jwt.sign(payload, secret, { expiresIn: expire + maxAge });
 
       token && (await userActions.storeUserToken(Session_Id, user.id));
