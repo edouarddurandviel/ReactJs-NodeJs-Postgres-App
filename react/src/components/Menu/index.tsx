@@ -10,12 +10,13 @@ const Index = () => {
   const currentUser = useContext(UserContext);
   const contextValue = useMemo(
     () => ({
-      ...(currentUser && currentUser.loggedUser.perms.content.routes),
+      ...(currentUser && currentUser.loggedUser.perms.content.content.routes),
     }),
     [currentUser],
   );
 
   useEffect(() => {
+
     const handleSelectionChange = () => {
       const selection = window.getSelection();
       if (selection && selection !== null) {
@@ -28,7 +29,7 @@ const Index = () => {
     return () => {
       document.removeEventListener("selectionchange", handleSelectionChange);
     };
-  }, [contextValue]);
+  }, []);
 
   return (
     <Menu>
@@ -46,12 +47,12 @@ const Index = () => {
             <NavLink className="links" to="/user/add">
               Create user
             </NavLink>
-          )}
+           )}
           {contextValue["profil"].read && (
             <NavLink className="links" to="/user/profil">
               User profil
             </NavLink>
-          )}
+          )} 
           <Button
             disabled={typeof seletedTextArea === "boolean"}
             content="Voices"

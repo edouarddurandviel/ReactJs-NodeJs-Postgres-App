@@ -15,10 +15,11 @@ import {
 import { Formik, type FormikProps } from "formik";
 import { Input } from "../../../components/Formik";
 import { schemaUserCreate } from "../../../schemas/userSchema";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import type { User } from "../../../stores/user/interfaces";
 import { formatFrDate } from "../../../utils";
 import { UserDate, UserList } from "./styles";
+import { UserContext } from "../../../contexts/UserContext";
 
 const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
   const [userList, setUserList] = useState<boolean>(false);
@@ -28,6 +29,16 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
   const userForm = userRef.current as any;
   //const rightsForm = rightsRef.current as any;
 
+  const currentUser = useContext(UserContext);
+    const contextValue = useMemo(
+      () => ({
+        ...(currentUser && currentUser.loggedUser.perms.content.content.routes),
+      }),
+      [currentUser],
+    );
+  
+
+    
   useEffect(() => {
     dispatch(actions.user.getAllUsers());
 
@@ -37,6 +48,8 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
       dispatch(actions.socket.user.unsubscribeAllUsers());
     };
   }, [dispatch]);
+
+
 
   const handleSubmitCreateUser = (values: any) => {
     dispatch(
@@ -48,9 +61,11 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
     setUserList(true);
   };
 
+
   const handleRights = (args: any) => {
     if (args) setUserRights(args);
   };
+
 
   const handleUserRights = (args: any) => {
     if(args) console.log(args)
@@ -70,17 +85,16 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
               <UserList
                 key={user._id}
                 onClick={() => {
-                  handleRights(user.user_rights.content.routes ?? null);
+                  handleRights(contextValue ?? null);
                 }}
               >
                 {user.email} -{" "}
                 <UserDate>
                   {formatFrDate(user.createdAt!).date}
-                  {user.user_rights && user.user_rights.content.routes.length > 0 && (
+                  {user.user_rights && contextValue.length > 0 && (
                     <Button
                       content="select"
                       onClick={() => {
-                        console.log(user.user_rights);
                         handleRights(user.user_rights ?? null);
                       }}
                     />
