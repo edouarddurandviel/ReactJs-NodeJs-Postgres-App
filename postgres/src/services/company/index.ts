@@ -34,15 +34,12 @@ class CompanyController {
     return companies;
   }
 
-  public async createOneCompany(company: CreateCompany, file?: any) {
-    if (file) {
-      const createdFile = await saveImageResizedFile(file, 300, 200);
-      company.imgpath = createdFile.outputFileName;
+  public async createOneCompany(company: CreateCompany, file: any) {
+    const createdFile = await saveImageResizedFile(file, 300, 200);
+    company.imgpath = createdFile.outputFileName;
 
-      await companyActions.createOneCompany(company);
-    } else {
-      throw new CompaniesFilesBadRequestError();
-    }
+    await companyActions.createOneCompany(company);
+   
   }
 
   public async createOneCompanyAddress(companyId: number, address: Address) {

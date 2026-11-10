@@ -9,6 +9,8 @@ export const fullCompany = Joi.object({
   owner: textSchema
 });
 
+export const singleFile = Joi.object().required();
+
 export const updateCompany = Joi.object({
   name: Joi.string().required(),
   activity: Joi.string().required(),

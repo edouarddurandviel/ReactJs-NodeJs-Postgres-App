@@ -16,7 +16,9 @@ export default () => {
   router.post("/create", upload.single("image"), async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await companySchemas.fullCompany.validateAsync(req.body);
-      await companyServices.createOneCompany(data, req.file);
+      const file = await companySchemas.singleFile.validateAsync(req.file);
+      
+      await companyServices.createOneCompany(data, file);
 
       companySockets.reloadCompanies(res);
 

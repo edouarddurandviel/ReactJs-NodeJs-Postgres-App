@@ -4,8 +4,6 @@ import { NotFound } from "http-json-errors";
 import * as userActions from "@src/services/user/actions";
 import { Token } from "@src/models/token";
 
-
-
 export const sessionToken: RequestHandler = async (
   req: any,
   res: any,
