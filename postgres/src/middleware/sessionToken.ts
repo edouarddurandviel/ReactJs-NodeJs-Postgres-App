@@ -4,6 +4,8 @@ import { NotFound } from "http-json-errors";
 import * as userActions from "@src/services/user/actions";
 import { Token } from "@src/models/token";
 
+
+
 export const sessionToken: RequestHandler = async (
   req: any,
   res: any,
@@ -17,18 +19,13 @@ export const sessionToken: RequestHandler = async (
         if (decode) {
           const user = (await userActions.getUserTokenWithId(decode.Session_Id)) as Token;
           if (user) {
-            const isValid = new Date(decode.exp) > new Date();
-            if (isValid) {
               req.User_Id = user.id;
               next();
-            } else {
-              throw new NotFound("Session expiry");
-            }
           } else {
-            throw new NotFound("User does not exist");
+            throw new NotFound("No User found");
           }
         } else {
-          throw new NotFound("Unauthorized session token");
+          throw new NotFound("Session expiry");
         }
       }
     } else {
