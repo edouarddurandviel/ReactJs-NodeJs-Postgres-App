@@ -5,8 +5,7 @@ const dbInstance = sequelize.instance();
 
 export const checkConnection = async () => {
   try {
-    await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
+    await dbInstance.authenticate();
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
@@ -14,8 +13,7 @@ export const checkConnection = async () => {
 
 export const forceSynchronization = async (args: any) => {
   try {
-    await sequelize.sync(args);
-    console.log("Tables has been synchronized successfully.");
+    await dbInstance.sync(args);
   } catch (error) {
     console.error(error);
   }
@@ -26,24 +24,22 @@ export const poolConnection = async () => {
 };
 
 export const getConnection = async (query: string, bindParams: any[]) => {
-  // Pool initialization
   const conn = await dbInstance.getConnection();
 
   return async () => {
     await conn.query(query, bindParams);
-    // When finished, release connection
     dbInstance.releaseConnection(conn);
   };
 };
 
 export const closeConnection = async () => {
-  if (sequelize) {
-    await sequelize.close();
+  if (dbInstance) {
+    await dbInstance.close();
   }
 };
 
 export const getDatabase = async () => {
-  return sequelize;
+  return dbInstance;
 };
 
 export const manageError = (err: any) => {

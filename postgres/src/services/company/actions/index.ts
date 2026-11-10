@@ -8,8 +8,8 @@ import {
   bulkCreate,
   findOrCreate,
   create
-} from "@src/_lib/sequelizeModelStatic";
-import { manageError } from "@src/_lib/sequelize";
+} from "@src/_lib/sequelize/modelStatic";
+import { manageError } from "@src/_lib/sequelize/sequelize";
 import {
   CompaniesBadRequestError,
   ComapniesNotFoundError,

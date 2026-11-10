@@ -93,14 +93,5 @@ export default {
 
   instance: () => {
     return db;
-  },
-  authenticate: () => {
-    if (db.sequelize) return db.sequelize.authenticate();
-  },
-  sync: (args: any) => {
-    if (db.sequelize) return db.sequelize.sync(args);
-  },
-  close: () => {
-    if (db.sequelize) return db.sequelize.close();
   }
 };
