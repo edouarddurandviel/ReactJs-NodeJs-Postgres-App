@@ -1,8 +1,9 @@
 import express from "express";
 import UsersRoutes from "./user";
+import AuthRoutes from "./auth";
 import CompanyRoutes from "./company";
 // import RemoteRoutes from "./remote";
-import { sessionToken } from "src/middleware/sessionToken";
+import { sessionToken } from "@src/middleware/sessionToken";
 
 export default () => {
   const app = express.Router({
@@ -12,7 +13,8 @@ export default () => {
   });
 
   app.use("/company", sessionToken, CompanyRoutes());
-  app.use("/user", UsersRoutes());
+  app.use("/user", sessionToken, UsersRoutes());
+  app.use("/auth", AuthRoutes());
   //app.use("/remote", RemoteRoutes(io));
 
   return app;

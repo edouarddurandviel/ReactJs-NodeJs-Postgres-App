@@ -31,6 +31,16 @@ export default {
       },
     },
   },
+  auth: {
+    login: {
+      method: "GET",
+      path: "auth/login",
+    },
+    logout: {
+      method: "POST",
+      path: "auth/logout/:userId",
+    },
+  },
   users: {
     all: {
       method: "GET",
@@ -47,14 +57,6 @@ export default {
     addProfil: {
       method: "POST",
       path: "user/profil/:userId/create",
-    },
-    login: {
-      method: "GET",
-      path: "user/login",
-    },
-    logout: {
-      method: "POST",
-      path: "user/logout/:userId",
     },
     delete: {
       method: "DELETE",

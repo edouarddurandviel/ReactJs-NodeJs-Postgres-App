@@ -4,7 +4,7 @@ import type { Payload } from "./interfaces";
 
 export default {
   userLogin: (data: Payload) => {
-    const userApi = apiRoutes.users.login;
+    const userApi = apiRoutes.auth.login;
     return request({
       path: userApi.path,
       query: {
@@ -15,7 +15,7 @@ export default {
     });
   },
   userLogout: (data: Payload) => {
-    const userApi = apiRoutes.users.logout;
+    const userApi = apiRoutes.auth.logout;
     return request({
       path: userApi.path,
       params: data.params,

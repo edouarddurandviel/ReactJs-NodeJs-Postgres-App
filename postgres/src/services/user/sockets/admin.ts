@@ -3,6 +3,9 @@ import { Response } from "express";
 import socketIo from "@src/_lib/socketio";
 import { noServerError } from "@src/_lib/server";
 
+// wait request has finished and has no errors to emit
+// message and send it to the front.
+
 class UserAdminSocket {
   private _io: Server;
   constructor() {
@@ -15,7 +18,7 @@ class UserAdminSocket {
     }
   }
 
-  public refreshUserAddress(res: Response, number: number, addrId: string, params: any) {
+  public refreshUserAddress(res: Response, addrId: string, params: any) {
     if (noServerError(res.statusCode)) {
       return this._io.emit(`user:${addrId}:address`, params);
     }
