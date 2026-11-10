@@ -4,6 +4,7 @@ import helmet from "helmet";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import RateLimit from "express-rate-limit";
 import "dotenv/config";
 import sequelize from "@src/models";
 import path from "node:path";
@@ -48,6 +49,12 @@ app.use(
   })
 );
 
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20,
+});
+app.use(limiter);
+
 // Serve images
 app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
 
@@ -64,7 +71,7 @@ app.use(morgan("dev"));
 // Check sequelize connection
 sequelize.init();
 
-// custom registering listeners for step function
+// custom registering listeners for step functions
 // StepFunction.initEvent();
 // StepFunction.createRoute(ROUTE_TASK, taskStepFunction);
 // StepFunction.createRoute(ROUTE_MAILS, mailsStepFunction);
