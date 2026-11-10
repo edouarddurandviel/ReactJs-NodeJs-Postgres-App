@@ -4,13 +4,12 @@ import app from "@src/_config/app";
 import socketIo from "@src/_lib/_socketio";
 import { onErrorEvent, normalizePort } from "@src/_lib/server";
 import v1Routes from "@src/api/v1";
-//import websockets from "@libs/ws";
 
 const origin = process.env.REACT_API_PORT;
 const domain = process.env.DOMAIN_URL;
 const apiPort = process.env.PORT;
 
-// Get port from environment and store it in Express
+
 const port = normalizePort(apiPort || "3000");
 app.set("port", port);
 
@@ -25,10 +24,10 @@ const io = socketIo.init(server, {
   }
 });
 
-// Send io instance through routes
 app.use(v1Routes(io));
 
-// Listen on provided port, on all network interfaces
+// Listen on provided port, 
+// on all network interfaces
 server.listen(port);
 
 // - EACCES - Require elevated privileges
@@ -37,7 +36,7 @@ server.on("error", (error: any) => {
   onErrorEvent(error, port);
 });
 
-// Must be an address to listen
+
 server.on("listening", () => {
   const addr = server.address();
   if (addr) {
