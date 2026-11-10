@@ -25,7 +25,7 @@ export const sessionToken: RequestHandler = async (
               throw new NotFound("Session expiry");
             }
           } else {
-            throw new NotFound("Unauthorized user session token");
+            throw new NotFound("User does not exist");
           }
         } else {
           throw new NotFound("Unauthorized session token");
