@@ -5,7 +5,7 @@ export const handleErrors = async (res: any, error: any) => {
   });
 };
 
-// Normalize a port into a number, string, or false
+// Normalize .env port into a number, string, or false
 export const normalizePort = (portValue: string) => {
   const port = parseInt(portValue, 10);
 
@@ -41,6 +41,9 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
   }
 };
 
+// Websocket emit instruction only 
+// if response statusCode
+// is in between 500 and 599
 export const noServerError = (
   statusCode: number,
   start: number = 500,
