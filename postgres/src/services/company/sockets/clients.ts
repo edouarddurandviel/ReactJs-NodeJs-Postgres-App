@@ -1,5 +1,5 @@
 import { Response } from "express";
-import io from "../../../../extra/socketio";
+import io from "@src/_lib/socketio";;
 import { noServerError } from "@src/_lib/server";
 
 export const reloadCompany = (res: Response, userId: number, params: {}) => {
