@@ -1,7 +1,7 @@
 import "dotenv/config";
 import http from "http";
 import app from "@src/_config/app";
-import socketIo from "@src/_lib/socketio";
+import socketIo from "@src/_lib/_socketio";
 import { onErrorEvent, normalizePort } from "@src/_lib/server";
 import v1Routes from "@src/api/v1";
 //import websockets from "@libs/ws";

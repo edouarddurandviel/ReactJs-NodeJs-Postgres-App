@@ -25,7 +25,7 @@
     "emitDecoratorMetadata": true,
     "types": ["node"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "extra/socketio", "extra/ws"],
   "exclude": ["node_modules", "dist", "src/test"],
   "watchOptions": {
     "watchFile": "useFsEvents",

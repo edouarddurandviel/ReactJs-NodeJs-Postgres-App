@@ -1,6 +1,6 @@
 import { Server } from "socket.io";
 import { Response } from "express";
-import socketIo from "@src/_lib/socketio";
+import socketIo from "../../../../extra/socketio";
 import { noServerError } from "@src/_lib/server";
 
 // wait request has finished and has no errors to emit

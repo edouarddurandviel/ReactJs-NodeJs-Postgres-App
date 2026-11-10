@@ -1,6 +1,7 @@
 cert
 dist
 node_modules
+extra
 
 .boto
 tsconfig.tsbuildinfo
