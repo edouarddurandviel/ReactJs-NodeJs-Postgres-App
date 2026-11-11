@@ -41,7 +41,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
         <Header>
             {/* store alerts depends on dispatch(messageError(error from server)) */}
             <Alerts 
-              error={{err: true, message: "Not found"}} 
+              error={error} 
               closeModal={() => {
                 dispatch(errorReset(["error"]));
               }}
