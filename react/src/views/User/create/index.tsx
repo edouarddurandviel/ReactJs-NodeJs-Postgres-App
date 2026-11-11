@@ -27,12 +27,11 @@ const Index = ({ dispatch, addUserLoading, users }: UserProps) => {
   const userRef = useRef<FormikProps<any>>(null);
   const rightsRef = useRef<FormikProps<any>>(null);
   const userForm = userRef.current as any;
-  //const rightsForm = rightsRef.current as any;
 
   const currentUser = useContext(UserContext);
     const contextValue = useMemo(
       () => ({
-        ...(currentUser && currentUser.loggedUser.perms.content.content.routes),
+        ...(currentUser && currentUser.loggedUser.perms.content.routes),
       }),
       [currentUser],
     );
