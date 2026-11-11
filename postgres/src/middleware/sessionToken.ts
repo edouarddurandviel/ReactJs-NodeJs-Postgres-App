@@ -30,6 +30,6 @@ export const sessionToken: RequestHandler = async (
       throw "Need a session token";
     }
   } catch (error: any) {
-    res.status(401).json({ message: error });
+    res.status(401).json({ status: 401, message: error });
   }
 };

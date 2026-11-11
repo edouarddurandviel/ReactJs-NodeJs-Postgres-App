@@ -2,10 +2,11 @@ import type { Middleware } from "redux";
 import requests from "./api";
 import * as actionTypes from "./types";
 import type { Payload } from "./interfaces";
+import type { User } from "../user/interfaces";
 
 type Action = {
   type?: string;
-  payload: Payload;
+  payload: Payload<User>;
   message?: string;
   socket?: boolean;
 };
