@@ -32,10 +32,10 @@ export default async (props: {
     const key = config.url;
     const isCacheEnabled = await cache.manageRequest(key, config);
     if (isCacheEnabled) {
-      return Promise.reject({
-        __fromCache: true,
+      throw {
+        fromCache: true,
         data: cache.getCache(key),
-      });
+      };
     } else {
       return config;
     }
@@ -58,7 +58,7 @@ export default async (props: {
 
     return resp;
   } catch (err: any) {
-    if (err.__fromCache) {
+    if (err.fromCache) {
       return err;
     } else {
       return err;
