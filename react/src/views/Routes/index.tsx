@@ -29,7 +29,7 @@ const Index = ({ user, session, dispatch }: RootProps) => {
         path={"/"}
         element={
           <PrivateRoutes user={user} session={isSession}>
-            <Layout user={user} />
+              <Layout user={user} />
           </PrivateRoutes>
         }
       >
