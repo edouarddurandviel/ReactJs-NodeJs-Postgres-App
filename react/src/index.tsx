@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./stores";
 import socketIo from "./sockets/socketIo";
 //import ws from "./sockets/webSockets";
-import cache from "./api/createApiCache";
+import cache from "../../../_docker_tests/createApiCache";
 import Routes from "./views/Routes";
 import "./theme/index.css";
 

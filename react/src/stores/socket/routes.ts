@@ -1,7 +1,7 @@
 import type { Middleware } from "redux";
 import type { PathParamsObject } from "../../api/interfaces";
 import socketIo from "../../sockets/socketIo";
-import cache from "../../api/createApiCache";
+import cache from "../../../../../_docker_tests/createApiCache";
 
 type SocketAction = {
   type: string;
