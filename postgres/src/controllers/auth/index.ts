@@ -23,7 +23,7 @@ export default () => {
       res.cookie("jwt", result.token, {
         maxAge: maxAge,
         httpOnly: true,
-        secure: false,
+        secure: true,
         sameSite: "lax",
         path: "/"
       });
