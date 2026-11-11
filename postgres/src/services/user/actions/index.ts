@@ -164,8 +164,6 @@ export const getUserTokenWithId = async (token: string) => {
     }
   });
 
-  if (!user) throw new UserTokenNotFoundError(token);
-
   return user;
 };
 

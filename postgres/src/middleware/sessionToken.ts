@@ -3,6 +3,7 @@ import * as jwt from "jsonwebtoken";
 import { NotFound } from "http-json-errors";
 import * as userActions from "@src/services/user/actions";
 import { Token } from "@src/models/token";
+import { StatusCode } from "@src/_config/statusCode";
 
 export const sessionToken: RequestHandler = async (
   req: any,
@@ -21,16 +22,16 @@ export const sessionToken: RequestHandler = async (
             req.User_Id = user.id;
             next();
           } else {
-            throw new NotFound("No User found");
+            throw "No User found";
           }
         } else {
-          throw new NotFound("Session expiry");
+          throw "Session expiry";
         }
       }
     } else {
-      throw new NotFound("Need a session token");
+      throw "Need a session token";
     }
   } catch (error: any) {
-    res.status(401).json({ message: error.message });
+    res.status(401).json({ message: error });
   }
 };

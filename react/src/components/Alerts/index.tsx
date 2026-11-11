@@ -1,23 +1,30 @@
-import { Alert } from "./styles";
+import { Alert, AlertBody, AlertHeader, CloseAlert } from "./styles";
 
-const Index = ({ data, open, closeModal }: AlertProps) => {
+const Index = ({ error, closeModal }: ErrorAlertProps) => {
+
   return (
-    open && (
-      <Alert
-        color={(data.status === 200 && "green") || "red"}
-        onClick={() => {
-          closeModal();
-        }}
-      >
-        {data.status === 200 ? "Success" : "Error"}
+    error && (
+      <Alert color={(error.status === 200 && "green") || "red"}>
+        <AlertHeader>
+          {error.status === 200 ? "Success" : "Error"}
+          <CloseAlert
+            onClick={() => {
+              closeModal();
+            }}
+          >
+            X
+          </CloseAlert>
+        </AlertHeader>
+        <AlertBody>
+          {error.message}
+        </AlertBody> 
       </Alert>
     )
   );
 };
 
-interface AlertProps {
-  data: any;
-  open: boolean;
+interface ErrorAlertProps {
+  error: any;
   closeModal: () => void;
 }
 

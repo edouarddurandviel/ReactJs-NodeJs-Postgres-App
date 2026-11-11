@@ -16,7 +16,7 @@ export default (state: State = initialState, action: Action): State => {
         if (action.payload) {
           if (Array.isArray(action.payload)) {
             action.payload.map((item: string) => {
-              Object.assign(draft, { [item]: [] });
+              Object.assign(draft, { [item]: undefined });
             });
           }
         }

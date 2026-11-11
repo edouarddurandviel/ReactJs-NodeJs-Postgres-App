@@ -11,9 +11,9 @@ import Menu from "../Menu";
 import { footerText } from "../../theme/variables";
 import * as selectors from "../../stores/rootSelectors";
 import { errorReset } from "../../stores/error/actions";
+import Alerts from "../Alerts";
 
 const Index = ({ dispatch, user, error }: LayoutProps) => {
-  const [alert, setAlert] = useState<boolean>(false);
   const handleLogout = useCallback(() => {
     if (user) {
       dispatch(
@@ -30,17 +30,24 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
   }, [user]);
 
   useEffect(() => {
-    if (error && error.length) {
-      setAlert(true);
-    }
-  }, [error]);
+    error && console.dir(error)
+  }, [error])
+
+ 
 
   return (
     <UserContext value={user}>
       <PLaceHolder>
         <Header>
-          {error && error.length > 0 && alert && (
-            <Alert>
+            {/* store alerts depends on dispatch(messageError(error from server)) */}
+            <Alerts 
+              error={{err: true, message: "Not found"}} 
+              closeModal={() => {
+                dispatch(errorReset(["error"]));
+              }}
+            />
+
+            {/* <Alert>
               {error}
               <CloseAlert
                 onClick={() => {
@@ -58,8 +65,8 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
               >
                 Logout
               </CloseAlertButton>
-            </Alert>
-          )}
+            </Alert> */}
+          
           {user && (
             <>
               <Menu />

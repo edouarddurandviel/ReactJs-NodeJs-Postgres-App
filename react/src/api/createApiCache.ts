@@ -5,7 +5,7 @@ export default {
   createApiCache: () => {
     if (!cache)
       cache = new apiCache({
-        whitelist: ["company", "one"],
+        whitelist: ["one", "company"],
       });
     return cache;
   },
