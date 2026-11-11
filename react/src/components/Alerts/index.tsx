@@ -1,12 +1,12 @@
-import { Alert, AlertBody, AlertHeader, CloseAlert } from "./styles";
+import { AuthAlert, AlertBody, AlertHeader, CloseAlert } from "./styles";
 
 const Index = ({ error, closeModal }: ErrorAlertProps) => {
 
   return (
     error && (
-      <Alert color={(error.status === 200 && "green") || "red"}>
+      <AuthAlert>
         <AlertHeader>
-          {error.status === 200 ? "Success" : "Error"}
+            Unauthorized
           <CloseAlert
             onClick={() => {
               closeModal();
@@ -18,8 +18,8 @@ const Index = ({ error, closeModal }: ErrorAlertProps) => {
         <AlertBody>
           {error.message}
         </AlertBody> 
-      </Alert>
-    )
+      </AuthAlert>
+      )
   );
 };
 

@@ -5,6 +5,7 @@ export { default as RVInput } from "./Input";
 export { default as RVLayout } from "./Layout";
 export { default as Button } from "./Button";
 export { default as Alerts } from "./Alerts";
+export { default as AlertsSession } from "./AlertsSession";
 export { default as Meta } from "./Meta";
 export { default as MainList } from "./MainList";
 export { default as Image } from "./Image";

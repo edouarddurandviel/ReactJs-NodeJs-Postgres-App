@@ -2,7 +2,7 @@ import { Button } from "./style";
 
 const Index = ({ content, disabled, onClick }: ButtonProps) => {
   return (
-    <Button onClick={() => onClick()} disabled={disabled} background={disabled}>
+    <Button onClick={() => onClick()} disabled={disabled}>
       {content}
     </Button>
   );

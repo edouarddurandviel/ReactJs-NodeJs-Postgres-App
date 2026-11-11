@@ -1,17 +1,16 @@
 import { Outlet } from "react-router";
-import { Alert, CloseAlert, CloseAlertButton, Footer, Header, Main, PLaceHolder } from "./styles";
+import { Footer, Header, Main, PLaceHolder } from "./styles";
 import type { AppDispatch, RootState } from "../../stores";
 import * as actions from "../../stores/rootActions";
 import { connect } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
-import LoadingButton from "../LoadingButton";
+import { useCallback } from "react";
 import type { UserConnected } from "../../stores/auth/interfaces";
 import { UserContext } from "../../contexts/UserContext";
-import Menu from "../Menu";
 import { footerText } from "../../theme/variables";
 import * as selectors from "../../stores/rootSelectors";
 import { errorReset } from "../../stores/error/actions";
-import Alerts from "../Alerts";
+import { Alerts, AlertsSession, LoadingButton } from "..";
+import Menu from "../Menu";
 
 const Index = ({ dispatch, user, error }: LayoutProps) => {
   const handleLogout = useCallback(() => {
@@ -29,43 +28,25 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
     }
   }, [user]);
 
-  useEffect(() => {
-    error && console.dir(error)
-  }, [error])
-
- 
 
   return (
     <UserContext value={user}>
       <PLaceHolder>
         <Header>
-            {/* store alerts depends on dispatch(messageError(error from server)) */}
             <Alerts 
-              error={error} 
+              error={error && error.status && error.status !== 401} 
               closeModal={() => {
                 dispatch(errorReset(["error"]));
               }}
             />
 
-            {/* <Alert>
-              {error}
-              <CloseAlert
-                onClick={() => {
-                  dispatch(errorReset(["error"]));
-                  setAlert(false);
-                }}
-              >
-                X
-              </CloseAlert>
-              <CloseAlertButton
-                onClick={() => {
-                  dispatch(errorReset(["error"]));
-                  handleLogout();
-                }}
-              >
-                Logout
-              </CloseAlertButton>
-            </Alert> */}
+            <AlertsSession 
+              error={error && error.status && error.status === 401} 
+              handleLogout={() => {
+                dispatch(errorReset(["error"]));
+                handleLogout();
+              }}
+            />
           
           {user && (
             <>

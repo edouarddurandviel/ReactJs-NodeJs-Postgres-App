@@ -4,7 +4,24 @@ interface AlertProps {
   color: string;
 }
 
-export const Alert = styled.div<AlertProps>`
+export const AuthAlert = styled.div`
+  display: flex;
+  padding: 0;
+  background: #dd6300;
+  border: 1px solid #dd6300;
+  width: 250px;
+  height: 100px;
+  margin-right: -125px;
+  position: absolute;
+  top: 30px;
+  right: 50%;
+  z-index: 150000;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
+export const Alert = styled.div`
   display: flex;
   padding: 0;
   background: #ce0000;
