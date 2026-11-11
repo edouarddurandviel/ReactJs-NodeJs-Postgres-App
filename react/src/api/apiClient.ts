@@ -21,9 +21,9 @@ export default async (props: {
     ...(headers && {
       headers: {
         "Content-Type": "application/json",
-        // 'Cache-Control': 'no-cache',
-        // 'Pragma': 'no-cache',
-        // 'Expires': '0',
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
     }),
   });
