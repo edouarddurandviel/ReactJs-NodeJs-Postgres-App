@@ -6,7 +6,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import RateLimit from "express-rate-limit";
 import "dotenv/config";
-import sequelize from "@src/models";
 import path from "node:path";
 // import * as StepFunction from "@libs/stepFunctions";
 // import { ROUTE_TASK } from "@libs/stepFunctions/task/config";
@@ -49,11 +48,11 @@ app.use(
   })
 );
 
-const limiter = RateLimit({
+const requestsLimiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 20,
+  max: 20
 });
-app.use(limiter);
+app.use(requestsLimiter);
 
 // Serve images
 app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
@@ -67,9 +66,6 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use(morgan("dev"));
-
-// Check sequelize connection
-sequelize.init();
 
 // custom registering listeners for step functions
 // StepFunction.initEvent();

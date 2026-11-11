@@ -15,10 +15,11 @@ export const sessionToken: RequestHandler = async (
       if (secret) {
         const decode = (await jwt.verify(req.cookies.jwt, secret)) as any;
         if (decode) {
+          // could be a shorter generated token or in that case a hidden sessionId 
           const user = (await userActions.getUserTokenWithId(decode.Session_Id)) as Token;
           if (user) {
-              req.User_Id = user.id;
-              next();
+            req.User_Id = user.id;
+            next();
           } else {
             throw new NotFound("No User found");
           }

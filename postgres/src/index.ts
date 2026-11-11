@@ -4,6 +4,7 @@ import app from "@src/_config/app";
 import socketIo from "@src/_lib/socketio";
 import { onErrorEvent, normalizePort } from "@src/_lib/server";
 import v1Routes from "@src/api/v1";
+import sequelize from "@src/models";
 
 const origin = process.env.REACT_API_PORT;
 const domain = process.env.DOMAIN_URL;
@@ -17,7 +18,7 @@ app.set("port", port);
 // Create HTTP server.
 const server = http.createServer(app);
 
-// Initialize HTTP server.
+// Initialize HTTP server with Socket.IO.
 const io = socketIo.init(server, {
   path: "/socket",
   cors: {
@@ -27,23 +28,24 @@ const io = socketIo.init(server, {
 
 app.use(v1Routes(io));
 
-// Listen on provided port, 
-// on all network interfaces
+// Sequelize initialization
+sequelize.sync();
+
 server.listen(port);
 
-// - EACCES - Require elevated privileges
+// - EACCES - Require elevated chmod privileges
 // - EADDRINUSE - Port already in use
-server.on("error", (error: any) => {
+// - ENOENT - Files ro directory not found
+server.on("error", (error: Error) => {
   onErrorEvent(error, port);
 });
-
 
 server.on("listening", () => {
   const addr = server.address();
   if (addr) {
-    const bind = typeof addr === "object" ? addr.port : addr;
-    
-    console.info(`[Listening] on ${domain}: ${bind}`);
+    const port = typeof addr === "object" ? addr.port : addr;
+
+    console.info(`[Listening] on ${domain}: ${port}`);
   }
 });
 

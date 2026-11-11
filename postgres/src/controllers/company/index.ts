@@ -17,7 +17,7 @@ export default () => {
     try {
       const data = await companySchemas.fullCompany.validateAsync(req.body);
       const file = await companySchemas.singleFile.validateAsync(req.file);
-      
+
       await companyServices.createOneCompany(data, file);
 
       companySockets.reloadCompanies(res);

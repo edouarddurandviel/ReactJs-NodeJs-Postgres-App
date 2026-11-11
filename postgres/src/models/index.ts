@@ -11,7 +11,7 @@ let db: {
 } = {};
 
 export default {
-  init: async () => {
+  sync: async () => {
     const configFile: any = {
       development: {
         username: "dbuser",

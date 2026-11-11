@@ -39,7 +39,6 @@ class CompanyController {
     company.imgpath = createdFile.outputFileName;
 
     await companyActions.createOneCompany(company);
-   
   }
 
   public async createOneCompanyAddress(companyId: number, address: Address) {

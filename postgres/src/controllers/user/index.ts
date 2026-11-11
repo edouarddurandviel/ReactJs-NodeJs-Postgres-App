@@ -28,8 +28,6 @@ export default () => {
     }
   });
 
- 
-
   // router.post("/profil/:userId/create",
   //   //sessionToken,
   //   async (req: Request, res: Response) => {

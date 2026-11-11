@@ -28,14 +28,11 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
 
   // Error messages
   switch (error.code && port) {
-   
     case "EACCES":
       throw new Error(`For port ${port} - permission denied: requires elevated chmod privileges`);
 
-  
     case "ENOENT":
       throw new Error(`For port ${port} - File or directory not found`);
-
 
     case "EADDRINUSE":
       throw new Error(`Port address ${port}: already in use`);
@@ -45,7 +42,7 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
   }
 };
 
-// Websocket emit instruction only 
+// Websocket emit instruction only
 // if response statusCode
 // is in between 500 and 599
 export const noServerError = (

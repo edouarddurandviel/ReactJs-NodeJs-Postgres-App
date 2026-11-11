@@ -12,7 +12,6 @@ export default () => {
 
   const userServices = new UserController();
 
-
   router.get("/login", async (req: Request, res: Response) => {
     try {
       const email = await userSchemas.textSchema.validateAsync(req.query.email);
@@ -46,7 +45,6 @@ export default () => {
       handleErrors(res, error);
     }
   });
-
 
   return router;
 };
