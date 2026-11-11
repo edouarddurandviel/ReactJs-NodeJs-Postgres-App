@@ -1,9 +1,7 @@
 import { RequestHandler } from "express";
 import * as jwt from "jsonwebtoken";
-import { NotFound } from "http-json-errors";
 import * as userActions from "@src/services/user/actions";
 import { Token } from "@src/models/token";
-import { StatusCode } from "@src/_config/statusCode";
 
 export const sessionToken: RequestHandler = async (
   req: any,
