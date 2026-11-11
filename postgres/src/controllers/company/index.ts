@@ -64,7 +64,6 @@ export default () => {
     upload.single("image"),
     async (req: ExtendedRequest, res: Response) => {
       try {
-          console.log(req)
         const data = await companySchemas.updateCompany.validateAsync(req.body);
         const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
 
