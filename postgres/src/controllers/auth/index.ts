@@ -17,7 +17,7 @@ export default () => {
   
       const user = await userSchemas.userAuth.validateAsync(req.body);
 
-      const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
+      const maxAge = 7 * 24 * 60 * 60 * 1000;
       const result = await userServices.login(user.email, user.password, maxAge);
 
       res.cookie("jwt", result.token, {
