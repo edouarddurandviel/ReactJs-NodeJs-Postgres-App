@@ -21,13 +21,13 @@ export interface ResponseState {
   [key: string]: UserState;
 }
 
-export type Payload = {
-  data: UserConnected;
+export type Payload<T> = {
+  data: T;
   params: PathParamsObject;
-  query: QueryObject;
+  query?: QueryObject;
 };
 
 export type Action = {
   type: string;
-  payload: Payload;
+  payload: Payload<any>;
 };

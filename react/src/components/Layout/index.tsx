@@ -16,6 +16,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
   const [alert, setAlert] = useState<boolean>(false);
   const handleLogout = useCallback(() => {
     if (user) {
+      console.log(user)
       dispatch(
         actions.auth.userLogout({
           params: {

@@ -22,7 +22,6 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   const [companyList, setCompanyList] = useState<Company[]>([]);
   const [createEntry, setCreateEntry] = useState<boolean | null>(null);
   const formRef = useRef("home") as any;
-  const handleHomeForm = formRef.current;
   const KHFdefaultValues = {
     id: "",
     name: "",
@@ -67,26 +66,24 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
   }, [companies]);
 
   const submit: SubmitHandler<Company> = (values: Company) => {
-    switch(createEntry){
-      case true:
+    if(createEntry){
         dispatch(
           actions.company.addOneCompany({
             data: values,
           }),
         )
-        break;
-      default:
+      }else{
         dispatch(
           actions.company.updateOneCompany({
             params: {
               companyId: values.id,
             },
             data: values,
-          }),
+          })
         );
       }
 
-    handleHomeForm?.resetForm(KHFdefaultValues);
+    formRef.current?.resetForm(KHFdefaultValues);
   };
 
   const handleDeleteItem = (item: string) => {
@@ -101,7 +98,8 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
   const handleEditModal = (data: Company) => {
     setCreateEntry(false);
-    handleHomeForm?.resetForm({
+
+    formRef.current?.resetForm({
       id: data.id,
       name: data.name,
       activity: data.activity,
@@ -111,7 +109,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
 
   const handleNewModal = () => {
     setCreateEntry(!createEntry);
-    handleHomeForm?.resetForm(KHFdefaultValues);
+    formRef.current?.resetForm(KHFdefaultValues);
   };
 
   return (
