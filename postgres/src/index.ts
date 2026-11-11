@@ -9,7 +9,8 @@ const origin = process.env.REACT_API_PORT;
 const domain = process.env.DOMAIN_URL;
 const apiPort = process.env.PORT;
 
-
+// Information comming from .env shall be normalized
+// in that case converted to a Number.
 const port = normalizePort(apiPort || "3000");
 app.set("port", port);
 
@@ -31,7 +32,7 @@ app.use(v1Routes(io));
 server.listen(port);
 
 // - EACCES - Require elevated privileges
-// - EADDRINUSE - Already in use
+// - EADDRINUSE - Port already in use
 server.on("error", (error: any) => {
   onErrorEvent(error, port);
 });
@@ -40,8 +41,8 @@ server.on("error", (error: any) => {
 server.on("listening", () => {
   const addr = server.address();
   if (addr) {
-    const bind = typeof addr === "string" ? "pipe " + addr : addr.port;
-
+    const bind = typeof addr === "object" ? addr.port : addr;
+    
     console.info(`[Listening] on ${domain}: ${bind}`);
   }
 });

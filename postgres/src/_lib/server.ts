@@ -7,7 +7,7 @@ export const handleErrors = async (res: any, error: any) => {
 
 // Normalize .env port into a number, string, or false
 export const normalizePort = (portValue: string) => {
-  const port = parseInt(portValue, 10);
+  const port = Number(portValue);
 
   if (isNaN(port)) {
     return portValue;
@@ -28,13 +28,17 @@ export const onErrorEvent = (error: NodeJS.ErrnoException, port: number | string
 
   // Error messages
   switch (error.code && port) {
-    // Pipe
+   
     case "EACCES":
-      throw new Error(`For pipe ${port} - permission denied: requires elevated privileges`);
+      throw new Error(`For port ${port} - permission denied: requires elevated chmod privileges`);
 
-    // Port
+  
+    case "ENOENT":
+      throw new Error(`For port ${port} - File or directory not found`);
+
+
     case "EADDRINUSE":
-      throw new Error(`For port address ${port} already in use`);
+      throw new Error(`Port address ${port}: already in use`);
 
     default:
       throw error;
