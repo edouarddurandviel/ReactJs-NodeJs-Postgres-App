@@ -1,6 +1,7 @@
 import axios from "axios";
 import type { PathParamsObject, QueryObject } from "./interfaces";
 import { urlBuilder } from "./buildUrl";
+import { default as apiCache } from "./createApiCache";
 import config from "../config";
 
 export default async (props: {
@@ -12,15 +13,37 @@ export default async (props: {
   headers?: boolean;
 }) => {
   const { headers = true } = props;
+  const cache = await apiCache.init();
 
   const apiClient = await axios.create({
     baseURL: config.baseUrl,
     withCredentials: true,
     ...(headers && {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'Expires': '0',
       },
     }),
+  });
+
+  apiClient.interceptors.request.use(async (config) => {
+    const key = config.url;
+    const isCacheEnabled = await cache.manageRequest(key, config);
+    if (isCacheEnabled) {
+      throw {
+        fromCache: true,
+        data: cache.getCache(key),
+      };
+    } else {
+      return config;
+    }
+  });
+
+  apiClient.interceptors.response.use(async (response) => {
+    const resp = await cache.manageResponse(response);
+    return resp;
   });
 
   try {
@@ -35,6 +58,10 @@ export default async (props: {
 
     return resp;
   } catch (err: any) {
-    return err;
+    if (err.fromCache) {
+      return err;
+    } else {
+      return err;
+    }
   }
 };
