@@ -9,7 +9,7 @@ import { UserContext } from "../../contexts/UserContext";
 import { footerText } from "../../theme/variables";
 import * as selectors from "../../stores/rootSelectors";
 import { errorReset } from "../../stores/error/actions";
-import { Alerts, AlertsSession, LoadingButton } from "..";
+import { AlertsCard, AlertsSessionCard, LoadingButton } from "..";
 import Menu from "../Menu";
 
 const Index = ({ dispatch, user, error }: LayoutProps) => {
@@ -33,14 +33,14 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
     <UserContext value={user}>
       <PLaceHolder>
         <Header>
-            <Alerts 
+            <AlertsCard 
               error={error && error.status && error.status !== 401} 
               closeModal={() => {
                 dispatch(errorReset(["error"]));
               }}
             />
 
-            <AlertsSession 
+            <AlertsSessionCard 
               error={error && error.status && error.status === 401} 
               handleLogout={() => {
                 dispatch(errorReset(["error"]));
