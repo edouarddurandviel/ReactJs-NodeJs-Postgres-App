@@ -60,7 +60,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../../uploads")));
 const origin = process.env.REACT_API_PORT;
 app.use(
   cors({
-    origin: `http://localhost:${origin}`, // Allow frontend origin
+    origin: `http://localhost:${origin && origin}`, // Allow frontend origin
     credentials: true
   })
 );

@@ -144,7 +144,7 @@ export const storeUserToken = async (token: string, userId: number) => {
     User_Id: userId
   });
 
-  //if (!userToken) throw new UserBadRequestError();
+  if (!userToken) throw new UserBadRequestError();
 
   return userToken;
 };

@@ -83,6 +83,8 @@ class UserController {
 
       token && (await userActions.storeUserToken(Session_Id, user.id));
 
+      console.log(user)
+
       const loggedUser = {
         id: user.id,
         email: user.email,

@@ -14,7 +14,7 @@ export default () => {
 
   router.post("/login", async (req: Request, res: Response) => {
     try {
-  
+
       const user = await userSchemas.userAuth.validateAsync(req.body);
 
       const maxAge = 7 * 24 * 60 * 60 * 1000;

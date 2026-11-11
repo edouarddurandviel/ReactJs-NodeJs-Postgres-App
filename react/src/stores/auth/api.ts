@@ -7,10 +7,7 @@ export default {
     const userApi = apiRoutes.auth.login;
     return request({
       path: userApi.path,
-      query: {
-        email: data.query.email!,
-        password: data.query.password!,
-      },
+      data: data,
       method: userApi.method,
     });
   },

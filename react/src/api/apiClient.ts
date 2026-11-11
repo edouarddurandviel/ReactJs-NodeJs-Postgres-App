@@ -47,7 +47,7 @@ export default async (props: {
     const resp = await apiClient.request({
       url: await urlBuilder(props.path, props.params, props.query),
       method: props.method,
-      ...(props.data && { data: props.data }),
+      ...(props.data && props.data),
       validateStatus(status) {
         return status === 200;
       },

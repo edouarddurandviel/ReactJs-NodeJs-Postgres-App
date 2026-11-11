@@ -10,7 +10,7 @@ const Index = () => {
   const currentUser = useContext(UserContext);
   const contextValue = useMemo(
     () => ({
-      ...(currentUser && currentUser.loggedUser.perms.content.content.routes),
+      ...(currentUser && currentUser.loggedUser.perms.content),
     }),
     [currentUser],
   );
