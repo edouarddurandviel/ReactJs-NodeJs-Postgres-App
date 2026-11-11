@@ -12,13 +12,13 @@ export default () => {
 
   const userServices = new UserController();
 
-  router.get("/login", async (req: Request, res: Response) => {
+  router.post("/login", async (req: Request, res: Response) => {
     try {
-      const email = await userSchemas.textSchema.validateAsync(req.query.email);
-      const password = await userSchemas.textSchema.validateAsync(req.query.password);
+  
+      const user = await userSchemas.userAuth.validateAsync(req.body);
 
       const maxAge = 7 * 24 * 60 * 60 * 1000; // 7 days
-      const result = await userServices.login(email, password, maxAge);
+      const result = await userServices.login(user.email, user.password, maxAge);
 
       res.cookie("jwt", result.token, {
         maxAge: maxAge,

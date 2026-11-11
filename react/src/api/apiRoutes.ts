@@ -33,7 +33,7 @@ export default {
   },
   auth: {
     login: {
-      method: "GET",
+      method: "POST",
       path: "auth/login",
     },
     logout: {
