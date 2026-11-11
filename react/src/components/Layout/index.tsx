@@ -34,7 +34,7 @@ const Index = ({ dispatch, user, error }: LayoutProps) => {
       <PLaceHolder>
         <Header>
             <AlertsCard 
-              error={error && error.status && error.status !== 401} 
+              error={error && !error.status} 
               closeModal={() => {
                 dispatch(errorReset(["error"]));
               }}
