@@ -5,7 +5,7 @@
 Frontend: "React", redux, "ReactHookForms", 'Formiz", "Formik", "Tanstask React Query"
 Backend: "node.js", "express.js", connecté à une base de données relationnelle, "Postgres".
 
-Utilisation de **react-persist** pour sauvegarder les utilisateurs connectés. **cache des requêtes avec une Map - synchronisé avec socket.io** 
+Utilisation de **react-persist** pour sauvegarder les utilisateurs connectés. **cache des requêtes avec une Map - synchronisé via un WebSocket** 
 
 ### Docker
 
