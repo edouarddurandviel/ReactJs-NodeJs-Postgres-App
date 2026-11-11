@@ -40,6 +40,10 @@ export default {
       method: "POST",
       path: "auth/logout/:userId",
     },
+    session: {
+      method: "GET",
+      path: "auth/session",
+    },
   },
   users: {
     all: {

@@ -7,6 +7,7 @@ export const initialState = {
   userSuccess: false,
   userLoading: false,
   userErrors: false,
+  session: null as null | boolean,
   reset: [],
 };
 

@@ -54,6 +54,20 @@ export const authMiddleware: Middleware = (api) => (next) => async (action: unkn
         }
         break;
 
+        case actionTypes.USER_SESSION_REQUEST:
+        try {
+          const resp = await requests.userSession();
+          dispatch({
+            type: actionTypes.USER_SESSION_SUCCESS,
+            payload: resp.data.data,
+          });
+        } catch (error: unknown) {
+          dispatch({
+            type: actionTypes.USER_SESSION_FAILURE
+          });
+        }
+        break;
+
       case actionTypes.USER_RESET:
         dispatch({
           type: actionTypes.RESET,

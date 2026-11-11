@@ -14,6 +14,12 @@ export const userLogout = (data: object) => {
   };
 };
 
+export const userSession = () => {
+  return {
+    type: actionType.USER_SESSION_REQUEST
+  };
+};
+
 export const reset = (data: string[]) => {
   return {
     type: actionType.USER_RESET,

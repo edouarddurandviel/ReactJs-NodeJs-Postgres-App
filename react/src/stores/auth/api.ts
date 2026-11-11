@@ -24,4 +24,11 @@ export default {
       method: userApi.method,
     });
   },
+  userSession: () => {
+    const userApi = apiRoutes.auth.session;
+    return request({
+      path: userApi.path,
+      method: userApi.method,
+    });
+  },
 };

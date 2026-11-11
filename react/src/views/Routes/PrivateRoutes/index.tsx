@@ -2,18 +2,22 @@ import { useLocation, useNavigate } from "react-router";
 import type { UserConnected } from "../../../stores/auth/interfaces";
 import { useEffect, type ReactNode } from "react";
 
-const Index = ({ user, children }: PrivateRouteProps) => {
+const Index = ({ user, session, children }: PrivateRouteProps) => {
   const location = useLocation();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (!user && location.pathname !== "/login") {
       navigate("/login", { replace: true });
     } else if (user && location.pathname === "/login") {
       navigate("/", { replace: true });
     }
-  }, [user, navigate]);
+
+    if(session && !user){
+       navigate("/", { replace: true });
+    }
+  }, [user, session, navigate]);
 
   return children;
 
@@ -28,6 +32,7 @@ const Index = ({ user, children }: PrivateRouteProps) => {
 
 interface PrivateRouteProps extends React.PropsWithChildren {
   user: UserConnected | null;
+  session: boolean;
   children: ReactNode;
 }
 

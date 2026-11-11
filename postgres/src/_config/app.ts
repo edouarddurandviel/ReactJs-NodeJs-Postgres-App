@@ -61,6 +61,7 @@ const origin = process.env.REACT_API_PORT;
 app.use(
   cors({
     origin: `http://localhost:${origin && origin}`, // Allow frontend origin
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     credentials: true
   })
 );

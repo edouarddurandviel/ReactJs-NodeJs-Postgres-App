@@ -4,7 +4,7 @@ import * as selectors from "../../../stores/rootSelectors";
 import * as actions from "../../../stores/rootActions";
 import type { AppDispatch, RootState } from "../../../stores";
 import type { ThunkDispatch } from "redux-thunk";
-import { Alerts, LoadingButton, Meta } from "../../../components/index";
+
 import { BthForm, Column, Form, H2, Message } from "../../../components/Layout/styles";
 import { Input } from "../../../components/Formik";
 import { useCallback, useEffect, useState } from "react";
@@ -14,6 +14,7 @@ import type { AnyAction } from "redux";
 import { RHFform } from "../../../components/RHF/Form/styles";
 import { ReactHookForm, RHFInputField } from "../../../components/RHF";
 import Selector from "../../../components/Selector";
+import { AlertsCard, LoadingButton, Meta } from "../../../components";
 
 const Index = ({ profil, dispatch }: UserProps) => {
   const appDispatch = useDispatch<ThunkDispatch<RootState, undefined, AnyAction>>();
@@ -31,9 +32,9 @@ const Index = ({ profil, dispatch }: UserProps) => {
     );
   };
 
-  const closeModal = useCallback(() => {
-    dispatch(actions.user.reset(["profil"]));
-  }, [profil]);
+  // const closeModal = useCallback(() => {
+  //   dispatch(actions.user.reset(["profil"]));
+  // }, [profil]);
 
   useEffect(() => {
     profil && profil.data ? setOpen(true) : setOpen(false);
@@ -53,8 +54,6 @@ const Index = ({ profil, dispatch }: UserProps) => {
     <>
       <Column>
         <Meta metaData={meta} />
-
-        {profil && <Alerts data={profil} open={open} closeModal={closeModal} />}
 
         <H2>Add information about each users</H2>
         <Message>

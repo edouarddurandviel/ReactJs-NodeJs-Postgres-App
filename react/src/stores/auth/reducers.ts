@@ -31,6 +31,13 @@ export default (state: State = initialState, action: Action): State => {
         draft.userErrors = true;
         break;
 
+      case actionType.USER_SESSION_SUCCESS:
+        draft.session = true;
+        break;
+      case actionType.USER_SESSION_FAILURE:
+        draft.session = false;
+        break;
+
       case actionType.RESET:
         if (action.payload) {
           if (Array.isArray(action.payload)) {

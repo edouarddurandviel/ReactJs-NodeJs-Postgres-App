@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import * as userSchemas from "@src/_joiSchemas/users";
 import { handleErrors } from "@src/_lib/server";
 import UserController from "@src/services/user";
+import { sessionToken } from "@src/middleware/sessionToken";
 
 export default () => {
   const router = express.Router({
@@ -40,6 +41,14 @@ export default () => {
       await userServices.logout(data);
 
       res.clearCookie("jwt");
+      res.status(200).json({ err: false });
+    } catch (error: any) {
+      handleErrors(res, error);
+    }
+  });
+
+   router.get("/session", sessionToken, async (req: Request, res: Response) => {
+    try {
       res.status(200).json({ err: false });
     } catch (error: any) {
       handleErrors(res, error);
