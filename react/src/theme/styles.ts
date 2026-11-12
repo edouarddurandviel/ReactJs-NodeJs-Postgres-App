@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { fontSize, primary, radius, secondary } from "../../../theme/variables";
+import { fontSize, primary, radius, secondary } from "../theme/variables";
 import type { TextProps } from "./interfaces";
 
 export const PLaceHolder = styled.div`

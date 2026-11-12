@@ -12,7 +12,7 @@ import {
   FormActionsLabel,
   LeftColumn,
   RightColumn,
-} from "../Routes/Layout/styles";
+} from "../../theme/styles";
 import { ReactHookForm, RHFInputField } from "../../components/RHF";
 import { RHFform_Row, RHFform_Row_Btns } from "../../components/RHF/Form/styles";
 import { Controller, type SubmitHandler } from "react-hook-form";

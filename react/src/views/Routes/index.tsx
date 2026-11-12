@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router";
 import RouteSettings from "../../routes/index";
-import Layout from "./Layout";
 import ProtectedRoutes from "./ProtectedRoutes";
 import { connect } from "react-redux";
 import * as selectors from "../../stores/rootSelectors";
@@ -8,6 +7,7 @@ import * as actions from "../../stores/rootActions";
 import type { AppDispatch, RootState } from "../../stores";
 import type { UserConnected } from "../../stores/auth/interfaces";
 import { useEffect, useState } from "react";
+import Layout from "../Layout";
 
 const Index = ({ user, session, dispatch }: RootProps) => {
   const [isSession, setIsSession] = useState(false);

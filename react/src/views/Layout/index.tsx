@@ -1,16 +1,16 @@
 import { Outlet } from "react-router";
 import { Footer, Header, Main, PLaceHolder } from "./styles";
-import type { AppDispatch, RootState } from "../../../stores";
-import * as actions from "../../../stores/rootActions";
+import type { AppDispatch, RootState } from "../../stores";
+import * as actions from "../../stores/rootActions";
 import { connect } from "react-redux";
 import { useCallback } from "react";
-import type { UserConnected } from "../../../stores/auth/interfaces";
-import { UserContext } from "../../../contexts/UserContext";
-import { footerText } from "../../../theme/variables";
-import * as selectors from "../../../stores/rootSelectors";
-import { errorReset } from "../../../stores/error/actions";
-import { AlertsCard, AlertsSessionCard, LoadingButton } from "../../../components";
-import Menu from "../../../components/Menu";
+import type { UserConnected } from "../../stores/auth/interfaces";
+import { UserContext } from "../../contexts/UserContext";
+import { footerText } from "../../theme/variables";
+import * as selectors from "../../stores/rootSelectors";
+import { errorReset } from "../../stores/error/actions";
+import { AlertsCard, AlertsSessionCard, LoadingButton } from "../../components";
+import Menu from "../../components/Menu";
 
 const Index = ({ dispatch, user, error }: LayoutProps) => {
   const handleLogout = useCallback(() => {
