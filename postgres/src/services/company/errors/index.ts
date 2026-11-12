@@ -1,3 +1,5 @@
+import { UniqueConstraintError } from "sequelize";
+
 export class ComapnyNotFoundError extends Error {
   statusCode = 404;
   constructor() {
@@ -30,12 +32,12 @@ export class CompaniesBadRequestError extends Error {
   }
 }
 
-export class CompanyAlreadyExistRequestError extends Error {
+// experiment
+export class CompanyAlreadyExistRequestError extends UniqueConstraintError {
   statusCode = 400;
-
   constructor() {
-    super(`Could not create company. It already exist`);
-    this.name = "ComapnyNotFoundError";
+    super({ message: `Could not create company. It already exist` });
+    this.name = "CompanyAlreadyExistRequestError";
   }
 }
 
