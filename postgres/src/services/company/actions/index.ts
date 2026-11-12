@@ -16,7 +16,7 @@ import {
   ComapnyNotFoundError,
   ComapnyDeleteError,
   CompanyAlreadyExistRequestError
-} from "../httpErrors";
+} from "../errors";
 
 // findOne() OR findOne<Company>()
 //////////////////////////////////
