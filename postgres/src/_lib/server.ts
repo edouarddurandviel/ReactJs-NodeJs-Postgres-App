@@ -1,8 +1,39 @@
+import { UniqueConstraintError, ValidationError } from "sequelize";
+
 export const handleErrors = async (res: any, error: any) => {
   return res.status(error.statusCode || 500).json({ // 500
     err: true,
     error: error.message
   });
+};
+
+export const errorManagement = (res: any, err: any) => {
+
+  if (err instanceof ValidationError) {
+
+    return res.status(400).json({
+      message: "Validation error",
+      errors: err.errors.map(e => ({
+        field: e.path,
+        message: e.message,
+      }))
+    });
+
+  } else if (err instanceof UniqueConstraintError) {
+
+    return res.status(400).json({
+      message: "Duplicate value",
+      errors: err.errors.map(e => e.message)
+    });
+
+  } else {
+    
+    return res.status(err.statusCode).json({
+      err: true,
+      message: err.message
+    });
+
+  };
 };
 
 // Normalize .env port into a number, string, or false

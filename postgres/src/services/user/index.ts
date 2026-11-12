@@ -86,7 +86,7 @@ class UserController {
       const loggedUser = {
         id: user.id,
         email: user.email,
-        perms: user.user_rights as unknown as Rights
+        perms: user.userRights as unknown as Rights
       };
 
       return { loggedUser, token };

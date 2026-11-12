@@ -34,8 +34,10 @@ export const getOneUserWithEmail = async (email: string) => {
     where: {
       email: email
     },
-    include: ["user_rights"]
+    include: ["userRights"]
   });
+
+  console.log(user)
 
   if (!user) throw new UserNotFoundError();
 
@@ -45,7 +47,7 @@ export const getOneUserWithEmail = async (email: string) => {
 export const getAllUsers = async () => {
   const users = await findAll<User>("User", {
     order: [["email", "ASC"]],
-    include: ["user_rights"]
+    include: ["userRights"]
   });
 
   if (users.length === 0) throw new UsersNotFoundError();

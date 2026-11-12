@@ -14,7 +14,7 @@ export class Rights extends Model<InferAttributes<Rights>, InferCreationAttribut
   static associate(models: any) {
     Rights.belongsTo(models.User, {
       foreignKey: "User_Id",
-      as: "user_rights"
+      as: "userRights"
     });
   }
 }

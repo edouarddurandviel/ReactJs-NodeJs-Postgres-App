@@ -7,7 +7,6 @@ import {
   CreationOptional,
   Association
 } from "sequelize";
-import { User } from "./user";
 
 export class Token extends Model<InferAttributes<Token>, InferCreationAttributes<Token>> {
   declare id: CreationOptional<number>;
@@ -18,7 +17,7 @@ export class Token extends Model<InferAttributes<Token>, InferCreationAttributes
     // foreign key defined in Token
     Token.belongsTo(models.User, {
       foreignKey: "User_Id",
-      as: "user_token"
+      as: "userToken"
     });
   }
 }

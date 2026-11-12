@@ -23,7 +23,7 @@ import {
 
 export const getAllCompanies = async () => {
   const companies: Company[] = await findAll("Company", {
-    include: ["company_addresses"]
+    include: ["addresses"]
   });
 
   if (!companies) throw new ComapniesNotFoundError();
@@ -54,14 +54,18 @@ export const findOrcreateOneCompany = async (data: Company) => {
 };
 
 export const createOneCompanyAddress = async (companyId: number, data: Address) => {
-  try {
-    const company: Company | null = await findOne("Company", {
+   try {
+    const company: Company | null = await findOne<Company>("Company", {
       where: {
         id: companyId
       }
     });
+
+    console.log(data)
+    console.log(company)
     if (company) await company.createAddress({ ...data });
   } catch (err: any) {
+    console.log(err)
     return sequelizeError(err);
   }
 };

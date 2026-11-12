@@ -32,11 +32,11 @@ export class CompaniesBadRequestError extends Error {
   }
 }
 
-// experiment
-export class CompanyAlreadyExistRequestError extends UniqueConstraintError {
+//
+export class CompanyAlreadyExistRequestError extends Error {
   statusCode = 400;
   constructor() {
-    super({ message: `Could not create company. It already exist` });
+    super(`Could not create company. It already exist` );
     this.name = "CompanyAlreadyExistRequestError";
   }
 }

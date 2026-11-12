@@ -55,7 +55,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
             activity: c.activity,
             owner: c.owner,
             imgpath: c.imgpath,
-            ...(c.company_addresses && { addresses: c.company_addresses }),
+            ...(c.addresses && { addresses: c.addresses }),
             createdAt: c.createdAt,
             updatedAt: c.updatedAt,
           };

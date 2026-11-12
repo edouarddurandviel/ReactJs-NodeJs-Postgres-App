@@ -29,7 +29,7 @@ const Index = () => {
     return () => {
       document.removeEventListener("selectionchange", handleSelectionChange);
     };
-  }, []);
+  }, [currentUser]);
 
   return (
     <Menu>

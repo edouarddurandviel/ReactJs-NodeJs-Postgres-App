@@ -15,12 +15,12 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   static associate(models: any) {
     User.hasOne(models.Rights, {
       foreignKey: "User_Id",
-      as: "user_rights"
+      as: "userRights"
     });
 
     User.hasOne(models.Token, {
       foreignKey: "User_Id",
-      as: "user_token"
+      as: "userToken"
     });
   }
 }

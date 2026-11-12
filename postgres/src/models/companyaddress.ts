@@ -19,7 +19,7 @@ export class CompanyAddress extends Model<
   static associate(models: any) {
     CompanyAddress.belongsTo(models.Company, {
       foreignKey: "Company_Id",
-      as: "company_addresses"
+      as: "addresses"
     });
   }
 }
