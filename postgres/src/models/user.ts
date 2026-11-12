@@ -3,8 +3,12 @@ import {
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
-  CreationOptional
+  CreationOptional,
+  HasOneGetAssociationMixin,
+  HasOneSetAssociationMixin,
 } from "sequelize";
+import { Rights } from "./rights";
+import { Token } from "./token";
 
 export class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>;
@@ -12,15 +16,25 @@ export class User extends Model<InferAttributes<User>, InferCreationAttributes<U
   declare password: string;
   declare salt: string;
 
+  declare getUserRights: HasOneGetAssociationMixin<Rights>;
+  declare setUserRights: HasOneSetAssociationMixin<Rights, "User_Id">;
+
+  declare setUserToken: HasOneSetAssociationMixin<Token, "User_Id">;
+  declare getUserToken: HasOneGetAssociationMixin<Token>;
+
   static associate(models: any) {
     User.hasOne(models.Rights, {
       foreignKey: "User_Id",
-      as: "userRights"
+      as: "userRights",
+      onDelete: "CASCADE",
+      hooks: true
     });
 
     User.hasOne(models.Token, {
       foreignKey: "User_Id",
-      as: "userToken"
+      as: "userToken",
+      onDelete: "CASCADE",
+      hooks: true
     });
   }
 }
