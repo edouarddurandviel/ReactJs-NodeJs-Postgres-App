@@ -37,8 +37,6 @@ export const getOneUserWithEmail = async (email: string) => {
     include: ["userRights"]
   });
 
-  console.log(user)
-
   if (!user) throw new UserNotFoundError();
 
   return user;

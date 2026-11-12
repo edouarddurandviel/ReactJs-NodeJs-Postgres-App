@@ -61,8 +61,6 @@ export const createOneCompanyAddress = async (companyId: number, data: Address) 
       }
     });
 
-    console.log(data)
-    console.log(company)
     if (company) await company.createAddress({ ...data });
   } catch (err: any) {
     console.log(err)
