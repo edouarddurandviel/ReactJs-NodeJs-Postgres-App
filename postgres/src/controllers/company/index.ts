@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import CompanyController from "@src/services/company";
 import * as companySchemas from "@src/_joiSchemas/company";
 import * as generalSchemas from "@src/_joiSchemas/general";
-import { handleErrors } from "@src/_lib/server";
+import { errorManagement, handleErrors } from "@src/_lib/server";
 import { ExtendedRequest } from "@src/_interfaces/requests";
 import { upload } from "@src/middleware/downloadImages";
 import * as filesManagement from "@src/services/company/images";
@@ -16,9 +16,9 @@ export default () => {
   router.post("/create", upload.single("image"), async (req: ExtendedRequest, res: Response) => {
     try {
       const data = await companySchemas.fullCompany.validateAsync(req.body);
-      //const file = await companySchemas.singleFile.validateAsync(req.file);
+      const file = await companySchemas.singleFile.validateAsync(req.file);
 
-      await companyServices.createOneCompany(data, req);
+      await companyServices.createOneCompany(data, file);
 
       companySockets.reloadCompanies(res);
 
@@ -64,6 +64,7 @@ export default () => {
     upload.single("image"),
     async (req: ExtendedRequest, res: Response) => {
       try {
+        console.log(req.body)
         const data = await companySchemas.updateCompany.validateAsync(req.body);
         const companyId = await generalSchemas.textSchema.validateAsync(req.params.companyId);
 

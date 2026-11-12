@@ -1,7 +1,8 @@
+import Joi from "joi";
 import { UniqueConstraintError, ValidationError } from "sequelize";
 
 export const handleErrors = async (res: any, error: any) => {
-  return res.status(error.statusCode || 500).json({ // 500
+  return res.status(error.statusCode).json({ // 500
     err: true,
     error: error.message
   });
@@ -10,29 +11,38 @@ export const handleErrors = async (res: any, error: any) => {
 export const errorManagement = (res: any, err: any) => {
 
   if (err instanceof ValidationError) {
-
     return res.status(400).json({
+      err: true,
+      status: 400,
       message: "Validation error",
       errors: err.errors.map(e => ({
         field: e.path,
         message: e.message,
-      }))
+      })),
     });
-
   } else if (err instanceof UniqueConstraintError) {
-
     return res.status(400).json({
+      err: true,
+      status: 400,
       message: "Duplicate value",
-      errors: err.errors.map(e => e.message)
+      errors: err.errors.map(e => e.message),
+      statusCode: 400
     });
+
+  } else if (err instanceof Joi.ValidationError){
+    return res.status(400).json({
+      err: true,
+      status: 400,
+      message: err.message
+    })
 
   } else {
-    
     return res.status(err.statusCode).json({
       err: true,
-      message: err.message
+      status: err.statusCode,
+      message: err.message,
+      ...(err.name && {name: err.name})
     });
-
   };
 };
 

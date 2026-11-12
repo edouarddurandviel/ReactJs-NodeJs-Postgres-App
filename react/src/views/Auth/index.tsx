@@ -5,7 +5,7 @@ import * as selectors from "../../stores/rootSelectors";
 import * as actions from "../../stores/rootActions";
 import type { AppDispatch, RootState } from "../../stores";
 import { RVInput, LoadingButton, Meta } from "../../components";
-import { BthForm, Container, Form, LoginForm, Message } from "../../components/Layout/styles";
+import { BthForm, Container, Form, LoginForm, Message } from "../Routes/Layout/styles";
 import type { User } from "../../stores/user/interfaces";
 
 // cookies une semaine + auth à la 3ème bloque le compte 5 10 20 30 minutes

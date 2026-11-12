@@ -5,7 +5,7 @@ import * as actions from "../../../stores/rootActions";
 import type { AppDispatch, RootState } from "../../../stores";
 import type { ThunkDispatch } from "redux-thunk";
 
-import { BthForm, Column, Form, H2, Message } from "../../../components/Layout/styles";
+import { BthForm, Column, Form, H2, Message } from "../../Routes/Layout/styles";
 import { Input } from "../../../components/Formik";
 import { useCallback, useEffect, useState } from "react";
 import { type SubmitHandler } from "react-hook-form";

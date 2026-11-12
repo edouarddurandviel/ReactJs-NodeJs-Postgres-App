@@ -11,7 +11,7 @@ import {
   LeftColumn,
   Message,
   RightColumn,
-} from "../../../components/Layout/styles";
+} from "../../Routes/Layout/styles";
 import { Formik, type FormikProps } from "formik";
 import { Input } from "../../../components/Formik";
 import { schemaUserCreate } from "../../../schemas/userSchema";

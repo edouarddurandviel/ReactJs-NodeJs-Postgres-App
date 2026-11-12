@@ -9,7 +9,8 @@ export class UserNotFoundError extends Error {
 export class UsersNotFoundError extends Error {
   statusCode = 404;
   constructor() {
-    super(`Users not found`);
+    super();
+    this.message = `Users not found`
     this.name = "UsersNotFoundError";
   }
 }
@@ -17,7 +18,8 @@ export class UsersNotFoundError extends Error {
 export class UserTokenNotFoundError extends Error {
   statusCode = 404;
   constructor() {
-    super(`User token not found`);
+    super();
+    this.message = `User token not found`
     this.name = "UserTokenNotFoundError";
   }
 }
@@ -25,7 +27,8 @@ export class UserTokenNotFoundError extends Error {
 export class UserBadRequestError extends Error {
   statusCode = 400;
   constructor() {
-    super(`Bad Request: could not create user`);
+    super();
+    this.message = `Bad Request: could not create user`
     this.name = "UserBadRequestError";
   }
 }
@@ -33,7 +36,8 @@ export class UserBadRequestError extends Error {
 export class UserTokenBadRequestError extends Error {
   statusCode = 400;
   constructor(user: number) {
-    super(`Bad Request: could not create token for this user: ${user}`);
+    super();
+    this.message = `Bad Request: could not create token for this user: ${user}`;
     this.name = "UserTokenBadRequestError";
   }
 }

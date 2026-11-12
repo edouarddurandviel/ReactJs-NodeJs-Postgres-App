@@ -1,50 +1,60 @@
-import { UniqueConstraintError } from "sequelize";
-
 export class ComapnyNotFoundError extends Error {
-  statusCode = 404;
+  statusCode
   constructor() {
-    super('Company not found');
+    super();
+    this.statusCode =  404;
+    this.message = "Company not found";
     this.name = "ComapnyNotFoundError";
   }
 }
 
 export class ComapnyDeleteError extends Error {
-  statusCode = 404;
+  statusCode
   constructor() {
-    super(`Company could note be delete`);
+    super();
+    this.statusCode =  404;
+    this.message = "Company could note be delete";
     this.name = "ComapnyDeleteError";
   }
 }
 
 export class ComapniesNotFoundError extends Error {
-  statusCode = 404;
+  statusCode;
   constructor() {
-    super(`Companies not found`);
+    super();
+    this.statusCode = 404;
+    this.message = "Companies not found";
     this.name = "ComapniesNotFoundError";
   }
 }
 
 export class CompaniesBadRequestError extends Error {
-  statusCode = 400;
+  statusCode;
   constructor() {
-    super(`Could not create company`);
+    super();
+    this.statusCode = 404;
+    this.message = "Could not create company";
     this.name = "CompaniesBadRequestError";
   }
 }
 
 //
 export class CompanyAlreadyExistRequestError extends Error {
-  statusCode = 400;
+  statusCode;
   constructor() {
-    super(`Could not create company. It already exist` );
+    super();
+    this.statusCode = 404;
+    this.message = "Could not create company. It already exist";
     this.name = "CompanyAlreadyExistRequestError";
   }
 }
 
 export class CompaniesFilesBadRequestError extends Error {
-  statusCode = 400;
+  statusCode;
   constructor() {
     super(`Image files are mandatory`);
+    this.statusCode = 404;
+    this.message = "Image files are mandatory";
     this.name = "CompaniesFilesBadRequestError";
   }
 }

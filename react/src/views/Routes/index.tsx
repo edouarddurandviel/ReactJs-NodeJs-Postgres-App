@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import RouteSettings from "../../routes/index";
-import Layout from "../../components/Layout";
-import PrivateRoutes from "./PrivateRoutes";
+import Layout from "./Layout";
+import ProtectedRoutes from "./ProtectedRoutes";
 import { connect } from "react-redux";
 import * as selectors from "../../stores/rootSelectors";
 import * as actions from "../../stores/rootActions";
@@ -28,9 +28,9 @@ const Index = ({ user, session, dispatch }: RootProps) => {
         key="default"
         path={"/"}
         element={
-          <PrivateRoutes user={user} session={isSession}>
+          <ProtectedRoutes user={user} session={isSession}>
               <Layout user={user} />
-          </PrivateRoutes>
+          </ProtectedRoutes>
         }
       >
         {RouteSettings.length &&

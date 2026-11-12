@@ -3,6 +3,7 @@ import requests from "./api";
 import * as actionTypes from "./types";
 import type { Payload } from "./interfaces";
 import type { User } from "../user/interfaces";
+import * as actions from "../rootActions";
 
 type Action = {
   type?: string;
@@ -27,10 +28,11 @@ export const authMiddleware: Middleware = (api) => (next) => async (action: unkn
             type: actionTypes.USER_LOGIN_SUCCESS,
             payload: resp.data.data,
           });
-        } catch (error: unknown) {
+        } catch (error: any) {
+          dispatch(actions.error.errorMessage(error.response.data))
           dispatch({
             type: actionTypes.USER_LOGIN_FAILURE,
-            payload: error,
+            payload: error.response.data,
           });
         }
         break;
@@ -41,15 +43,14 @@ export const authMiddleware: Middleware = (api) => (next) => async (action: unkn
             type: actionTypes.USER_LOGOUT_LOADING,
           });
           const resp = await requests.userLogout(typedAction.payload);
-
           dispatch({
             type: actionTypes.USER_LOGOUT_SUCCESS,
             payload: resp.data.data,
           });
-        } catch (error: unknown) {
+        } catch (error: any) {
           dispatch({
             type: actionTypes.USER_LOGOUT_FAILURE,
-            payload: error,
+            payload: error.response.data,
           });
         }
         break;
@@ -61,7 +62,7 @@ export const authMiddleware: Middleware = (api) => (next) => async (action: unkn
             type: actionTypes.USER_SESSION_SUCCESS,
             payload: resp.data.data,
           });
-        } catch (error: unknown) {
+        } catch (error: any) {
           dispatch({
             type: actionTypes.USER_SESSION_FAILURE
           });

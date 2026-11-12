@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import * as userSchemas from "@src/_joiSchemas/users";
-import { handleErrors } from "@src/_lib/server";
+import { errorManagement, handleErrors } from "@src/_lib/server";
 import UserController from "@src/services/user";
 import { sessionToken } from "@src/middleware/sessionToken";
 

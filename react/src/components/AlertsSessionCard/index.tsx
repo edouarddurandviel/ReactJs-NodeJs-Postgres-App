@@ -10,6 +10,7 @@ const Index = ({ error, handleLogout }: ErrorAlertProps) => {
             Unauthorized
         </AlertHeader>
         <AlertBody>
+          {error.error}
           {error.message}
         </AlertBody>
         <AlertFooter>

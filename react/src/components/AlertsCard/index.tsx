@@ -1,9 +1,9 @@
 import { AuthAlert, AlertBody, AlertHeader, CloseAlert } from "./styles";
 
-const Index = ({ error, closeModal }: ErrorAlertProps) => {
+const Index = ({ data, closeModal }: ErrorAlertProps) => {
 
   return (
-    error && (
+    data && (
       <AuthAlert>
         <AlertHeader>
             Unauthorized
@@ -16,7 +16,7 @@ const Index = ({ error, closeModal }: ErrorAlertProps) => {
           </CloseAlert>
         </AlertHeader>
         <AlertBody>
-          {error.message}
+          {data.error}
         </AlertBody> 
       </AuthAlert>
       )
@@ -24,7 +24,7 @@ const Index = ({ error, closeModal }: ErrorAlertProps) => {
 };
 
 interface ErrorAlertProps {
-  error: any;
+  data: any;
   closeModal: () => void;
 }
 
