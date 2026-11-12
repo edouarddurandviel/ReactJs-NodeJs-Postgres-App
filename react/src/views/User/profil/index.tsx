@@ -5,16 +5,16 @@ import * as actions from "../../../stores/rootActions";
 import type { AppDispatch, RootState } from "../../../stores";
 import type { ThunkDispatch } from "redux-thunk";
 
-import { BthForm, Column, Form, H2, Message } from "../../Routes/Layout/styles";
+import { BthForm, Column, Form, H2, Message } from "../../../theme/styles";
 import { Input } from "../../../components/Formik";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { type SubmitHandler } from "react-hook-form";
 import { formizUser, schemaUser } from "../../../schemas/userSchema";
 import type { AnyAction } from "redux";
 import { RHFform } from "../../../components/RHF/Form/styles";
 import { ReactHookForm, RHFInputField } from "../../../components/RHF";
 import Selector from "../../../components/Selector";
-import { AlertsCard, LoadingButton, Meta } from "../../../components";
+import { LoadingButton, Meta } from "../../../components";
 
 const Index = ({ profil, dispatch }: UserProps) => {
   const appDispatch = useDispatch<ThunkDispatch<RootState, undefined, AnyAction>>();

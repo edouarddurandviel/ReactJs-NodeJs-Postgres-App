@@ -5,7 +5,7 @@ import * as selectors from "../../stores/rootSelectors";
 import * as actions from "../../stores/rootActions";
 import type { Address, Company } from "../../stores/company/interfaces";
 import type { AppDispatch, RootState } from "../../stores";
-import { Container, ContainerCentered, InlineWrapper } from "../Routes/Layout/styles";
+import { Container, ContainerCentered, InlineWrapper } from "../../theme/styles";
 import { Button, LoadingButton, Meta, Image } from "../../components";
 import { ReactHookForm, RHFInputField } from "../../components/RHF";
 import { type SubmitHandler } from "react-hook-form";

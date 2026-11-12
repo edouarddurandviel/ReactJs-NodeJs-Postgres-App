@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { Footer, Header, Main, PLaceHolder } from "./styles";
+import { Footer, Header, Main, PLaceHolder } from "../../theme/styles";
 import type { AppDispatch, RootState } from "../../stores";
 import * as actions from "../../stores/rootActions";
 import { connect } from "react-redux";
