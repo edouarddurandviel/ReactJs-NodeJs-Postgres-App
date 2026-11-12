@@ -6,6 +6,7 @@ import { open } from "fs/promises";
 
 import { CompaniesFilesBadRequestError } from "@src/services/company/httpErrors";
 import { saveImageResizedFile } from "./images";
+import { Company } from "@src/models/company";
 // import eventEmitter from "@libs/eventEmitter";
 // import emitter from "@services/company/emitters/company";
 
@@ -34,11 +35,13 @@ class CompanyController {
     return companies;
   }
 
-  public async createOneCompany(company: CreateCompany, file: any) {
-    const createdFile = await saveImageResizedFile(file, 300, 200);
-    company.imgpath = createdFile.outputFileName;
+  public async createOneCompany(company: Company, file?: any) {
+    if(file){
+      const createdFile = await saveImageResizedFile(file, 300, 200);
+      company.imgpath = createdFile.outputFileName;
+    }
 
-    await companyActions.createOneCompany(company);
+    await companyActions.findOrcreateOneCompany(company);
   }
 
   public async createOneCompanyAddress(companyId: number, address: Address) {

@@ -42,7 +42,7 @@ export const getDatabase = async () => {
   return dbInstance;
 };
 
-export const manageError = (err: any) => {
+export const sequelizeError = (err: any) => {
   if (err instanceof ValidationError) {
     return {
       message: "Validation error",

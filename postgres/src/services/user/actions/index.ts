@@ -3,7 +3,7 @@ import { CreateUser } from "@src/_interfaces/user";
 import { findAll, findOne, count, create, destroy } from "@src/_lib/sequelize/modelStatic";
 import { Token } from "@src/models/token";
 import { User } from "@src/models/user";
-import { manageError } from "@src/_lib/sequelize/sequelize";
+import { sequelizeError } from "@src/_lib/sequelize/sequelize";
 import {
   UserBadRequestError,
   UserNotFoundError,
@@ -107,7 +107,7 @@ export const countUsers = async () => {
 
     return users;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 

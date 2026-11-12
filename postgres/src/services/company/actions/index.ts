@@ -9,12 +9,13 @@ import {
   findOrCreate,
   create
 } from "@src/_lib/sequelize/modelStatic";
-import { manageError } from "@src/_lib/sequelize/sequelize";
+import { sequelizeError } from "@src/_lib/sequelize/sequelize";
 import {
   CompaniesBadRequestError,
   ComapniesNotFoundError,
   ComapnyNotFoundError,
-  ComapnyDeleteError
+  ComapnyDeleteError,
+  CompanyAlreadyExistRequestError
 } from "../httpErrors";
 
 // findOne() OR findOne<Company>()
@@ -46,7 +47,8 @@ export const findOrcreateOneCompany = async (data: Company) => {
     defaults: data
   });
 
-  if (!company || !created) throw new CompaniesBadRequestError();
+  if (!created) throw new CompanyAlreadyExistRequestError();
+  if (!company) throw new CompaniesBadRequestError();
 
   return company;
 };
@@ -60,7 +62,7 @@ export const createOneCompanyAddress = async (companyId: number, data: Address) 
     });
     if (company) await company.createAddress({ ...data });
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -74,7 +76,7 @@ export const deleteOneCompanyAddress = async (companyId: number, addressId: numb
     });
     return result;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -89,7 +91,7 @@ export const destroyOneCompany = async (companyId: number) => {
 
     return result;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -98,7 +100,7 @@ export const insertManyCompanies = async (data: CreateManyCompanies) => {
     const companies: Company[] = await bulkCreate("Company", [...data]);
     return companies;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -115,7 +117,7 @@ export const replaceOneCompany = async (companyId: number, data: CreateCompany) 
 
     return response;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -148,7 +150,7 @@ export const updateOneCompany = async (companyId: number, data: CreateCompany) =
 
     return document[1];
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
 
@@ -163,6 +165,6 @@ export const deleteOneCompany = async (companyId: string) => {
 
     return document;
   } catch (err: any) {
-    return manageError(err);
+    return sequelizeError(err);
   }
 };
