@@ -119,24 +119,6 @@ export const createOneUser = async (data: CreateUser) => {
   return user;
 };
 
-// export const createProfil = async (data: any, userId: string) => {
-//   const userCollection = await inCollection("profil");
-
-//   const user = await userCollection.insertOne({
-//     ...data,
-//     _id: new ObjectId(userId)
-//   });
-//   return user;
-// };
-
-// export const searchForOneUser = async (email: string) => {
-//   const userCollection = await inCollection("user");
-//   const search = `/${email}/`;
-//   const searchedUser = (await userCollection
-//     .find({ email: search })
-//     .toArray()) as unknown as User[];
-//   return searchedUser;
-// };
 
 export const storeUserToken = async (token: string, userId: number) => {
   const userToken = await create<Token>("Token", {
@@ -149,20 +131,14 @@ export const storeUserToken = async (token: string, userId: number) => {
   return userToken;
 };
 
-// export const getUserToken = async (token: string) => {
-//   const userCollection = await inCollection("token");
-//   const userToken = (await userCollection.findOne({
-//     token: token
-//   })) as unknown as UserToken;
-//   return userToken;
-// };
-
 export const getUserTokenWithId = async (token: string) => {
   const user = await findOne<Token>("Token", {
     where: {
       token: token
     }
   });
+
+  if(!user) throw new UserTokenNotFoundError();
 
   return user;
 };

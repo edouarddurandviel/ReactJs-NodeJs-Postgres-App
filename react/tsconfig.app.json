@@ -28,5 +28,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "src/api/apiCache.ts", "../../_docker_tests/createApiCache.ts"]
+  "include": ["src", "src/api/apiCache.ts", "../../_docker_tests/createApiCache.ts", "src/stores/company/thunks.ts", "../../_docker_tests/user/thunks.ts"]
 }

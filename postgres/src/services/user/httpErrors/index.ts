@@ -16,8 +16,8 @@ export class UsersNotFoundError extends Error {
 
 export class UserTokenNotFoundError extends Error {
   statusCode = 404;
-  constructor(token: string) {
-    super(`User token not found ${token}`);
+  constructor() {
+    super(`User token not found`);
     this.name = "UserTokenNotFoundError";
   }
 }
