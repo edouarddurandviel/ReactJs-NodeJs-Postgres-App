@@ -120,9 +120,7 @@ const Index = ({ dispatch, user, companies, companiesLoading }: HomeProps) => {
         <LeftColumn>
           <h3>{user?.loggedUser.email}</h3>
           <p>
-            <strong>Cache definition</strong> for every viewed company detail pages. It prevents
-            from making any <strong>unnecessary requests</strong> twice. Content is stored in a Map.
-            It could be sessionStorage
+            <strong>Cache definition</strong> using react-persist
           </p>
           <p>
             Home page is using <strong>URF</strong> forms. User profil has been built with
