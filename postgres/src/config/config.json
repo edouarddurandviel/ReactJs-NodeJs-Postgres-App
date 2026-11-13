@@ -1,26 +1,34 @@
 {
-  "development": {
-    "username": "dbuser",
-    "password": "dbpassword",
-    "database": "mydatabase",
-    "host": "localhost",
-    "port": 5433,
-    "dialect": "postgres"
-  },
-  "test": {
-    "username": "dbuser",
-    "password": "dbpassword",
-    "database": "mydatabase",
-    "host": "localhost",
-    "port": 5433,
-    "dialect": "postgres"
-  },
-  "production": {
-    "username": "dbuser",
-    "password": "dbpassword",
-    "database": "mydatabase",
-    "host": "localhost",
-    "port": 5433,
-    "dialect": "postgres"
-  }
+      "development": {
+        "username": "dbuser",
+        "password": "dbpassword",
+        "database": "mydatabase",
+        "host": "localhost",
+        "port": 5433,
+        "dialect": "postgres"
+      },
+      "docker": {
+        "username": "dbuser",
+        "password": "dbpassword",
+        "database": "mydatabase",
+        "host": "postgresdb",
+        "port": 5432,
+        "dialect": "postgres"
+      },
+      "test": {
+        "username": "dbuser",
+        "password": "dbpassword",
+        "database": "mydatabase",
+        "host": "localhost",
+        "port": 5432,
+        "dialect": "postgres"
+      },
+      "production": {
+        "username": "dbuser",
+        "password": "dbpassword",
+        "database": "mydatabase",
+        "host": "localhost",
+        "port": 5432,
+        "dialect": "postgres"
+      }
 }

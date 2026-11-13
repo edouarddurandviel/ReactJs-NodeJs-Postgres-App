@@ -12,43 +12,12 @@ let db: {
 
 export default {
   sync: async () => {
-    const configFile: any = {
-      development: {
-        username: "dbuser",
-        password: "dbpassword",
-        database: "mydatabase",
-        host: "localhost",
-        port: 5433,
-        dialect: "postgres"
-      },
-      docker: {
-        username: "dbuser",
-        password: "dbpassword",
-        database: "mydatabase",
-        host: "postgresdb",
-        port: 5432,
-        dialect: "postgres"
-      },
-      test: {
-        username: "dbuser",
-        password: "dbpassword",
-        database: "mydatabase",
-        host: "localhost",
-        port: 5432,
-        dialect: "postgres"
-      },
-      production: {
-        username: "dbuser",
-        password: "dbpassword",
-        database: "mydatabase",
-        host: "localhost",
-        port: 5432,
-        dialect: "postgres"
-      }
-    };
+  
+
+    const configfile: any = await import(path.join(__dirname, '../config/config.json'));
 
     const env = process.env.NODE_ENV || "docker";
-    const config = configFile[env];
+    const config = configfile[env];
 
     const namespace = cls.createNamespace("my-namesapace");
     Sequelize.useCLS(namespace);
