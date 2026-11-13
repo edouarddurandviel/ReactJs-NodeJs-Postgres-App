@@ -2,9 +2,9 @@
 -- PostgreSQL database cluster dump
 --
 
--- Started on 2026-11-11 12:40:40
+-- Started on 2026-11-13 11:44:48
 
-\restrict rue4tyEBZ5fV8N4erNz0PbZaEu0AOpyQxGDKrL2eKCtekya7TRVnj6TAIYJPnYv
+\restrict qj5YjVK5BZ7maitOGAu3ayF91j64qY3koFHNKkOU6eeBNzJggiRLYw5t2qd6JyZ
 
 SET default_transaction_read_only = off;
 
@@ -29,7 +29,7 @@ ALTER ROLE dbuser WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION B
 
 
 
-\unrestrict rue4tyEBZ5fV8N4erNz0PbZaEu0AOpyQxGDKrL2eKCtekya7TRVnj6TAIYJPnYv
+\unrestrict qj5YjVK5BZ7maitOGAu3ayF91j64qY3koFHNKkOU6eeBNzJggiRLYw5t2qd6JyZ
 
 --
 -- Databases
@@ -45,12 +45,12 @@ ALTER ROLE dbuser WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION B
 -- PostgreSQL database dump
 --
 
-\restrict uAuGGr5T3bDdzhJ7YYb0diP4ikfvjT4KdaKcJh78wGun2tuDKhrY63thAREHcZ0
+\restrict wBNLxUvsDI0aS1fu9XB1Q8nFiqfyDW8RuniwfplHDvnwf87rZ3oZlfe7Lv1Kdy1
 
 -- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
 -- Dumped by pg_dump version 16.14
 
--- Started on 2026-11-11 12:40:40
+-- Started on 2026-11-13 11:44:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -63,13 +63,13 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Completed on 2026-11-11 12:40:40
+-- Completed on 2026-11-13 11:44:48
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict uAuGGr5T3bDdzhJ7YYb0diP4ikfvjT4KdaKcJh78wGun2tuDKhrY63thAREHcZ0
+\unrestrict wBNLxUvsDI0aS1fu9XB1Q8nFiqfyDW8RuniwfplHDvnwf87rZ3oZlfe7Lv1Kdy1
 
 --
 -- Database "mydatabase" dump
@@ -79,12 +79,12 @@ SET row_security = off;
 -- PostgreSQL database dump
 --
 
-\restrict gNAwVuB8T79c2DUyciBZXrAP0AO1TejIsqjq8raifrZLwi50sGCQOLQM9rmGmGh
+\restrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
 
 -- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
 -- Dumped by pg_dump version 16.14
 
--- Started on 2026-11-11 12:40:40
+-- Started on 2026-11-13 11:44:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -107,9 +107,9 @@ CREATE DATABASE mydatabase WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PR
 
 ALTER DATABASE mydatabase OWNER TO dbuser;
 
-\unrestrict gNAwVuB8T79c2DUyciBZXrAP0AO1TejIsqjq8raifrZLwi50sGCQOLQM9rmGmGh
+\unrestrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
 \connect mydatabase
-\restrict gNAwVuB8T79c2DUyciBZXrAP0AO1TejIsqjq8raifrZLwi50sGCQOLQM9rmGmGh
+\restrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -409,10 +409,10 @@ ALTER TABLE ONLY public."Users" ALTER COLUMN id SET DEFAULT nextval('public."Use
 --
 
 COPY public."Companies" (id, name, activity, owner, "createdAt", "updatedAt", imgpath) FROM stdin;
-5	asycs	running	asycs	2026-05-22 08:52:08.476+00	2026-06-18 13:16:11.095+00	300x200/image-1781720549877-259532396-300x200.jpeg
-1	adidas	football	adidas	2026-05-21 08:43:41.475+00	2026-06-18 13:16:20.403+00	300x200/image-1781719403485-170517145-300x200.jpeg
 6	puma	football	puma	2026-06-13 10:33:03.422+00	2026-06-18 13:16:46.386+00	300x200/image-1781713799501-966738190-300x200.jpeg
 7	nike	sport	nike	2026-06-13 11:05:55.874+00	2026-06-18 13:16:59.492+00	300x200/image-1781721689039-16606833-300x200.jpeg
+5	asycs	sport	asycs	2026-05-22 08:52:08.476+00	2026-11-11 12:27:09.897+00	300x200/image-1781720549877-259532396-300x200.jpeg
+1	adidas	football	adidas	2026-05-21 08:43:41.475+00	2026-11-12 18:48:17.614+00	300x200/image-1781719403485-170517145-300x200.jpeg
 \.
 
 
@@ -429,6 +429,9 @@ COPY public."CompanyAddresses" (id, "Company_Id", street, "createdAt", "updatedA
 14	5	464 Chem. du Petit Four	2026-06-12 14:57:05.913+00	2026-06-12 14:57:05.913+00	6600	Antibes
 15	6	464 Chem. du Petit Four	2026-06-13 10:42:27.667+00	2026-06-13 10:42:27.667+00	6600	Antibes
 16	7	464 Chem. du Petit Four	2026-06-13 11:06:01.564+00	2026-06-13 11:06:01.564+00	6600	Antibes
+18	1	464 Chem. du Petit Four	2026-11-12 11:54:58.53+00	2026-11-12 11:54:58.53+00	6600	Antibes
+19	1	464 Chem. du Petit Four	2026-11-12 12:00:14.824+00	2026-11-12 12:00:14.824+00	6600	Antibes
+20	1	464 Chem. du Petit Four	2026-11-12 12:13:27.903+00	2026-11-12 12:13:27.903+00	6600	Antibes
 \.
 
 
@@ -477,6 +480,7 @@ COPY public."Users" (id, email, password, salt, "createdAt", "updatedAt") FROM s
 1	hash3@test.com	3bd883b191816eb909f6bd11fc81ab9af205c4a72c1c78cd00d08af6607ae22e	b1a2c8dbf30250c10724f882fa269b90	2026-05-18 17:28:53.366+00	2026-05-18 17:28:53.366+00
 2	hash3@mail.com	62a99c443b72e9ad56c06796eaafdf90e4fa0c5993b3d544ea1957e8b2302967	f86a5d7283d17a3a046676af3c65b3af	2026-05-18 17:29:36.058+00	2026-05-18 17:29:36.058+00
 3	hash4@mail.com	$argon2id$v=19$m=16384,t=2,p=1$aAUZtiS7IuKZ+x99Cw+imw$QcnWOeWq7oBf9dKW2qQhnjt1Dm9EYxjP/CAMs4azIB0	8f48cc9a2fa8b403258075bb66b818b0	2026-11-08 17:46:36.13215+00	2026-11-08 17:46:36.13215+00
+4	hash5@mail.com	bab3e7e42ee00e6ccdef1af916914dd94d332b2a8adf581e5594010b083db1cc	478a07582c8b65ce8803eec1dbc97b41	2026-11-11 12:27:41.005+00	2026-11-11 12:27:41.005+00
 \.
 
 
@@ -515,7 +519,7 @@ SELECT pg_catalog.setval('public."Companies_id_seq"', 8, true);
 -- Name: CompanyAddresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
 
-SELECT pg_catalog.setval('public."CompanyAddresses_id_seq"', 17, true);
+SELECT pg_catalog.setval('public."CompanyAddresses_id_seq"', 20, true);
 
 
 --
@@ -533,7 +537,7 @@ SELECT pg_catalog.setval('public."Rights_id_seq"', 1, false);
 -- Name: Tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
 
-SELECT pg_catalog.setval('public."Tokens_id_seq"', 103, true);
+SELECT pg_catalog.setval('public."Tokens_id_seq"', 151, true);
 
 
 --
@@ -542,7 +546,7 @@ SELECT pg_catalog.setval('public."Tokens_id_seq"', 103, true);
 -- Name: Users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
 
-SELECT pg_catalog.setval('public."Users_id_seq"', 3, true);
+SELECT pg_catalog.setval('public."Users_id_seq"', 4, true);
 
 
 --
@@ -695,13 +699,13 @@ ALTER TABLE ONLY public.spring_session_attributes
     ADD CONSTRAINT spring_session_attributes_fk FOREIGN KEY (session_primary_id) REFERENCES public.spring_session(primary_id) ON DELETE CASCADE;
 
 
--- Completed on 2026-11-11 12:40:41
+-- Completed on 2026-11-13 11:44:48
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict gNAwVuB8T79c2DUyciBZXrAP0AO1TejIsqjq8raifrZLwi50sGCQOLQM9rmGmGh
+\unrestrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
 
 --
 -- Database "postgres" dump
@@ -713,12 +717,12 @@ ALTER TABLE ONLY public.spring_session_attributes
 -- PostgreSQL database dump
 --
 
-\restrict 2Kg6RgtGgTQtDgC2YQKoLugxyElEgoWaepRnzU8pOtgQbrpsQUg61QJoc22Ck6v
+\restrict TLpygzAJJZDaztPjztqLKP0frX9YDQ9wfWxnilg4FEtasMm7WAWVwkcz5iFeQe1
 
 -- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
 -- Dumped by pg_dump version 16.14
 
--- Started on 2026-11-11 12:40:41
+-- Started on 2026-11-13 11:44:48
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -731,15 +735,15 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
--- Completed on 2026-11-11 12:40:41
+-- Completed on 2026-11-13 11:44:49
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict 2Kg6RgtGgTQtDgC2YQKoLugxyElEgoWaepRnzU8pOtgQbrpsQUg61QJoc22Ck6v
+\unrestrict TLpygzAJJZDaztPjztqLKP0frX9YDQ9wfWxnilg4FEtasMm7WAWVwkcz5iFeQe1
 
--- Completed on 2026-11-11 12:40:41
+-- Completed on 2026-11-13 11:44:49
 
 --
 -- PostgreSQL database cluster dump complete
