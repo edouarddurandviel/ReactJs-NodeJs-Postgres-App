@@ -14,7 +14,7 @@ export default {
   sync: async () => {
   
 
-    const configfile: any = await import(path.join(__dirname, '../config/config.json'));
+    const configfile: any = await import('../config/config.json');
 
     const env = process.env.NODE_ENV || "docker";
     const config = configfile[env];
