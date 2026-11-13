@@ -24,7 +24,7 @@ export default {
       docker: {
         username: "dbuser",
         password: "dbpassword",
-        database: "companiesdb",
+        database: "mydatabase",
         host: "postgresdb",
         port: 5432,
         dialect: "postgres"
@@ -34,7 +34,7 @@ export default {
         password: "dbpassword",
         database: "mydatabase",
         host: "localhost",
-        port: 5433,
+        port: 5432,
         dialect: "postgres"
       },
       production: {
@@ -42,7 +42,7 @@ export default {
         password: "dbpassword",
         database: "mydatabase",
         host: "localhost",
-        port: 5433,
+        port: 5432,
         dialect: "postgres"
       }
     };

@@ -1,115 +1,13 @@
 --
--- PostgreSQL database cluster dump
---
-
--- Started on 2026-11-13 11:44:48
-
-\restrict qj5YjVK5BZ7maitOGAu3ayF91j64qY3koFHNKkOU6eeBNzJggiRLYw5t2qd6JyZ
-
-SET default_transaction_read_only = off;
-
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-
---
--- Roles
---
-
-CREATE ROLE dbuser;
-ALTER ROLE dbuser WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD 'SCRAM-SHA-256$4096:J8j1s/nIfuSIIO6APOuSIg==$8aohIzkr9JSli9ODz3NJet/jy5oJyuMI/ZlQ1KREuds=:GjDQJJCT/t8zMCBHTJLR8bBqMHvfD7i4LTXd8CzTQVY=';
-
---
--- User Configurations
---
-
-
-
-
-
-
-
-
-\unrestrict qj5YjVK5BZ7maitOGAu3ayF91j64qY3koFHNKkOU6eeBNzJggiRLYw5t2qd6JyZ
-
---
--- Databases
---
-
---
--- Database "template1" dump
---
-
-\connect template1
-
---
 -- PostgreSQL database dump
 --
 
-\restrict wBNLxUvsDI0aS1fu9XB1Q8nFiqfyDW8RuniwfplHDvnwf87rZ3oZlfe7Lv1Kdy1
+\restrict FgaszDpSfRsLEdxWSJj5HXStfseTbelv2QGgBTWKEBL5YObuGxGpy8pp93RrZtS
 
 -- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
 -- Dumped by pg_dump version 16.14
 
--- Started on 2026-11-13 11:44:48
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
--- Completed on 2026-11-13 11:44:48
-
---
--- PostgreSQL database dump complete
---
-
-\unrestrict wBNLxUvsDI0aS1fu9XB1Q8nFiqfyDW8RuniwfplHDvnwf87rZ3oZlfe7Lv1Kdy1
-
---
--- Database "mydatabase" dump
---
-
---
--- PostgreSQL database dump
---
-
-\restrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
-
--- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
--- Dumped by pg_dump version 16.14
-
--- Started on 2026-11-13 11:44:48
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- TOC entry 3492 (class 1262 OID 16384)
--- Name: mydatabase; Type: DATABASE; Schema: -; Owner: dbuser
---
-
-CREATE DATABASE mydatabase WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'en_US.utf8';
-
-
-ALTER DATABASE mydatabase OWNER TO dbuser;
-
-\unrestrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
-\connect mydatabase
-\restrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
+-- Started on 2026-11-13 12:51:36
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -161,7 +59,7 @@ CREATE SEQUENCE public."Companies_id_seq"
 ALTER SEQUENCE public."Companies_id_seq" OWNER TO dbuser;
 
 --
--- TOC entry 3493 (class 0 OID 0)
+-- TOC entry 3492 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: Companies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbuser
 --
@@ -204,7 +102,7 @@ CREATE SEQUENCE public."CompanyAddresses_id_seq"
 ALTER SEQUENCE public."CompanyAddresses_id_seq" OWNER TO dbuser;
 
 --
--- TOC entry 3494 (class 0 OID 0)
+-- TOC entry 3493 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: CompanyAddresses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbuser
 --
@@ -288,7 +186,7 @@ CREATE SEQUENCE public."Tokens_id_seq"
 ALTER SEQUENCE public."Tokens_id_seq" OWNER TO dbuser;
 
 --
--- TOC entry 3495 (class 0 OID 0)
+-- TOC entry 3494 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: Tokens_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbuser
 --
@@ -330,7 +228,7 @@ CREATE SEQUENCE public."Users_id_seq"
 ALTER SEQUENCE public."Users_id_seq" OWNER TO dbuser;
 
 --
--- TOC entry 3496 (class 0 OID 0)
+-- TOC entry 3495 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: Users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dbuser
 --
@@ -412,7 +310,7 @@ COPY public."Companies" (id, name, activity, owner, "createdAt", "updatedAt", im
 6	puma	football	puma	2026-06-13 10:33:03.422+00	2026-06-18 13:16:46.386+00	300x200/image-1781713799501-966738190-300x200.jpeg
 7	nike	sport	nike	2026-06-13 11:05:55.874+00	2026-06-18 13:16:59.492+00	300x200/image-1781721689039-16606833-300x200.jpeg
 5	asycs	sport	asycs	2026-05-22 08:52:08.476+00	2026-11-11 12:27:09.897+00	300x200/image-1781720549877-259532396-300x200.jpeg
-1	adidas	football	adidas	2026-05-21 08:43:41.475+00	2026-11-12 18:48:17.614+00	300x200/image-1781719403485-170517145-300x200.jpeg
+1	adidas	tennis	adidas	2026-05-21 08:43:41.475+00	2026-11-13 10:56:36.585+00	300x200/image-1781719403485-170517145-300x200.jpeg
 \.
 
 
@@ -505,7 +403,7 @@ COPY public.spring_session_attributes (session_primary_id, attribute_name, attri
 
 
 --
--- TOC entry 3497 (class 0 OID 0)
+-- TOC entry 3496 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: Companies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
@@ -514,7 +412,7 @@ SELECT pg_catalog.setval('public."Companies_id_seq"', 8, true);
 
 
 --
--- TOC entry 3498 (class 0 OID 0)
+-- TOC entry 3497 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: CompanyAddresses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
@@ -523,7 +421,7 @@ SELECT pg_catalog.setval('public."CompanyAddresses_id_seq"', 20, true);
 
 
 --
--- TOC entry 3499 (class 0 OID 0)
+-- TOC entry 3498 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: Rights_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
@@ -532,16 +430,16 @@ SELECT pg_catalog.setval('public."Rights_id_seq"', 1, false);
 
 
 --
--- TOC entry 3500 (class 0 OID 0)
+-- TOC entry 3499 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: Tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
 
-SELECT pg_catalog.setval('public."Tokens_id_seq"', 151, true);
+SELECT pg_catalog.setval('public."Tokens_id_seq"', 152, true);
 
 
 --
--- TOC entry 3501 (class 0 OID 0)
+-- TOC entry 3500 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: Users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dbuser
 --
@@ -699,53 +597,11 @@ ALTER TABLE ONLY public.spring_session_attributes
     ADD CONSTRAINT spring_session_attributes_fk FOREIGN KEY (session_primary_id) REFERENCES public.spring_session(primary_id) ON DELETE CASCADE;
 
 
--- Completed on 2026-11-13 11:44:48
+-- Completed on 2026-11-13 12:51:36
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict UjgfRCYjPvsyexzF1QcPttFBuQx7eSRzrhDSRmN4BjE7VqzVZzj3HHZ9an0Sj9X
-
---
--- Database "postgres" dump
---
-
-\connect postgres
-
---
--- PostgreSQL database dump
---
-
-\restrict TLpygzAJJZDaztPjztqLKP0frX9YDQ9wfWxnilg4FEtasMm7WAWVwkcz5iFeQe1
-
--- Dumped from database version 16.15 (Debian 16.15-1.pgdg13+2)
--- Dumped by pg_dump version 16.14
-
--- Started on 2026-11-13 11:44:48
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
--- Completed on 2026-11-13 11:44:49
-
---
--- PostgreSQL database dump complete
---
-
-\unrestrict TLpygzAJJZDaztPjztqLKP0frX9YDQ9wfWxnilg4FEtasMm7WAWVwkcz5iFeQe1
-
--- Completed on 2026-11-13 11:44:49
-
---
--- PostgreSQL database cluster dump complete
---
+\unrestrict FgaszDpSfRsLEdxWSJj5HXStfseTbelv2QGgBTWKEBL5YObuGxGpy8pp93RrZtS
 

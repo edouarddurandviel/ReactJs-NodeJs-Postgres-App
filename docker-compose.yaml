@@ -36,16 +36,16 @@ services:
     environment:
       POSTGRES_USER: dbuser
       POSTGRES_PASSWORD: dbpassword
-      POSTGRES_DB: companiesdb
+      POSTGRES_DB: mydatabase
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U dbuser -d companiesdb"]
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d mydatabase"]
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 20s
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./postgres/data/database.202611131144.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres/data/database.202611131251.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
     ports:
       - "5432:5432"
