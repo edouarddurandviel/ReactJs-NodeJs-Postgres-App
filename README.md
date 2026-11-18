@@ -1,5 +1,7 @@
 ## ReactJs-NodeJs-Postgres-App
 
+Lastest version of app: 18/11/2026 13h22
+
 **auth argon2Async** uniquement disponible à partir de la version **node: v24.7.0** 
 
 Frontend: "React", redux, "ReactHookForms", 'Formiz", "Formik", "Tanstask React Query"
