@@ -25,6 +25,6 @@ export default defineConfig({
     ///babel()
   ],
   html: {
-    cspNonce: "__CSP_NONCE__",
+    cspNonce: "my_csp_nonce", // Content-Security-Policy: script-src 'self' 'nonce-abc123YTUYT';
   },
 });
