@@ -60,7 +60,7 @@ app.get("/{*path}", async (req, res, next) => {
   try {
     const nonce = res.locals.nonce;
     const template = await fs.readFile(reactIndexPath, "utf8");
-    const html = template.replaceAll("__CSP_NONCE__", nonce);
+    const html = template.replaceAll("my_csp_nonce", nonce);
 
     res.setHeader("Cache-Control", "no-store");
     res.type("html").send(html);
