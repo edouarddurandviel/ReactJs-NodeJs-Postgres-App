@@ -13,6 +13,7 @@ COPY . /usr/src/app
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build:n"]
+CMD ["npm", "run", "start:n"]
 
 
