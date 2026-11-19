@@ -1,9 +1,9 @@
 import { applyMiddleware } from "redux";
 import { thunk } from "redux-thunk";
-import { socketMiddleware } from "./socket/routes";
-import { companyMiddleware } from "./company/routes";
-import { userMiddleware } from "./user/routes";
-import { authMiddleware } from "./auth/routes";
+import { socketMiddleware } from "./socket/middleware";
+import { companyMiddleware } from "./company/middleware";
+import { userMiddleware } from "./user/middleware";
+import { authMiddleware } from "./auth/middleware";
 
 const groupedMiddlewares = [companyMiddleware, userMiddleware, authMiddleware, socketMiddleware];
 
